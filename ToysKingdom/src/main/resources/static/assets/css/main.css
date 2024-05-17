@@ -1,0 +1,139 @@
+/* ROOT */
+html {
+    font-size: 16px;
+}
+
+:root {
+    --main-color: #cf102d;
+    /* đỏ */
+    --secondary-color: #041675;
+    /* xanh */
+}
+
+/* END ROOT */
+
+/* Header */
+
+.header {
+    height: 10rem;
+    background-color: var(--main-color);
+    padding: 0.5rem 1.5rem;
+}
+
+.header__searchBox {
+    background-color: white;
+    border-radius: 4rem;
+    height: 4rem;
+}
+
+.search_Icon {
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+.search_Input {
+    font-size: 1.2rem;
+    border: none;
+    color: #333;
+    outline: none;
+}
+
+.header__cart,
+.header__user {
+    font-size: 1rem;
+    color: white;
+    font-weight: bold;
+}
+
+/* END header */
+
+
+/* Home */
+.badge__left {
+    background-color: var(--secondary-color);
+    position: absolute;
+    height: 2rem;
+    width: 4rem;
+    left: 10px;
+    top: 10px;
+    align-content: center;
+    z-index: 10;
+}
+
+.badge__right {
+    background-color: rgb(229, 144, 85);
+    position: absolute;
+    height: 2rem;
+    width: 4rem;
+    right: 10px;
+    top: 10px;
+    align-content: center;
+    z-index: 10;
+}
+
+.btn_yeu_thich {
+    color: var(--main-color);
+    font-size: 2rem;
+    outline: none;
+    border: none;
+    background: none;
+}
+
+.btn_add_to_card {
+    background-color: var(--main-color);
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.btn_add_to_card:hover {
+    background-color: #e45b6f;
+    color: white;
+}
+
+.card__product {
+    transition: all 0.1s ease;
+}
+
+.card__product:hover {
+    scale: 1.05;
+    box-shadow: 0 0 15px rgba(180, 136, 48, 0.3);
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #fcfcfc;
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+.accordion-item {
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.page-link {
+    border-radius: 50% !important;
+    margin-right: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.active>.page-link,
+.page-link.active {
+    border-radius: 50% !important;
+    background-color: var(--main-color);
+    border-color: #90081c;
+}
+
+.page-link:hover {
+   color: var(--main-color);
+}
+
+/* End Home */
