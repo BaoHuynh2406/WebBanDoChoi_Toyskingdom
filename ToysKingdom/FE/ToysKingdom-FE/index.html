@@ -29,6 +29,18 @@
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- Axios dùng để call API-->
+    <!-- Đang tìm hiểu -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js"
+        integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- JQuery dùng để select element-->
+    <!-- Đang tìm hiểu -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 </head>
 
 <body ng-app="ToysKingdom" ng-controller="mainCtrl">
@@ -40,8 +52,8 @@
     <section>
         <ng-view></ng-view>
     </section>
-    
-    
+
+
 
     <!-- Footer -->
     <div ng-include="'/page/footer.html'"></div>
@@ -49,6 +61,13 @@
 
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/scrip.js"></script>
+    <script>
+        const test = new Test();
+        $(document).ready(function () {
+            
+        })
+    </script>
 
 </body>
 
