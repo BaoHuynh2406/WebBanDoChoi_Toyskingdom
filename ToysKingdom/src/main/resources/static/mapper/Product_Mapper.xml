@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mts.ToysKingdom.mapper.Product_Mapper">
 
-<mapper namespace="com.mts.ToysKingdom.mapper.productMapper">
-
-    <resultMap id="productMap" type="com.mts.ToysKingdom.data.entity.productE">
-        <id column="id_product" property="id_product"/>
-        <result column="product_name" property="product_name"/>
+    <resultMap id="productMap" type="com.mts.ToysKingdom.data.entity.ProductE">
+        <id column="id_product" property="idProduct"/>
+        <result column="id_category" property="idCategory"/>
+        <result column="product_name" property="productName"/>
         <result column="des" property="des"/>
         <result column="image" property="image"/>
         <result column="price" property="price"/>
@@ -14,12 +14,16 @@
         <result column="active" property="active"/>
     </resultMap>
 
-    <select id="getProduct" resultMap="productMap" parameterType="String">
-        SELECT * FROM products WHERE id_product = #{id_product}
+    <select id="getProduct" resultMap="productMap" parameterType="int">
+        SELECT * FROM products WHERE id_product = #{idProduct}
     </select>
 
     <select id="getAllProducts" resultMap="productMap">
         SELECT * FROM products
+    </select>
+
+    <select id="getAllActiveProducts" resultMap="productMap">
+        SELECT * FROM products where active = true
     </select>
 
 </mapper>

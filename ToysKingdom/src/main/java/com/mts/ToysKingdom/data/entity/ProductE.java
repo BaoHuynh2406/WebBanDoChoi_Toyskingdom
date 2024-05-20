@@ -1,13 +1,12 @@
 package com.mts.ToysKingdom.data.entity;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
-public class productE {
+@Data
+public class ProductE {
     private int idProduct;
+    private String idCategory;
     private String productName;
     private String des;
     private String image;

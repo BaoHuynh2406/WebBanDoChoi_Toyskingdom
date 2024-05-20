@@ -3,8 +3,9 @@ package com.mts.ToysKingdom.data.dto;
 import lombok.Data;
 
 @Data
-public class productDTO {
+public class ProductDTO {
     private int idProduct;
+    private String idCategory;
     private String productName;
     private String des;
     private String image;
