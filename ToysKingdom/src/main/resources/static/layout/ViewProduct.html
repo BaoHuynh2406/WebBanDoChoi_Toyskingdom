@@ -117,7 +117,7 @@
                  id="cardContainer" ng-repeat="p in productsData">
                 <span class="badge badge__left">New</span>
                 <span class="badge badge__right">-25%</span>
-                <img th:src="@{/assets/image/image-default.webp}" class="product__img card-img-top"
+                <img ng-src="/assets/image/image-default.webp" class="product__img card-img-top"
                      alt="..." style="border-radius: 1.5rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{p.productName}}</h5>

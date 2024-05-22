@@ -2,7 +2,7 @@ let app = angular.module('ToysKingdom', ["ngRoute"]);
 
 app.config(function ($routeProvider) {
     $routeProvider
-        .when("/", {templateUrl: "page/ViewProduct.html", controller: "mainCtrl"})
+        .when("/", {templateUrl: "layout/ViewProduct.html", controller: "mainCtrl"})
         .when("/siginUp", {templateUrl: "./SignUp.html", controller: "myCtrl"})
         .otherwise({templateUrl: "layout/error.html", controller: "myCtrl"});
 });
