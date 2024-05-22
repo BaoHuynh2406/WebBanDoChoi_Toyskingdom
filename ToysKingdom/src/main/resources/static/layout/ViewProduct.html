@@ -114,7 +114,26 @@
 
             <!-- Vùng hiển thị sản phẩm -->
             <div class="card mx-2 my-4 card__product" style="width: 18rem; border-radius: 1.5rem;"
-                 id="cardContainer">
+                 id="cardContainer" ng-repeat="p in productsData">
+                <span class="badge badge__left">New</span>
+                <span class="badge badge__right">-25%</span>
+                <img th:src="@{/assets/image/image-default.webp}" class="product__img card-img-top"
+                     alt="..." style="border-radius: 1.5rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{p.productName}}</h5>
+                    <p class="card-text text-danger fw-bold">{{p.price}} Đ</p>
+
+                    <div class="row">
+                        <div class="col-9">
+                            <a href="#" class="w-100 btn btn_add_to_card">Thêm vào giỏ</a>
+                        </div>
+
+                        <div class="col-3">
+                            <button class="far fa-heart btn_yeu_thich"></button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Phân trang -->

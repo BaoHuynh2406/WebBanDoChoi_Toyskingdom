@@ -54,7 +54,7 @@
 <body ng-app="ToysKingdom" ng-controller="mainCtrl">
 
 <!-- Header -->
-<div ng-include="'/page/header.html'"></div>
+<div ng-include="'/layout/header.html'"></div>
 
 <!-- View -->
 <section>
@@ -63,19 +63,12 @@
 
 
 <!-- Footer -->
-<div ng-include="'/page/footer.html'"></div>
+<div ng-include="'/layout/footer.html'"></div>
 
 
 <!-- Main JS -->
 <script th:src="@{/assets/js/main.js}"></script>
-<script th:src="@{/assets/js/scrip.js}"></script>
-<script>
-    const productLoader = new ProductLoader();
-    $(document).ready(function () {
-        // Chạy hàm load khi file được tải hoàn toàn
-        productLoader.loadInit();
-    })
-</script>
+
 
 </body>
 
