@@ -1,4 +1,4 @@
-package com.mts.ToysKingdom.controller;
+package com.mts.toyskingdom.controller;
 
 
 import org.springframework.stereotype.Controller;

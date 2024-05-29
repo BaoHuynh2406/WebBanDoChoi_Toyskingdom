@@ -1,10 +1,12 @@
-package com.mts.ToysKingdom.service;
+package com.mts.toyskingdom.service;
 
 import java.sql.SQLException;
 import java.util.List;
-import com.mts.ToysKingdom.data.model.ProductM;
 
-public interface ProductService {
+import com.mts.toyskingdom.data.model.ProductFeatureM;
+import com.mts.toyskingdom.data.model.ProductM;
+
+public interface ProductSv {
 
     /**
      * Lấy tất cả thông tin: idProduct, idCategory, image, productName, quantity, price, description, unit, active
@@ -29,5 +31,12 @@ public interface ProductService {
      */
     ProductM getProductByID(int idProduct) throws SQLException;
 
+
+    /**
+     * Lấy tất cả thông tin: sản phẩm được chọn
+     *
+     * @return danh sách sản phẩm
+     */
+    List<ProductFeatureM> getProductFeature() throws SQLException;
 
 }

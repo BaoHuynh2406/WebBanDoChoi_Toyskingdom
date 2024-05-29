@@ -100,7 +100,7 @@ VALUES ('Xe Đạp Trẻ Em', 'RB', 'Xe đạp 3 bánh cho trẻ em, màu xanh l
        ('Đàn Piano Điện Tử', 'RB', 'Đàn piano điện tử mini cho bé', 'piano.png', 1500000.00, 'Cái', 10, 1);
 
 INSERT INTO discounts (id_prduct, discount_percent, start_day, end_day, active)
-VALUES (1, 10.00, '2024-06-01 00:00:00', '2024-06-10 23:59:59', 1),
+VALUES (1, 10.00, '2024-01-01 00:00:00', '2024-06-10 23:59:59', 1),
        (2, 15.00, '2024-06-05 00:00:00', '2024-06-15 23:59:59', 1),
        (3, 20.00, '2024-06-10 00:00:00', '2024-06-20 23:59:59', 1),
        (4, 25.00, '2024-06-15 00:00:00', '2024-06-25 23:59:59', 1),
@@ -131,3 +131,30 @@ VALUES (1, 1, 1, 850000.00, 'Cái'),
        (4, 8, 2, 350000.00, 'Bộ'),
        (5, 9, 1, 500000.00, 'Bộ'),
        (5, 10, 1, 1500000.00, 'Cái');
+
+
+
+# Select
+
+create VIEW product_discounts AS
+SELECT
+    p.id_product,
+    p.id_category,
+    p.product_name,
+    p.des,
+    p.image,
+    p.price,
+    p.unit,
+    p.quantity,
+    p.active,
+    COALESCE(d.discount_percent, 0) AS discount_percent
+FROM
+    products p
+        LEFT JOIN
+    discounts d
+    ON
+        p.id_product = d.id_prduct
+            AND p.active = 1
+            AND d.active = 1
+            AND NOW() BETWEEN d.start_day AND d.end_day;
+

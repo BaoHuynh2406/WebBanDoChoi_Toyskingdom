@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mts.ToysKingdom.mapper.Product_Mapper">
+<mapper namespace="com.mts.toyskingdom.mapper.ProductMapper">
 
-    <resultMap id="productMap" type="com.mts.ToysKingdom.data.entity.ProductE">
-        <id column="id_product" property="idProduct"/>
+    <resultMap id="productMap" type="com.mts.toyskingdom.data.entity.ProductE">
+        <result column="id_product" property="idProduct"/>
         <result column="id_category" property="idCategory"/>
         <result column="product_name" property="productName"/>
         <result column="des" property="des"/>
@@ -13,6 +13,18 @@
         <result column="quantity" property="quantity"/>
         <result column="active" property="active"/>
     </resultMap>
+
+    <resultMap id="productFeature" type="com.mts.toyskingdom.data.entity.ProductE">
+        <result column="id_product" property="idProduct"/>
+        <result column="id_category" property="idCategory"/>
+        <result column="product_name" property="productName"/>
+        <result column="des" property="des"/>
+        <result column="image" property="image"/>
+        <result column="price" property="price"/>
+        <result column="discount_percent" property="discountPercent" />
+    </resultMap>
+
+
 
     <select id="getProduct" resultMap="productMap" parameterType="int">
         SELECT * FROM products WHERE id_product = #{idProduct}
@@ -25,5 +37,10 @@
     <select id="getAllActiveProducts" resultMap="productMap">
         SELECT * FROM products where active = true
     </select>
+
+    <select id="getAllProductsFeature" resultMap="productFeature">
+        SELECT * FROM product_discounts
+    </select>
+
 
 </mapper>

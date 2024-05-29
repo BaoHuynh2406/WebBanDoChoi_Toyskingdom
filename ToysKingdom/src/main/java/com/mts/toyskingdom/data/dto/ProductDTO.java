@@ -1,4 +1,4 @@
-package com.mts.ToysKingdom.data.dto;
+package com.mts.toyskingdom.data.dto;
 
 import lombok.Data;
 

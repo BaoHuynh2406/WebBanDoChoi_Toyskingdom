@@ -1,4 +1,4 @@
-package com.mts.ToysKingdom.data.entity;
+package com.mts.toyskingdom.data.entity;
 
 
 import lombok.*;
@@ -14,4 +14,5 @@ public class ProductE {
     private String unit;
     private double quantity;
     private boolean active;
+    private double discountPercent;
 }

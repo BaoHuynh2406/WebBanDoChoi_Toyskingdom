@@ -1,4 +1,4 @@
-package com.mts.ToysKingdom.data.mgt;
+package com.mts.toyskingdom.data.mgt;
 
 import lombok.Getter;
 import lombok.Setter;

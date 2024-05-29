@@ -11,26 +11,20 @@
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                                 aria-controls="panelsStayOpen-collapseOne">
-                            Siêu anh hùng
+                           Tất cả
                         </button>
                     </h2>
                     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                        <div class="accordion-body py-0">
+                        <div class="accordion-body py-0" ng-repeat="c in categoriesData">
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                       id="flexRadioDefault1">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Siêu anh hùng
+                                <input class="form-check-input" type="checkbox" name="flexRadioDefault"
+                                       id="{{c.idCategory}}">
+                                <label class="form-check-label" for="{{c.idCategory}}">
+                                   {{c.categoryName}}
                                 </label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                       id="flexRadioDefault2" checked>
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    Siêu robot
-                                </label>
-                            </div>
+                            
 
 
                         </div>
@@ -99,7 +93,7 @@
 
         <div class="col-10 row" id="productList">
             <div class="d-flex justify-content-between align-items-center py-1">
-                <span class="fw-bold ">Tổng: 215 sản phẩm</span>
+                <span class="fw-bold ">Danh sách sản phẩm</span>
                 <div class="d-flex h-100 align-items-center">
                     <div class="w-100 fw-bold">Sắp xếp theo:</div>
                     <select class="form-select" aria-label="Default select example">
@@ -115,25 +109,7 @@
             <!-- Vùng hiển thị sản phẩm -->
             <div class="card mx-2 my-4 card__product" style="width: 18rem; border-radius: 1.5rem;"
                  id="cardContainer" ng-repeat="p in productsData">
-                <span class="badge badge__left">New</span>
-                <span class="badge badge__right">-25%</span>
-                <img ng-src="/assets/image/image-default.webp" class="product__img card-img-top"
-                     alt="..." style="border-radius: 1.5rem;">
-                <div class="card-body">
-                    <h5 class="card-title">{{p.productName}}</h5>
-                    <p class="card-text text-danger fw-bold">{{p.price}} Đ</p>
-
-                    <div class="row">
-                        <div class="col-9">
-                            <a href="#" class="w-100 btn btn_add_to_card">Thêm vào giỏ</a>
-                        </div>
-
-                        <div class="col-3">
-                            <button class="far fa-heart btn_yeu_thich"></button>
-                        </div>
-                    </div>
-                </div>
-
+                    <card-Item-Type-1 product="p"></card-Item>
             </div>
 
             <!-- Phân trang -->

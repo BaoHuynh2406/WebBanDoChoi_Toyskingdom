@@ -1,19 +1,20 @@
-package com.mts.ToysKingdom.api;
+package com.mts.toyskingdom.api;
 
-import com.mts.ToysKingdom.data.mgt.ResponseObject;
-import com.mts.ToysKingdom.service.ProductService;
+import com.mts.toyskingdom.data.mgt.ResponseObject;
+import com.mts.toyskingdom.service.ProductSv;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api-public/products")
 public class ProductAPI {
-    final ProductService productService;
+    final ProductSv productService;
 
     @GetMapping("/getAllProducts")
     public ResponseObject<?> doGetAllProducts() {
@@ -41,6 +42,21 @@ public class ProductAPI {
             resultApi.setSuccess(false);
             resultApi.setMessage("Lấy thông tin sản phẩm thất bại");
             log.error("Fail When Call API /api-public/products/getAllActiveProducts : ", e);
+        }
+        return resultApi;
+    }
+
+    @GetMapping("/getAllProductsFeature")
+    public ResponseObject<?> doGetAllProductsFeature() {
+        var resultApi = new ResponseObject<>();
+        try {
+            resultApi.setData(productService.getProductFeature());
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Lấy thông tin toàn bộ sản phẩm feature thành công");
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lấy thông tin sản phẩm thất bại");
+            log.error("Fail When Call API /api-public/products/getAllProductsFeature : ", e);
         }
         return resultApi;
     }

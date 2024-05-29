@@ -1,8 +1,9 @@
-package com.mts.ToysKingdom.service.impl;
+package com.mts.toyskingdom.service.impl;
 
-import com.mts.ToysKingdom.data.model.ProductM;
-import com.mts.ToysKingdom.mapper.Product_Mapper;
-import com.mts.ToysKingdom.service.ProductService;
+import com.mts.toyskingdom.data.model.ProductFeatureM;
+import com.mts.toyskingdom.data.model.ProductM;
+import com.mts.toyskingdom.mapper.ProductMapper;
+import com.mts.toyskingdom.service.ProductSv;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,9 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class ProductServiceImpl implements ProductService {
+public class ProductSvImpl implements ProductSv {
 
-    final Product_Mapper productMapper;
+    final ProductMapper productMapper;
 
     @Override
     public List<ProductM> getAllProducts() throws SQLException {
@@ -39,6 +40,15 @@ public class ProductServiceImpl implements ProductService {
         var listResultEntity = productMapper.getProductByID(idProduct);
         if (Objects.nonNull(listResultEntity)) {
             return ProductM.convertProductEToProductM(listResultEntity);
+        }
+        return null;
+    }
+
+    @Override
+    public List<ProductFeatureM> getProductFeature() throws SQLException {
+        var listResultEntity = productMapper.getProductFeature();
+        if (Objects.nonNull(listResultEntity)) {
+            return ProductFeatureM.convertListProductEToProductM(listResultEntity);
         }
         return null;
     }
