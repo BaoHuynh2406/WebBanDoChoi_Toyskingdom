@@ -2,9 +2,8 @@ let app = angular.module('ToysKingdom', ["ngRoute"]);
 
 app.config(function ($routeProvider) {
     $routeProvider
-        .when("/", { templateUrl: "layout/ViewProduct.html", controller: "viewProductCtrl" })
-        .when("/siginUp", { templateUrl: "./SignUp.html", controller: "myCtrl" })
-        .otherwise({ redirectTo: "/" });
+        .when("/home", { templateUrl: "layout/ViewProduct.html", controller: "viewProductCtrl" })
+        .when("/login", { templateUrl: "layout/login.html", controller: "loginCtrl" });
 });
 
 
@@ -48,13 +47,10 @@ app.controller('viewProductCtrl', function ($scope, $http) {
 
     getData();
 
-
-
-
-
-
 });
 
+app.controller("loginCtrl", function ($scope) {
 
+});
 
 
