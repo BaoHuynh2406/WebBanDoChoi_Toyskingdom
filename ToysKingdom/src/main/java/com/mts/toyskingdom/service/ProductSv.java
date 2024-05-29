@@ -35,4 +35,6 @@ public interface ProductSv {
 
     List<ProductFeatureM> getAllProductsFeature() throws SQLException;
 
+//    tim sp them ten
+    List<ProductFeatureM> searchProduct(String productName) throws SQLException;
 }
