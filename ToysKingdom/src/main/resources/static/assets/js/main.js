@@ -5,6 +5,7 @@ app.config(function ($routeProvider) {
         .when("/home", { templateUrl: "layout/ViewProduct.html", controller: "viewProductCtrl" })
         .when("/login", { templateUrl: "layout/login.html", controller: "loginCtrl" })
         .when("/sign", { templateUrl: "layout/sign.html", controller: "signCtrl" })
+        .when("/forgotpassword", { templateUrl: "layout/forgotpassword.html", controller: "forgotpasswordCtrl" })
         .otherwise({ redirectTo: "/home" });
 });
 
@@ -57,6 +58,9 @@ app.controller("loginCtrl", function ($scope) {
 
 
 app.controller("signCtrl", function ($scope) {
+
+});
+app.controller("forgotpasswordCtrl", function ($scope) {
 
 });
 
