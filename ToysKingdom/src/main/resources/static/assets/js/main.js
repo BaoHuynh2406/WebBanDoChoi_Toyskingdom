@@ -3,7 +3,8 @@ let app = angular.module('ToysKingdom', ["ngRoute"]);
 app.config(function ($routeProvider) {
     $routeProvider
         .when("/home", { templateUrl: "layout/ViewProduct.html", controller: "viewProductCtrl" })
-        .when("/login", { templateUrl: "layout/login.html", controller: "loginCtrl" });
+        .when("/login", { templateUrl: "layout/login.html", controller: "loginCtrl" })
+        .when("/sign", { templateUrl: "layout/sign.html", controller: "signCtrl" });
 });
 
 
@@ -28,7 +29,7 @@ app.controller('viewProductCtrl', function ($scope, $http) {
     getData = function () {
         // Lấy danh mục sản phẩm
         $http.get('http://localhost:8080/api-public/categories/getAllCategories')
-           .then(function (response) {
+            .then(function (response) {
                 $scope.categoriesData = response.data.data;
             }, function (error) {
                 console.log(error.message);
@@ -41,7 +42,7 @@ app.controller('viewProductCtrl', function ($scope, $http) {
             }, function (error) {
                 console.log(error.message);
             });
-        
+
 
     };
 
@@ -53,4 +54,8 @@ app.controller("loginCtrl", function ($scope) {
 
 });
 
+
+app.controller("signCtrl", function ($scope) {
+
+});
 
