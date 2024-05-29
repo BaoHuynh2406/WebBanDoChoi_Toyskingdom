@@ -45,10 +45,10 @@ public class ProductSvImpl implements ProductSv {
     }
 
     @Override
-    public List<ProductFeatureM> getProductFeature() throws SQLException {
-        var listResultEntity = productMapper.getProductFeature();
+    public List<ProductFeatureM> getAllProductsFeature() throws SQLException {
+        var listResultEntity = productMapper.getAllProductsFeature();
         if (Objects.nonNull(listResultEntity)) {
-            return ProductFeatureM.convertListProductEToProductM(listResultEntity);
+            return ProductFeatureM.convertListProductEToProductFeatureM(listResultEntity);
         }
         return null;
     }

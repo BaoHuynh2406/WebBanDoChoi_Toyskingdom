@@ -15,6 +15,6 @@ public interface ProductMapper {
 //    Lấy tất cả sản phẩm có active = true
     List<ProductE> getAllActiveProducts();
 //    Lấy thông tin sản phẩm hữu ích. Tên, giá, ảnh, giảm giá..
-    List<ProductE> getProductFeature();
+    List<ProductE> getAllProductsFeature();
 
 }

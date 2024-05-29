@@ -32,11 +32,7 @@ public interface ProductSv {
     ProductM getProductByID(int idProduct) throws SQLException;
 
 
-    /**
-     * Lấy tất cả thông tin: sản phẩm được chọn
-     *
-     * @return danh sách sản phẩm
-     */
-    List<ProductFeatureM> getProductFeature() throws SQLException;
+
+    List<ProductFeatureM> getAllProductsFeature() throws SQLException;
 
 }

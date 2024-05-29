@@ -35,8 +35,8 @@ app.controller('viewProductCtrl', function ($scope, $http) {
                 console.log(error.message);
             });
 
-        //Lấy các sản phẩm đang hoạt động
-        $http.get('http://localhost:8080/api-public/products/getAllActiveProducts')
+        //Lấy các sản phẩm 
+        $http.get('http://localhost:8080/api-public/products/getAllProductsFeature')
             .then(function (response) {
                 $scope.productsData = response.data.data;
             }, function (error) {

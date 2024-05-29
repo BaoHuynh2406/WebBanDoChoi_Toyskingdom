@@ -1,13 +1,14 @@
 package com.mts.toyskingdom.data.mgt;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
 
 @Getter
 @Setter
-
 public class ResponseObject<OBJ> implements Serializable {
     /**
      *

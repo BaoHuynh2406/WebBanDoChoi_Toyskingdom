@@ -50,7 +50,7 @@ public class ProductAPI {
     public ResponseObject<?> doGetAllProductsFeature() {
         var resultApi = new ResponseObject<>();
         try {
-            resultApi.setData(productService.getProductFeature());
+            resultApi.setData(productService.getAllProductsFeature());
             resultApi.setSuccess(true);
             resultApi.setMessage("Lấy thông tin toàn bộ sản phẩm feature thành công");
         } catch (Exception e) {

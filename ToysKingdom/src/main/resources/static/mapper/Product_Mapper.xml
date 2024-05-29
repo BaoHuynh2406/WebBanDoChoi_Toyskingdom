@@ -39,7 +39,7 @@
     </select>
 
     <select id="getAllProductsFeature" resultMap="productFeature">
-        SELECT * FROM product_discounts
+        SELECT * FROM product_feature
     </select>
 
 

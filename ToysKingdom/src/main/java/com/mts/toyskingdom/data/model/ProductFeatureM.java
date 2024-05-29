@@ -21,7 +21,7 @@ public class ProductFeatureM {
     private double discountPercent;
 
 
-    public static ProductFeatureM convertProductEToProductM(ProductE productE) {
+    public static ProductFeatureM convertProductEToProductFeatureM(ProductE productE) {
         return ProductFeatureM.builder()
                 .idProduct(productE.getIdProduct())
                 .idCategory(productE.getIdCategory())
@@ -33,8 +33,10 @@ public class ProductFeatureM {
                 .build();
     }
 
-    public static List<ProductFeatureM> convertListProductEToProductM(List<ProductE> productEList)
+    public static List<ProductFeatureM> convertListProductEToProductFeatureM(List<ProductE> productEList)
     {
-        return productEList.stream().map(productE -> convertProductEToProductM(productE)).collect(Collectors.toList());
+        return productEList.stream()
+                .map(productE -> convertProductEToProductFeatureM(productE))
+                .collect(Collectors.toList());
     }
 }
