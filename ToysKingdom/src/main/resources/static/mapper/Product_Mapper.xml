@@ -43,7 +43,7 @@
     </select>
 
     <select id="searchProduct" resultMap="productFeature" parameterType="String">
-        SELECT * FROM product_feature WHERE product_name like '%' + #{productName} + '%'
+        SELECT * FROM product_feature WHERE product_name like CONCAT('%', #{productName}, '%')
     </select>
 
 </mapper>
