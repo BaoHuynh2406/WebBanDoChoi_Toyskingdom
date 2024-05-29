@@ -4,7 +4,8 @@ app.config(function ($routeProvider) {
     $routeProvider
         .when("/home", { templateUrl: "layout/ViewProduct.html", controller: "viewProductCtrl" })
         .when("/login", { templateUrl: "layout/login.html", controller: "loginCtrl" })
-        .when("/sign", { templateUrl: "layout/sign.html", controller: "signCtrl" });
+        .when("/sign", { templateUrl: "layout/sign.html", controller: "signCtrl" })
+        .otherwise({ redirectTo: "/home" });
 });
 
 
