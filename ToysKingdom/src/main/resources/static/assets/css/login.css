@@ -1,0 +1,48 @@
+/* Root */
+html {
+    font-size: 16px;
+}
+:root {
+    --main-color: #cf102d;
+    /* đỏ */
+    --secondary-color: #041675;
+    /* xanh */
+    --background-color: #f8f9fa;
+    /* nền nhạt */
+    --text-color: #333;
+    /* văn bản chính */
+    --muted-text-color: #6c757d;
+    /* văn bản nhạt */
+    
+}
+/* END ROOT */
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* START FORM */
+
+.container {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.form-card {
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.form-card__header {
+    /* background-color: var(--main-color); */
+    color: var(--secondary-color);
+    padding: 1rem;
+}
+
+.link-muted:hover {
+    color: var(--main-color);
+}
+
+/* END FONRM */
