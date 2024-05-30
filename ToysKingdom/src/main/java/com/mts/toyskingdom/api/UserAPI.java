@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserAPI {
 
 
-    @GetMapping("/testParam")
+    @GetMapping("/login")
     public ResponseObject<?> doTest(TestDTO testDTO) {
         ResponseObject resultApi = new ResponseObject<>();
         try {
-            resultApi.setData(testSv.testService(testDTO));
+            resultApi.setData("User");
             resultApi.setSuccess(true);
-            resultApi.setMessage("Lấy thông tin toàn bộ sản phẩm thành công");
+            resultApi.setMessage("Đăng nhập thành công");
         } catch (Exception e) {
             resultApi.setSuccess(false);
             resultApi.setMessage("Lấy thông tin sản phẩm thất bại");
