@@ -52,4 +52,13 @@ public class ProductSvImpl implements ProductSv {
         }
         return null;
     }
+
+    @Override
+    public List<ProductFeatureM> searchProduct(String productName) throws SQLException {
+        var listResultEntity = productMapper.searchProduct(productName);
+        if (Objects.nonNull(listResultEntity)) {
+            return ProductFeatureM.convertListProductEToProductFeatureM(listResultEntity);
+        }
+        return null;
+    }
 }

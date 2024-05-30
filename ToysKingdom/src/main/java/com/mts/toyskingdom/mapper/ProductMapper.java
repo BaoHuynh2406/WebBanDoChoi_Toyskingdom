@@ -17,4 +17,6 @@ public interface ProductMapper {
 //    Lấy thông tin sản phẩm hữu ích. Tên, giá, ảnh, giảm giá..
     List<ProductE> getAllProductsFeature();
 
+//    Tim sp theo ten
+    List<ProductE> searchProduct(@Param("productName") String productName);
 }

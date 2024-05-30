@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -56,6 +57,22 @@ public class ProductAPI {
         } catch (Exception e) {
             resultApi.setSuccess(false);
             resultApi.setMessage("Lấy thông tin sản phẩm thất bại");
+            log.error("Fail When Call API /api-public/products/getAllProductsFeature : ", e);
+        }
+        return resultApi;
+    }
+
+    // tim sp theo ten api
+    @GetMapping("/getproductbyname")
+    public ResponseObject<?> searchProductbyName(@RequestParam("productName") String productName) {
+        var resultApi = new ResponseObject<>();
+        try {
+            resultApi.setData(productService.searchProduct(productName));
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Tim thông tin sản phẩm thành công");
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Tim thông tin sản phẩm thất bại");
             log.error("Fail When Call API /api-public/products/getAllProductsFeature : ", e);
         }
         return resultApi;
