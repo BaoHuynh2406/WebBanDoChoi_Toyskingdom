@@ -6,6 +6,7 @@ app.config(function ($routeProvider) {
         .when("/login", { templateUrl: "layout/login.html", controller: "loginCtrl" })
         .when("/sign", { templateUrl: "layout/sign.html", controller: "signCtrl" })
         .when("/forgotpassword", { templateUrl: "layout/forgotpassword.html", controller: "forgotpasswordCtrl" })
+        .when("/resetpassword", { templateUrl: "layout/resetpassword"})
         .otherwise({ redirectTo: "/home" });
 });
 
