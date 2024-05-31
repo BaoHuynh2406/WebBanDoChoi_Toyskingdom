@@ -6,6 +6,7 @@ app.config(function ($routeProvider) {
         .when("/login", { templateUrl: "layout/login.html", controller: "loginCtrl" })
         .when("/sign", { templateUrl: "layout/sign.html", controller: "signCtrl" })
         .when("/forgotpassword", { templateUrl: "layout/forgotpassword.html", controller: "forgotpasswordCtrl" })
+        .when("/productout", { templateUrl: "layout/TimKiemLayout.html", controller: "productOutCtrl" })
         .otherwise({ redirectTo: "/home" });
 });
 
@@ -52,15 +53,35 @@ app.controller('viewProductCtrl', function ($scope, $http) {
 
 });
 
+// tìm kiếm chưa hoàn thành
+
 app.controller("loginCtrl", function ($scope) {
 
 });
-
 
 app.controller("signCtrl", function ($scope) {
 
 });
 app.controller("forgotpasswordCtrl", function ($scope) {
 
+});
+
+// tìm kiếm chưa hoàn thành
+app.controller("productOutCtrl", function ($scope, $http) {
+    $scope.productsData = [];
+    $scope.categoriesData = [];
+
+
+
+    $scope.search = function(){
+        //Lấy các sản phẩm 
+        $http.get('http://localhost:8080/api-public/products/getproductbyname', {params: {productName : $scope.searchkey}})
+            .then(function (response) {
+                $scope.productsData = response.data.data;
+            }, function (error) {
+                console.log(error.message);
+            });
+
+    }
 });
 
