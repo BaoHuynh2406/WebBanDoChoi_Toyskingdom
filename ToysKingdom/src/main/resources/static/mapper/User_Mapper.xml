@@ -24,4 +24,10 @@
         SELECT email FROM users WHERE email = #{email}
     </select>
 
+    <select id="getUserByidUser" parameterType="int" resultMap="userMap">
+        SELECT id_user FROM users WHERE id_user =#{idUser}
+        </select>
+
+
+
 </mapper>

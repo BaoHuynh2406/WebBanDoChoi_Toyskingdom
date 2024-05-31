@@ -15,6 +15,16 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UserSvlmpl implements UserSv {
 final UserMapper userMapper;
+
+    @Override
+    public List<UserM> getUserByidUser(int idUser) throws SQLException {
+        var listResultEntity = userMapper.getUserByidUser(idUser);
+        if (Objects.nonNull(listResultEntity)) {
+            return UserM.convertListUserEToUserM(listResultEntity);
+        }
+        return null;
+    }
+
     @Override
     public List<UserM> getAllUser()  throws SQLException{
         var listResultEntity = userMapper.getAllUser();

@@ -9,6 +9,7 @@ import java.util.List;
 public interface UserSv {
     public List<UserM> getAllUser() throws SQLException;
     public List<UserM> getUserByEmail(String email) throws SQLException;
+    public List<UserM> getUserByidUser(int idUser) throws SQLException;
 
 
 }

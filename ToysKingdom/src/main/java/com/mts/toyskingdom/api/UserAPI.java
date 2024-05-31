@@ -44,4 +44,17 @@ public class UserAPI {
         }
         return resultApi;
     }
+    @GetMapping("/getUserByidUser")
+    public ResponseObject<?> doGetFindidUser(@RequestParam("idUser") int idUser) {
+        var resultApi = new ResponseObject<>();
+        try {
+            resultApi.setData(userSV.getUserByidUser(idUser));
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Lấy thông tin người dùng thành công");
+        } catch (Exception e) {
+            resultApi.setMessage("Lấy thông tin người dùng thất bại");
+            log.error("Fail When Call API/api-public/user/getUserByidUser: ", e);
+        }
+        return resultApi;
+    }
 }

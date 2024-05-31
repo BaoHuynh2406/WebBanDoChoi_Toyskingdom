@@ -157,6 +157,8 @@ FROM
             AND d.active = 1
             AND NOW() BETWEEN d.start_day AND d.end_day;
 
-select * from product_feature
+select * from users
 
 SELECT email FROM users WHERE email LIKE '%k%';
+SELECT id_user FROM users WHERE id_user LIKE '%1%';
+

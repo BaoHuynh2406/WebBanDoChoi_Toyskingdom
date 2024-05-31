@@ -9,4 +9,6 @@ import java.util.List;
 public interface UserMapper {
 public List<UserE> getAllUser();
 public List<UserE> getUserByEmail(@Param("email") String email);
+public List<UserE> getUserByidUser(@Param("idUser") int idUser);
+
 }
