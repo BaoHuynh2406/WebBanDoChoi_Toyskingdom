@@ -13,7 +13,7 @@ create table users
     password     nvarchar(200)          not null,
     full_name    nvarchar(50)           not null,
     phone_number varchar(20),
-    address      nvarchar(200),
+        address      nvarchar(200),
     birthday     date,
     role         ENUM ('USER', 'ADMIN') not null default 'USER',
     active       bit                             default 1
@@ -157,4 +157,8 @@ FROM
             AND d.active = 1
             AND NOW() BETWEEN d.start_day AND d.end_day;
 
-select * from product_feature
+select * from users
+
+SELECT email FROM users WHERE email LIKE '%k%';
+SELECT id_user FROM users WHERE id_user LIKE '%1%';
+

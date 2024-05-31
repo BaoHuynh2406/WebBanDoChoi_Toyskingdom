@@ -12,21 +12,47 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/api-public/auth")
+@RequestMapping("/api-public/user")
 public class UserAPI {
+    final UserSv userSV;
 
-
-    @GetMapping("/login")
-    public ResponseObject<?> doTest(TestDTO testDTO) {
-        ResponseObject resultApi = new ResponseObject<>();
+    @GetMapping("/getAllUsers")
+    public ResponseObject<?> doGetAllUsers() {
+        var resultApi = new ResponseObject<>();
         try {
-            resultApi.setData("User");
+            resultApi.setData(userSV.getAllUser());
             resultApi.setSuccess(true);
-            resultApi.setMessage("Đăng nhập thành công");
+            resultApi.setMessage("Lấy thông tin người dùng thành công");
         } catch (Exception e) {
             resultApi.setSuccess(false);
-            resultApi.setMessage("Lấy thông tin sản phẩm thất bại");
-            log.error("Fail When Call API /api-public/products/getAllProducts : ", e);
+            resultApi.setMessage("Lấy thông tin người dùng thất bại");
+            log.error("Fail When Call API/api-public/user/getAllUsers : ", e);
+        }
+        return resultApi;
+    }
+    @GetMapping("/getUserByEmail")
+    public ResponseObject<?> doGetFindEmail(@RequestParam("email") String email) {
+        var resultApi = new ResponseObject<>();
+        try {
+            resultApi.setData(userSV.getUserByEmail(email));
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Lấy thông tin Email người dùng thành công");
+        } catch (Exception e) {
+            resultApi.setMessage("Lấy thông tin Email người dùng thất bại");
+            log.error("Fail When Call API/api-public/user/getFindEmail : ", e);
+        }
+        return resultApi;
+    }
+    @GetMapping("/getUserByidUser")
+    public ResponseObject<?> doGetFindidUser(@RequestParam("idUser") int idUser) {
+        var resultApi = new ResponseObject<>();
+        try {
+            resultApi.setData(userSV.getUserByidUser(idUser));
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Lấy thông tin người dùng thành công");
+        } catch (Exception e) {
+            resultApi.setMessage("Lấy thông tin người dùng thất bại");
+            log.error("Fail When Call API/api-public/user/getUserByidUser: ", e);
         }
         return resultApi;
     }
