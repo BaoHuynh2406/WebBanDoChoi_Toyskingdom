@@ -44,6 +44,12 @@
     <!-- Thư viện dùng để thay thế hộp thoại thông báo mặc định -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    
+    <!-- Lazy Load -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/oclazyload/1.1.0/ocLazyLoad.min.js"
+        integrity="sha512-V59jxS4kcWe6bvHEeZCojXfPrwUx2XPLbaKXl2xff8jHpc9U0u+HYvA/JHFLX89VuZtyyUaVWcVOKgD1Umnjzw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
 </head>
 
@@ -63,7 +69,9 @@
 
 
 <!-- Main JS -->
-<script th:src="@{/assets/js/main.js}"></script>
+<script src="/assets/js/app/module.js"></script>
+<script src="/assets/js/app/app.js"></script>
+<script src="/assets/js/app/routes.js"></script>
 
 
 </body>

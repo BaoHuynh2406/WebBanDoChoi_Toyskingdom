@@ -3,10 +3,12 @@ package com.mts.toyskingdom.api;
 
 import com.mts.toyskingdom.data.dto.TestDTO;
 import com.mts.toyskingdom.data.mgt.ResponseObject;
+import com.mts.toyskingdom.service.UserSv;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api-public/user")
 public class UserAPI {
-    final UserSv userSV;
+    final UserSv userSv;
 
     @GetMapping("/getAllUsers")
     public ResponseObject<?> doGetAllUsers() {
         var resultApi = new ResponseObject<>();
         try {
-            resultApi.setData(userSV.getAllUser());
+            resultApi.setData(userSv.getAllUser());
             resultApi.setSuccess(true);
             resultApi.setMessage("Lấy thông tin người dùng thành công");
         } catch (Exception e) {
@@ -34,7 +36,7 @@ public class UserAPI {
     public ResponseObject<?> doGetFindEmail(@RequestParam("email") String email) {
         var resultApi = new ResponseObject<>();
         try {
-            resultApi.setData(userSV.getUserByEmail(email));
+            resultApi.setData(userSv.getUserByEmail(email));
             resultApi.setSuccess(true);
             resultApi.setMessage("Lấy thông tin Email người dùng thành công");
         } catch (Exception e) {
@@ -47,7 +49,7 @@ public class UserAPI {
     public ResponseObject<?> doGetFindidUser(@RequestParam("idUser") int idUser) {
         var resultApi = new ResponseObject<>();
         try {
-            resultApi.setData(userSV.getUserByidUser(idUser));
+            resultApi.setData(userSv.getUserByidUser(idUser));
             resultApi.setSuccess(true);
             resultApi.setMessage("Lấy thông tin người dùng thành công");
         } catch (Exception e) {
