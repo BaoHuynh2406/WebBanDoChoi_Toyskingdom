@@ -57,3 +57,67 @@ html {
 }
 
 /* END FORM */
+
+/* START SIGN UP */
+
+.sign {
+    background-color: rgba(229, 229, 247, 0.07);
+    background: linear-gradient(135deg, rgba(68, 76, 247, 0.07) 25%, transparent 25%) -40px 0/ 80px 80px, 
+                linear-gradient(225deg, rgba(68, 76, 247, 0.07) 25%, transparent 25%) -40px 0/ 80px 80px, 
+                linear-gradient(315deg, rgba(68, 76, 247, 0.07) 25%, transparent 25%) 0px 0/ 80px 80px, 
+                linear-gradient(45deg, rgba(68, 76, 247, 0.07) 25%, rgba(229, 229, 247, 0.07) 25%) 0px 0/ 80px 80px;
+}
+
+.form-sign__btnSubmit {
+    border-radius: 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-sign__btnSubmit:hover {
+    background-color: #041775e7;
+    scale: 0.97;
+    color: white;
+}
+.form-sign__label {
+    color: var(--secondary-color);
+}
+.form-sign__input {
+    border-radius: 20px;
+    height: 40px;
+}
+/* END SIGN UP */
+
+/* START FORGOTPASS */
+
+.forgotpass {
+    background-color: rgba(229, 229, 247, 0.07);
+    background: linear-gradient(135deg, rgba(68, 76, 247, 0.07) 25%, transparent 25%) -40px 0/ 80px 80px, 
+                linear-gradient(225deg, rgba(68, 76, 247, 0.07) 25%, transparent 25%) -40px 0/ 80px 80px, 
+                linear-gradient(315deg, rgba(68, 76, 247, 0.07) 25%, transparent 25%) 0px 0/ 80px 80px, 
+                linear-gradient(45deg, rgba(68, 76, 247, 0.07) 25%, rgba(229, 229, 247, 0.07) 25%) 0px 0/ 80px 80px;
+}
+
+
+.form-forgotpass__btnSubmit {
+    border-radius: 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-forgotpass__btnSubmit:hover {
+    background-color: #041775e7;
+    scale: 0.97;
+    color: white;
+}
+.form-forgotpass__label {
+    color: var(--secondary-color);
+}
+.form-forgotpass__input {
+    border-radius: 20px;
+    height: 40px;
+}
+
+/* END FORGOTPASS */
