@@ -11,6 +11,7 @@ angular.module('ToysKingdom').directive('cardItemType1', function () {
         scope: {
             product: '=product'
         },
-        templateUrl: 'components/cardType1.html'
+        templateUrl: 'components/cardType1.html',
+        restrict: 'AE'
     }
 });
