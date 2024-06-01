@@ -1,38 +1,39 @@
-<section class="container">
+<section class="container" ng-controller="searchCtrl">
       <div class="row" id="productList">
-            <div class="d-flex justify-content-between align-items-center py-1">
-                  <span class="fw-bold ">Danh sách sản phẩm</span>
-                  <input type="text" ng-model="searchkey"> <button ng-click="search()">ok</button>
-
-                  <div class="d-flex h-100 align-items-center">
-                        <div class="w-100 fw-bold">Sắp xếp theo:</div>
-                        <select class="form-select" aria-label="Default select example">
-                              <option selected value="1">Giá tăng dần</option>
-                              <option value="2">Giá giảm dần</option>
-                              <option value="3">Ngày bán</option>
-                        </select>
-                  </div>
-            </div>
-
-            <!-- Vùng hiển thị sản phẩm -->
-            <div class="View-Container d-flex flex-wrap justify-content-center">
-                  <div card-Item-Type-1 class="px-2 my-3 col-sm-6 col-md-4 col-lg-3" id="cardContainer"
-                        ng-repeat="p in productsData" product="p">
-                  </div>
-            </div>
-
-            <!-- Phân trang -->
-            <nav aria-label="..." class="mt-5">
-                  <ul class="pagination pagination-lg justify-content-center">
-                        <li class="page-item active" aria-current="page">
-                              <span class="page-link">1</span>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                              <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
-                        </li>
-                  </ul>
-            </nav>
+          <div class="d-flex justify-content-between align-items-center py-1">
+              <span class="fw-bold">Danh sách sản phẩm</span>
+              <input type="text" ng-model="searchKey"> <button ng-click="search()">ok</button>
+  
+              <div class="d-flex h-100 align-items-center">
+                  <div class="w-100 fw-bold">Sắp xếp theo:</div>
+                  <select class="form-select" aria-label="Default select example">
+                      <option selected value="1">Giá tăng dần</option>
+                      <option value="2">Giá giảm dần</option>
+                      <option value="3">Ngày bán</option>
+                  </select>
+              </div>
+          </div>
+  
+          <!-- Vùng hiển thị sản phẩm -->
+          <div class="View-Container d-flex flex-wrap justify-content-center">
+              <div card-Item-Type-1 class="px-2 my-3 col-sm-6 col-md-4 col-lg-3" id="cardContainer"
+                  ng-repeat="p in productsData" product="p">
+              </div>
+          </div>
+  
+          <!-- Phân trang -->
+          <nav aria-label="..." class="mt-5">
+              <ul class="pagination pagination-lg justify-content-center">
+                  <li class="page-item active" aria-current="page">
+                      <span class="page-link">1</span>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                      <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                  </li>
+              </ul>
+          </nav>
       </div>
-</section>
+  </section>
+  
