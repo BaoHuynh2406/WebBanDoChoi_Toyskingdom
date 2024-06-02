@@ -6,6 +6,8 @@ use toyskingdomdata;
 
 
 
+drop
+
 create table users
 (
     id_user      int auto_increment primary key,
