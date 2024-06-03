@@ -43,10 +43,11 @@ create table products
 );
 
 
-create table discounts
+    create table discounts
 (
     id_discount      int auto_increment primary key,
-    id_prduct        int,
+    id_pr
+        duct        int,
     discount_percent decimal(5, 2) not null,
     start_day        datetime      not null,
     end_day          datetime      not null,
