@@ -99,12 +99,13 @@ public class ProductAPI {
     public ResponseObject<?> getHomePageProduct(@RequestParam("page") int page){
         var resultApi = new ResponseObject<>();
         try {
-            resultApi.setData(productService.getProductFeaturePage(page));
+            int pageNumber = (page-1)*12;
+            resultApi.setData(productService.getProductFeaturePage(pageNumber, 12));
             resultApi.setSuccess(true);
-            resultApi.setMessage("Lấy số lượng sản phẩm feature");
+            resultApi.setMessage(page+"");
         } catch (Exception e) {
             resultApi.setSuccess(false);
-            resultApi.setMessage("Lấy số lượng sản phẩm thất bại");
+            resultApi.setMessage("Lấy trang thất bại");
             log.error("Fail When Call API : ", e);
         }
         return resultApi;

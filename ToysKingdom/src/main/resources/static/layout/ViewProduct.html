@@ -105,6 +105,10 @@
 
             </div>
             <hr>
+            <!-- Spinner -->
+            <div class="spinner-grow m-5" role="status" ng-if="isLoading">
+                <span class="sr-only">Loading...</span>
+            </div>
 
             <!-- Vùng hiển thị sản phẩm -->
             <div class="View-Container d-flex flex-wrap justify-content-center">
@@ -114,17 +118,8 @@
             </div>
 
             <!-- Phân trang -->
-            <nav aria-label="..." class="mt-5">
-                <ul class="pagination pagination-lg justify-content-center">
-                    <li class="page-item active" aria-current="page">
-                        <span class="page-link">1</span>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
-                    </li>
-                </ul>
-            </nav>
+            <pagination current-page="currentPage" total-pages="totalPages" load-data="loadData(page)"></pagination>
+
+
         </div>
 </section>
