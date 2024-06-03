@@ -1,15 +1,17 @@
-
 angular.module('ToysKingdom').controller('searchCtrl', function($scope, $location, $http, $routeParams) {
-
-
+    
     $scope.searchKey = $routeParams.query || '';
+    $scope.productsData = [];
+
     $scope.search = function() {
         if ($scope.searchKey) {
+            console.log("Searching for:", $scope.searchKey);
             $location.path('/search').search({ query: $scope.searchKey });
+            $scope.loadData();
+        } else {
+            console.log("Product name cannot be null or empty");
         }
     };
-
-    $scope.productsData = [];
 
     $scope.loadData = function() {
         if ($scope.searchKey) {
@@ -19,7 +21,10 @@ angular.module('ToysKingdom').controller('searchCtrl', function($scope, $locatio
                 }, function(error) {
                     console.log(error.message);
                 });
+        } else {
+            console.log("Vui lòng nhập sản phẩm cần tìm kiếm");
         }
     };
+
     $scope.loadData();
 });
