@@ -77,4 +77,20 @@ public class ProductAPI {
         }
         return resultApi;
     }
+
+//    Lấy số lướng sản phẩm features trong db
+    @GetMapping("/countFeatureProducts")
+    public ResponseObject<?> getCountFeatureProducts(){
+        var resultApi = new ResponseObject<>();
+        try {
+            resultApi.setData(productService.countFeatureProducts());
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Lấy số lượng sản phẩm feature");
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lấy số lượng sản phẩm thất bại");
+            log.error("Fail When Call API : ", e);
+        }
+        return resultApi;
+    }
 }
