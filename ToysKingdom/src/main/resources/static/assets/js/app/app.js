@@ -1,7 +1,8 @@
 angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location){
     console.log("MainCtrl Load Done")
-    
+
     $scope.search = function () {
+        // Sữ dụng jquery để lấy dữ liệu thay vì ng-model
         $scope.searchQuery = $('#searchQuery').val();
         console.log($scope.searchQuery);
         if ($scope.searchQuery) {
