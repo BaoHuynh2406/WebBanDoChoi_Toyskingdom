@@ -51,7 +51,7 @@
     </select>
 
 
-    <select id="getQuantityProduct" resultMap="productFeature" parameterType="map">
+    <select id="getProductFeaturePage" resultMap="productFeature" parameterType="map">
         CALL get_Quantity_Product(#{start, mode=IN}, #{quantity, mode=IN})
     </select>
 

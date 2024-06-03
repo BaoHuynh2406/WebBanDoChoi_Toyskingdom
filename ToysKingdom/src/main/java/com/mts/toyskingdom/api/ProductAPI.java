@@ -93,4 +93,20 @@ public class ProductAPI {
         }
         return resultApi;
     }
+
+//    Trả dữ liệu về trang home page
+    @GetMapping("/homePageProduct")
+    public ResponseObject<?> getHomePageProduct(@RequestParam("page") int page){
+        var resultApi = new ResponseObject<>();
+        try {
+            resultApi.setData(productService.getProductFeaturePage(page));
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Lấy số lượng sản phẩm feature");
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lấy số lượng sản phẩm thất bại");
+            log.error("Fail When Call API : ", e);
+        }
+        return resultApi;
+    }
 }

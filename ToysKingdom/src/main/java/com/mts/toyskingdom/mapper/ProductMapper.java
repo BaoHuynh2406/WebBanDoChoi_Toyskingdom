@@ -24,5 +24,5 @@ public interface ProductMapper {
     int countFeatureProducts();
 
 //    Lấy sản phẩm từ start
-    List<ProductE> getProductsFrom(@Param("start") int start, @Param("quantity") int quantity);
+    List<ProductE> getProductFeaturePage(@Param("start") int start, @Param("quantity") int quantity);
 }

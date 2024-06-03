@@ -42,5 +42,5 @@ public interface ProductSv {
     int countFeatureProducts() throws SQLException;
 
 //    Lấy sản phẩm từ start đến quantity
-    List<ProductFeatureM> getFeatureProductsQuantity(int start, int quantity) throws SQLException;
+    List<ProductFeatureM> getProductFeaturePage(int page) throws SQLException;
 }
