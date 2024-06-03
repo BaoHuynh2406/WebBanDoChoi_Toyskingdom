@@ -1,4 +1,4 @@
-<header class="container-fluid header" ng-controller="searchCtrl">
+<header class="container-fluid header">
     <div>
         <!-- Hàng 1  -->
         <div class="row d-flex align-items-center">
@@ -8,9 +8,7 @@
             </div>
             <!-- Search -->
             <div class="col-5 header__searchBox d-flex align-items-center">
-                <button ng-click="search()">
-                    <i class="fas fa-search col-1 search_Icon"></i>
-                </button>
+                    <i class="fas fa-search col-1 search_Icon" ng-click="search()"></i>
                 <input class="col search_Input" type="text" placeholder="Nhập từ khóa để tìm kiếm" ng-model="searchKey">
             </div>
             <div class="col"></div>

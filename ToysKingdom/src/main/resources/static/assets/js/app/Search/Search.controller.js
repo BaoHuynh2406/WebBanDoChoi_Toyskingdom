@@ -1,24 +1,14 @@
-angular.module('ToysKingdom').controller('searchCtrl', function($scope, $location, $http, $routeParams) {
-    
-    $scope.searchKey = $routeParams.query || '';
+angular.module('ToysKingdom').controller('searchCtrl', function ($scope ,$location, $http, $routeParams) {
     $scope.productsData = [];
+    $scope.searchKey = $routeParams.query || '';
 
-    $scope.search = function() {
-        if ($scope.searchKey) {
-            console.log("Searching for:", $scope.searchKey);
-            $location.path('/search').search({ query: $scope.searchKey });
-            $scope.loadData();
-        } else {
-            console.log("Product name cannot be null or empty");
-        }
-    };
-
-    $scope.loadData = function() {
+    $scope.loadData = function () {
+        console.log("Loaddata...");
         if ($scope.searchKey) {
             $http.get('http://localhost:8080/api-public/products/getproductbyname', { params: { productName: $scope.searchKey } })
-                .then(function(response) {
+                .then(function (response) {
                     $scope.productsData = response.data.data;
-                }, function(error) {
+                }, function (error) {
                     console.log(error.message);
                 });
         } else {
@@ -26,5 +16,10 @@ angular.module('ToysKingdom').controller('searchCtrl', function($scope, $locatio
         }
     };
 
-    $scope.loadData();
+    // Khi khởi tạo controller, nếu có tham số query trên URL thì gán vào thanh tìm kiếm và gọi loadData
+    if ($scope.searchKey) {
+        $scope.loadData();
+    }
+
+    console.log('Search controller load')
 });
