@@ -146,39 +146,42 @@
                 <thead>
                     <tr class="text-center">
                         <th>#</th>
-                        <th>User name</th>
-                        <th>Password</th>
+                        <th>ID</th>
                         <th>Email</th>
-                        <th>Gender</th>
-                        <th>FullName</th>
+                        <th>Password</th>
+                        <th>Full name</th>
+                        <th>Phone number</th>
                         <th>BirthDay</th>
                         <th>Role</th>
+                        <th>Active</th>
                         <th>Edit</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr class="text-center">
                         <th>#</th>
-                        <th>User name</th>
-                        <th>Password</th>
+                        <th>ID</th>
                         <th>Email</th>
-                        <th>Gender</th>
-                        <th>FullName</th>
+                        <th>Password</th>
+                        <th>Full name</th>
+                        <th>Phone number</th>
                         <th>BirthDay</th>
                         <th>Role</th>
+                        <th>Active</th>
                         <th>Edit</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     <tr ng-repeat="u in users">
                         <td class="text-center">{{$index+1}}</td>
-                        <td class="text-center">{{u.id}}</td>
-                        <td class="text-center">*****</td>
+                        <td class="text-center">{{u.idUser}}</td>
                         <td class="text-center">{{u.email}}</td>
-                        <td class="text-center">{{u.gender ? 'Nam' : 'Nữ'}}</td>
+                        <td class="text-center">{{u.password}}</td>
                         <td class="text-center">{{u.fullName}}</td>
-                        <td class="text-center">{{u.birthday | dateFormat}}</td>
-                        <td class="text-center">{{u.admin ? 'Admin' : 'User'}}</td>
+                        <td class="text-center">{{u.phoneNumber}}</td>
+                        <td class="text-center">{{u.birthday }}</td>
+                        <td class="text-center">{{u.role}}</td>
+                        <td class="text-center">{{u.active ? "TRUE" : "FALSE"}}</td>
                         <td class="text-center">
                             <!-- Nút chỉnh sửa -->
                             <button ng-click="openEditModal(u)" class="btn btn-warning btn-circle btn-sm">

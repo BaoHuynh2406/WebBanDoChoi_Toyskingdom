@@ -15,12 +15,10 @@ angular.module('admin')
     $scope.getAll = function () {
         var button = document.getElementById("rotate-button");
         button.classList.add("rotate-icon");
-        $http.get('/PhimNew/admin/allUser')
+        $scope.users = [];
+        $http.get('http://localhost:8080/api-public/user/getAllUsers')
             .then(function (response) {
-                $scope.users = response.data;
-                $scope.users.forEach(function (user) {
-                    user.birthday = parseDate(user.birthday);
-                });
+                $scope.users = response.data.data;
                 button.classList.remove("rotate-icon");
             })
             .catch(function (error) {
@@ -31,17 +29,17 @@ angular.module('admin')
 
     $scope.getAll();
 
-    $scope.openEditModal = function (user) {
-        console.log('Selected user:', user);
-        $scope.editedUser = angular.copy(user);
-        $('#editUserModal').modal('show');
-    };
+    // $scope.openEditModal = function (user) {
+    //     console.log('Selected user:', user);
+    //     $scope.editedUser = angular.copy(user);
+    //     $('#editUserModal').modal('show');
+    // };
 
-    $scope.saveChanges = function () {
-        $('#editUserModal').modal('hide');
-    };
+    // $scope.saveChanges = function () {
+    //     $('#editUserModal').modal('hide');
+    // };
 
-    $scope.deleteUser = function () {
-        $('#editUserModal').modal('hide');
-    };
+    // $scope.deleteUser = function () {
+    //     $('#editUserModal').modal('hide');
+    // };
   });

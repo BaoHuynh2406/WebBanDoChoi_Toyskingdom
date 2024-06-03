@@ -7,10 +7,11 @@
         <result column="email" property="email"/>
         <result column="password" property="password"/>
         <result column="phone_number" property="phoneNumber"/>
+        <result column="full_name" property="fullName"/>
         <result column="address" property="address"/>
         <result column="birthday" property="birthday"/>
         <result column="role" property="role"/>
-        <result column="active" property="active"/>
+        <result column="active" property="isActive"/>
 
 
     </resultMap>
