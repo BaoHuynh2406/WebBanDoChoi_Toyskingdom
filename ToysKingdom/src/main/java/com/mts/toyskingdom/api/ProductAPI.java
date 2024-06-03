@@ -77,4 +77,37 @@ public class ProductAPI {
         }
         return resultApi;
     }
+
+//    Lấy số lướng sản phẩm features trong db
+    @GetMapping("/countFeatureProducts")
+    public ResponseObject<?> getCountFeatureProducts(){
+        var resultApi = new ResponseObject<>();
+        try {
+            resultApi.setData(productService.countFeatureProducts());
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Lấy số lượng sản phẩm feature");
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lấy số lượng sản phẩm thất bại");
+            log.error("Fail When Call API : ", e);
+        }
+        return resultApi;
+    }
+
+//    Trả dữ liệu về trang home page
+    @GetMapping("/homePageProduct")
+    public ResponseObject<?> getHomePageProduct(@RequestParam("page") int page){
+        var resultApi = new ResponseObject<>();
+        try {
+            int pageNumber = (page-1)*12;
+            resultApi.setData(productService.getProductFeaturePage(pageNumber, 12));
+            resultApi.setSuccess(true);
+            resultApi.setMessage(page+"");
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lấy trang thất bại");
+            log.error("Fail When Call API : ", e);
+        }
+        return resultApi;
+    }
 }

@@ -19,4 +19,10 @@ public interface ProductMapper {
 
 //    Tim sp theo ten
     List<ProductE> searchProduct(@Param("productName") String productName);
+
+//    Lấy số lượng sản phẩm feature trong db
+    int countFeatureProducts();
+
+//    Lấy sản phẩm từ start
+    List<ProductE> getProductFeaturePage(@Param("start") int start, @Param("quantity") int quantity);
 }

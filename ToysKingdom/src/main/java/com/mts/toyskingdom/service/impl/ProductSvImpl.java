@@ -66,5 +66,18 @@ public class ProductSvImpl implements ProductSv {
         }
     }
 
+    @Override
+    public int countFeatureProducts() throws SQLException {
+        int num = productMapper.countFeatureProducts();
+        return num;
+    }
 
+    @Override
+    public List<ProductFeatureM> getProductFeaturePage(int start, int quantity) throws SQLException {
+        var listResultEntity = productMapper.getProductFeaturePage(start, quantity);
+        if (Objects.nonNull(listResultEntity)) {
+            return ProductFeatureM.convertListProductEToProductFeatureM(listResultEntity);
+        }
+        return null;
+    }
 }

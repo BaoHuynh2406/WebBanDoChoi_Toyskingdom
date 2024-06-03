@@ -1,28 +1,51 @@
-angular.module('ToysKingdom').controller('ViewProductsCtrl',
-    function ($scope, $http) {
+angular.module('ToysKingdom').controller('ViewProductsCtrl', function($scope, $http) {
 
+    $scope.productsData = [];
+    $scope.categoriesData = [];
+    $scope.currentPage = 1;
+    $scope.totalPages = 1;
+    $scope.isLoading = false;
+
+    $scope.loadData = function(page) {
+        $scope.isLoading = true;
         $scope.productsData = [];
-        $scope.categoriesData = [];
+        $http.get('http://localhost:8080/api-public/products/homePageProduct', { params: { page: page } })
+            .then(function(response) {
+                $scope.productsData = response.data.data;
+                $scope.isLoading = false;
+            }, function(error) {
+                console.log(error.message);
+                $scope.isLoading = false;
+            });
+    };
 
-        getData = function () {
-            // Lấy danh mục sản phẩm
-            $http.get('http://localhost:8080/api-public/categories/getAllCategories')
-                .then(function (response) {
-                    $scope.categoriesData = response.data.data;
-                }, function (error) {
-                    console.log(error.message);
-                });
+    $scope.getTotalProducts = function() {
+        $scope.isLoading = true;
+        $http.get('http://localhost:8080/api-public/products/countFeatureProducts')
+            .then(function(response) {
+                const totalProducts = response.data.data;
+                $scope.totalPages = Math.ceil(totalProducts / 12); // 10 products per page
+                $scope.isLoading = false;
+            }, function(error) {
+                console.log(error.message);
+                $scope.isLoading = false;
+            });
+    };
 
-            //Lấy các sản phẩm 
-            $http.get('http://localhost:8080/api-public/products/getAllProductsFeature')
-                .then(function (response) {
-                    $scope.productsData = response.data.data;
-                }, function (error) {
-                    console.log(error.message);
-                });
+    $scope.getData = function() {
+        $scope.isLoading = true;
+        $http.get('http://localhost:8080/api-public/categories/getAllCategories')
+            .then(function(response) {
+                $scope.categoriesData = response.data.data;
+                $scope.isLoading = false;
+            }, function(error) {
+                console.log(error.message);
+                $scope.isLoading = false;
+            });
 
-        };
+        $scope.getTotalProducts();
+        $scope.loadData(1);
+    };
 
-        getData();
-
-    });
+    $scope.getData();
+});
