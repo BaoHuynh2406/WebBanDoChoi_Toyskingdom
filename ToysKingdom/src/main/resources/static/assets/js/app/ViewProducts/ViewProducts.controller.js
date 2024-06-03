@@ -24,7 +24,7 @@ angular.module('ToysKingdom').controller('ViewProductsCtrl', function($scope, $h
         $http.get('http://localhost:8080/api-public/products/countFeatureProducts')
             .then(function(response) {
                 const totalProducts = response.data.data;
-                $scope.totalPages = Math.ceil(totalProducts / 10); // 10 products per page
+                $scope.totalPages = Math.ceil(totalProducts / 12); // 10 products per page
                 $scope.isLoading = false;
             }, function(error) {
                 console.log(error.message);
