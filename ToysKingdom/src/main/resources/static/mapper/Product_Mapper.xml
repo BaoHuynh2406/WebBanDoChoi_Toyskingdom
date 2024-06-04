@@ -46,4 +46,13 @@
         SELECT * FROM product_feature WHERE product_name like CONCAT('%', #{productName}, '%')
     </select>
 
+    <select id="countFeatureProducts"  resultType="int">
+        select COUNT(id_product) from product_feature
+    </select>
+
+
+    <select id="getProductFeaturePage" resultMap="productFeature" parameterType="map">
+        CALL get_Quantity_Product(#{start, mode=IN}, #{quantity, mode=IN})
+    </select>
+
 </mapper>

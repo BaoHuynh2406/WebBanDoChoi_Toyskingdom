@@ -138,7 +138,7 @@ VALUES (1, 1, 1, 850000.00, 'Cái'),
 
 
 
-# Select
+# Bảng phụ
 
 CREATE VIEW product_feature AS
 SELECT
@@ -160,3 +160,21 @@ FROM
             AND NOW() BETWEEN d.start_day AND d.end_day;
 
 select * from product_feature where product_name like '%Xe đạp trẻ em%'
+
+# PROCEDURE pờ rô si trơ
+CREATE PROCEDURE get_Quantity_Product(IN start INT, IN quantity INT)
+BEGIN
+    SELECT
+        id_product,
+        id_category,
+        product_name,
+        des,
+        image,
+        price,
+        discount_percent
+    FROM
+        product_feature
+    LIMIT start, quantity;
+END
+
+select COUNT(id_product) from product_feature

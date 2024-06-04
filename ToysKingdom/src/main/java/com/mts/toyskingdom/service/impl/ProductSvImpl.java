@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -55,7 +56,25 @@ public class ProductSvImpl implements ProductSv {
 
     @Override
     public List<ProductFeatureM> searchProduct(String productName) throws SQLException {
+
         var listResultEntity = productMapper.searchProduct(productName);
+        if (Objects.nonNull(listResultEntity) && !listResultEntity.isEmpty()) {
+            return ProductFeatureM.convertListProductEToProductFeatureM(listResultEntity);
+        } else {
+            System.out.println("Không có sản phẩm có tên là: " + productName);
+            return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public int countFeatureProducts() throws SQLException {
+        int num = productMapper.countFeatureProducts();
+        return num;
+    }
+
+    @Override
+    public List<ProductFeatureM> getProductFeaturePage(int start, int quantity) throws SQLException {
+        var listResultEntity = productMapper.getProductFeaturePage(start, quantity);
         if (Objects.nonNull(listResultEntity)) {
             return ProductFeatureM.convertListProductEToProductFeatureM(listResultEntity);
         }
