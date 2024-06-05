@@ -3,9 +3,9 @@ angular.module('ToysKingdom').config(function ($routeProvider) {
         .when("/home",
             {
                 templateUrl: "layout/ViewProduct.html",
-                resolve: 
+                resolve:
                 {
-                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                    loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                         return $ocLazyLoad.load('/assets/js/app/ViewProducts/ViewProducts.controller.js');
                     }]
                 },
@@ -15,9 +15,9 @@ angular.module('ToysKingdom').config(function ($routeProvider) {
         .when("/login",
             {
                 templateUrl: "layout/login.html",
-                resolve: 
+                resolve:
                 {
-                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                    loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                         return $ocLazyLoad.load('/assets/js/app/Login/Login.controller.js');
                     }]
                 },
@@ -26,31 +26,42 @@ angular.module('ToysKingdom').config(function ($routeProvider) {
         .when("/signUp",
             {
                 templateUrl: "layout/signUp.html",
-                resolve: 
+                resolve:
                 {
-                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                    loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                         return $ocLazyLoad.load('/assets/js/app/SignUp/SignUp.controller.js');
                     }]
                 },
                 controller: "SignUpCtrl"
             })
-        .when("/ForgotPassword",
+        .when("/khoiphucTK",
             {
-                templateUrl: "layout/forgotpassword.html",
-                resolve: 
+                templateUrl: "layout/khoiphucTK.html",
+                resolve:
                 {
-                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                        return $ocLazyLoad.load('/assets/js/app/ForgotPassword/ForgotPassword.controller.js');
+                    loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                        return $ocLazyLoad.load('/assets/js/app/KhoiphucTK/KhoiphucTK.controller.js');
                     }]
                 },
-                controller: "ForgotPasswordCtrl"
+                controller: "KhoiphucTKCtrl"
+            })
+        .when("/doiMK",
+            {
+                templateUrl: "layout/doiMK.html",
+                resolve:
+                {
+                    loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                        return $ocLazyLoad.load('/assets/js/app/DoiMK/DoiMK.controller.js');
+                    }]
+                },
+                controller: "DoiMKCtrl"
             })
         .when("/search",
             {
                 templateUrl: "layout/TimKiemLayout.html",
-                resolve: 
+                resolve:
                 {
-                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                    loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                         return $ocLazyLoad.load('/assets/js/app/Search/Search.controller.js');
                     }]
                 },
