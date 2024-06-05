@@ -12,7 +12,7 @@ angular.module('ToysKingdom').controller('LoginCtrl', function ($scope, $http, $
                 if (success) {
                     // Handle successful login
                     $rootScope.isLoggedIn = true;
-                    $rootScope.userName = data[0].fullname || data[0].email; 
+                    $rootScope.userName = data[0].fullname || data[0].email;
                     console.log("Đăng nhập thành công !");
                     $location.path('/index');
                 } else {
