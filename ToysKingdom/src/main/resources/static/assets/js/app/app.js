@@ -1,4 +1,4 @@
-angular.module('ToysKingdom').controller('mainCtrl', function ($scope) {
+angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location) {
     console.log("MainCtrl Load Done")
 
     $scope.search = function () {
