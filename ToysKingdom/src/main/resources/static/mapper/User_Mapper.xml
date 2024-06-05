@@ -28,5 +28,9 @@
         </select>
 
 
+    <insert id="insertUser" parameterType="com.mts.toyskingdom.data.dto.UserRegistrationDto">
+        INSERT INTO users (email,full_name, password, phone_number, address, birthday)
+        VALUES (#{email},#{fullname}, #{password}, #{phoneNumber}, #{address}, #{birthday})
+    </insert>
 
 </mapper>
