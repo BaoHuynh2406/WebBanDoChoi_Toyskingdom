@@ -13,7 +13,7 @@ angular.module('ToysKingdom').controller('LoginCtrl', function ($scope, $http, $
                     // Handle successful login
                     $rootScope.isLoggedIn = true;
                     $rootScope.userName = data[0].fullname || data[0].email; 
-                    toastr.success("Đăng nhập thành công!");
+                    console.log("Đăng nhập thành công !");
                     $location.path('/index');
                 } else {
                     toastr.error(message || "Đã xảy ra lỗi. Vui lòng thử lại sau.");
@@ -21,7 +21,7 @@ angular.module('ToysKingdom').controller('LoginCtrl', function ($scope, $http, $
             })
             .catch(error => {
                 console.error("Error:", error);
-                toastr.error("Đã xảy ra lỗi trong quá trình đăng nhập. Vui lòng thử lại sau.");
+                console.log("Email hoặc mật khẩu không hợp lệ. Vui lòng thử lại sau.");
             });
     };
 });
