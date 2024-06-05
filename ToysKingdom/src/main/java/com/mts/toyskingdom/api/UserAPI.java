@@ -2,14 +2,18 @@ package com.mts.toyskingdom.api;
 
 
 import com.mts.toyskingdom.data.dto.TestDTO;
+import com.mts.toyskingdom.data.dto.UserLoginDTO;
 import com.mts.toyskingdom.data.mgt.ResponseObject;
+import com.mts.toyskingdom.data.model.UserM;
 import com.mts.toyskingdom.service.UserSv;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.sql.SQLException;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -57,5 +61,36 @@ public class UserAPI {
             log.error("Fail When Call API/api-public/user/getUserByidUser: ", e);
         }
         return resultApi;
+    }
+
+    // checkLogin
+
+    @PostMapping("/checkUserLogin")
+    public ResponseEntity<ResponseObject<?>> doCheckUserLogin(@RequestBody UserLoginDTO loginRequest) {
+        var resultApi = new ResponseObject<>();
+        try {
+            List<UserM> users = userSv.getUserByEmail(loginRequest.getEmail());
+            if (users == null || users.isEmpty()) {
+                resultApi.setSuccess(false);
+                resultApi.setMessage("Email không tồn tại");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(resultApi);
+            }
+            UserM user = users.get(0);
+            if (user.getPassword().equals(loginRequest.getPassword())) {
+                resultApi.setSuccess(true);
+                resultApi.setMessage("Đăng nhập thành công");
+                resultApi.setData(List.of(user));
+                return ResponseEntity.ok(resultApi);
+            } else {
+                resultApi.setSuccess(false);
+                resultApi.setMessage("Mật khẩu không đúng");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resultApi);
+            }
+        } catch (SQLException e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Đã xảy ra lỗi");
+            log.error("SQL error while checking user login", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resultApi);
+        }
     }
 }
