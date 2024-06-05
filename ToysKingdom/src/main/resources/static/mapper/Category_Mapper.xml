@@ -11,4 +11,7 @@
     <select id="getAllCategories" resultMap="categoryMap">
         SELECT * FROM categories
     </select>
+
+
+
 </mapper>
