@@ -1,5 +1,6 @@
 package com.mts.toyskingdom.service.impl;
 
+import com.mts.toyskingdom.data.dto.UserRegistrationDto;
 import com.mts.toyskingdom.data.entity.UserE;
 import com.mts.toyskingdom.data.model.UserM;
 import com.mts.toyskingdom.mapper.UserMapper;
@@ -23,6 +24,17 @@ public class UserSvlmpl implements UserSv {
     @Override
     public List<UserM> getAllUser() {
         return convertList(userMapper.getAllUser());
+    public int insertUser(UserRegistrationDto userRegistration) throws SQLException {
+        return userMapper.insertUser(userRegistration);
+    }
+
+    @Override
+    public List<UserM> getAllUser()  throws SQLException{
+        var listResultEntity = userMapper.getAllUser();
+        if (Objects.nonNull(listResultEntity)) {
+            return UserM.convertListUserEToUserM(listResultEntity);
+        }
+        return null;
     }
 
     @Override

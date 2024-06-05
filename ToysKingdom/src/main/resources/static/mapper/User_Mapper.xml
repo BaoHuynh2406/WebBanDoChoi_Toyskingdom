@@ -27,14 +27,10 @@
         SELECT * FROM users WHERE id_user =#{idUser}
         </select>
 
-<<<<<<< Updated upstream
 
-
-=======
     <insert id="insertUser" parameterType="com.mts.toyskingdom.data.dto.UserRegistrationDto">
-        INSERT INTO users (email, password, phone_number, address, birthday, role, active)
-        VALUES (#{email}, #{password}, #{phoneNumber}, #{address}, #{birthday}, #{role}, #{active})
+        INSERT INTO users (email,full_name, password, phone_number, address, birthday)
+        VALUES (#{email},#{fullname}, #{password}, #{phoneNumber}, #{address}, #{birthday})
     </insert>
-<!--kiet-->
->>>>>>> Stashed changes
+
 </mapper>

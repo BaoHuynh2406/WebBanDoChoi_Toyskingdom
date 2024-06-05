@@ -2,18 +2,13 @@ package com.mts.toyskingdom.api;
 
 
 import com.mts.toyskingdom.data.dto.TestDTO;
-import com.mts.toyskingdom.data.dto.UserLoginDTO;
+import com.mts.toyskingdom.data.dto.UserRegistrationDto;
 import com.mts.toyskingdom.data.mgt.ResponseObject;
 import com.mts.toyskingdom.data.model.UserM;
 import com.mts.toyskingdom.service.UserSv;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.SQLException;
-import java.util.List;
 
 @RestController
 @Slf4j
@@ -91,5 +86,26 @@ public class UserAPI {
             log.error("SQL error while checking user login", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resultApi);
         }
+
+    @PostMapping("/register")
+    public ResponseObject<?> registerUser( UserRegistrationDto userRegistrationDto) {
+        var resultApi = new ResponseObject<>();
+        try {
+            int rowsAffected = userSv.insertUser(userRegistrationDto);
+            if (rowsAffected > 0) {
+                resultApi.setSuccess(true);
+                resultApi.setMessage("Đăng ký người dùng thành công");
+            } else {
+                resultApi.setSuccess(false);
+                resultApi.setMessage("Đăng ký người dùng thất bại");
+            }
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Đăng ký người dùng thất bại");
+            log.error("Fail when calling API to register user: ", e);
+        }
+        return resultApi;
     }
 }
+
+
