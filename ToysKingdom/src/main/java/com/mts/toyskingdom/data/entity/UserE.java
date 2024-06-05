@@ -9,6 +9,7 @@ public class UserE {
     private int idUser;
     private String email;
     private String password;
+    private String fullname;
     private String phoneNumber;
     private String address;
     private Date birthday;

@@ -17,6 +17,7 @@ public class UserM {
     private int idUser;
     private String email;
     private String password;
+    private String fullname;
     private String phoneNumber;
     private String address;
     private java.sql.Date birthday;
@@ -28,6 +29,7 @@ public class UserM {
                 .idUser(userE.getIdUser())
                 .email(userE.getEmail())
                 .password(userE.getPassword())
+                .fullname(userE.getFullname())
                 .phoneNumber(userE.getPhoneNumber())
                 .address(userE.getAddress())
                 .birthday(new java.sql.Date(userE.getBirthday().getTime()))
