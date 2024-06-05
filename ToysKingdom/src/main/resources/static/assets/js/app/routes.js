@@ -34,16 +34,27 @@ angular.module('ToysKingdom').config(function ($routeProvider) {
                 },
                 controller: "SignUpCtrl"
             })
-        .when("/ForgotPassword",
+        .when("/khoiphucTK",
             {
-                templateUrl: "layout/forgotpassword.html",
+                templateUrl: "layout/khoiphucTK.html",
                 resolve:
                 {
                     loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                        return $ocLazyLoad.load('/assets/js/app/ForgotPassword/ForgotPassword.controller.js');
+                        return $ocLazyLoad.load('/assets/js/app/KhoiphucTK/KhoiphucTK.controller.js');
                     }]
                 },
-                controller: "ForgotPasswordCtrl"
+                controller: "KhoiphucTKCtrl"
+            })
+        .when("/doiMK",
+            {
+                templateUrl: "layout/doiMK.html",
+                resolve:
+                {
+                    loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                        return $ocLazyLoad.load('/assets/js/app/DoiMK/DoiMK.controller.js');
+                    }]
+                },
+                controller: "DoiMKCtrl"
             })
         .when("/search", {
             templateUrl: "layout/TimKiemLayout.html",

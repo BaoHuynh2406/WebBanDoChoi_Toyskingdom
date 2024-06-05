@@ -6,13 +6,12 @@
         <result column="id_user" property="idUser"/>
         <result column="email" property="email"/>
         <result column="password" property="password"/>
+        <result column="full_name" property="fullname"/>
         <result column="phone_number" property="phoneNumber"/>
         <result column="address" property="address"/>
         <result column="birthday" property="birthday"/>
         <result column="role" property="role"/>
         <result column="active" property="active"/>
-
-
     </resultMap>
 
     <select id="getAllUser" resultMap="userMap">
@@ -21,11 +20,11 @@
     </select>
 
     <select id="getUserByEmail" parameterType="String" resultMap="userMap">
-        SELECT email FROM users WHERE email = #{email}
+        SELECT * FROM users WHERE email = #{email}
     </select>
 
     <select id="getUserByidUser" parameterType="int" resultMap="userMap">
-        SELECT id_user FROM users WHERE id_user =#{idUser}
+        SELECT * FROM users WHERE id_user =#{idUser}
         </select>
 
 
