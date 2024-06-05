@@ -18,8 +18,7 @@ public class UserM {
     private String fullname;
     private String password;
     private String email;
-    private String password;
-    private String fullname;
+
     private String phoneNumber;
     private String address;
     private java.sql.Date birthday;
