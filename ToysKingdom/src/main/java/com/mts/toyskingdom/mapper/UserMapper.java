@@ -10,5 +10,9 @@ public interface UserMapper {
 public List<UserE> getAllUser();
 public List<UserE> getUserByEmail(@Param("email") String email);
 public List<UserE> getUserByidUser(@Param("idUser") int idUser);
+<<<<<<< Updated upstream
+=======
+public int insertUser(UserRegistrationDto UserRegistration);
+>>>>>>> Stashed changes
 
 }
