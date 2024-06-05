@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class UserM {
 
     private int idUser;
+    private String fullname;
     private String password;
     private String email;
     private String role;
@@ -22,6 +23,7 @@ public class UserM {
     public static UserM convertUserEToUserM(UserE userE) {
         return UserM.builder()
                 .idUser(userE.getIdUser())
+                .fullname(userE.getFullname())
                 .password(userE.getPassword())
                 .email(userE.getEmail())
                 .role(userE.getRole())

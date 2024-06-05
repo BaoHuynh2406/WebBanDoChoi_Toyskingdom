@@ -1,5 +1,6 @@
 package com.mts.toyskingdom.service.impl;
 
+import com.mts.toyskingdom.data.dto.UserRegistrationDto;
 import com.mts.toyskingdom.data.entity.UserE;
 import com.mts.toyskingdom.data.model.ProductM;
 import com.mts.toyskingdom.data.model.UserM;
@@ -23,6 +24,11 @@ final UserMapper userMapper;
             return UserM.convertListUserEToUserM(listResultEntity);
         }
         return null;
+    }
+
+    @Override
+    public int insertUser(UserRegistrationDto userRegistration) throws SQLException {
+        return userMapper.insertUser(userRegistration);
     }
 
     @Override

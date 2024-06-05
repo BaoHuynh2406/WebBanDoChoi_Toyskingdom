@@ -2,14 +2,12 @@ package com.mts.toyskingdom.api;
 
 
 import com.mts.toyskingdom.data.dto.TestDTO;
+import com.mts.toyskingdom.data.dto.UserRegistrationDto;
 import com.mts.toyskingdom.data.mgt.ResponseObject;
 import com.mts.toyskingdom.service.UserSv;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
@@ -58,4 +56,27 @@ public class UserAPI {
         }
         return resultApi;
     }
+
+
+    @PostMapping("/register")
+    public ResponseObject<?> registerUser( UserRegistrationDto userRegistrationDto) {
+        var resultApi = new ResponseObject<>();
+        try {
+            int rowsAffected = userSv.insertUser(userRegistrationDto);
+            if (rowsAffected > 0) {
+                resultApi.setSuccess(true);
+                resultApi.setMessage("Đăng ký người dùng thành công");
+            } else {
+                resultApi.setSuccess(false);
+                resultApi.setMessage("Đăng ký người dùng thất bại");
+            }
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Đăng ký người dùng thất bại");
+            log.error("Fail when calling API to register user: ", e);
+        }
+        return resultApi;
+    }
 }
+
+
