@@ -63,8 +63,7 @@ public class UserAPI {
         return resultApi;
     }
 
-    // checkLogin
-
+    // hàm checkUserLogin kiểm tra quá trình đăng nhập
     @PostMapping("/checkUserLogin")
     public ResponseEntity<ResponseObject<?>> doCheckUserLogin(@RequestBody UserLoginDTO loginRequest) {
         var resultApi = new ResponseObject<>();
