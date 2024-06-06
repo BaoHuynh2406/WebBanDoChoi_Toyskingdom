@@ -1,5 +1,6 @@
 package com.mts.toyskingdom.service.impl;
 
+import com.mts.toyskingdom.data.model.UserM;
 import com.mts.toyskingdom.service.SendEmailSv;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,15 +10,21 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @RequiredArgsConstructor
 public class SendEmailSvImpl implements SendEmailSv {
 
+    final UserSvlmpl userSvlmpl;
+
+    private Map<String, Integer> otpStorage = new ConcurrentHashMap<>();
 
     public static boolean sendEmail(String email, String subject, String content) {
-
         final String username = "lynguyenhoa102@gmail.com";
         final String password = "ajxbvpfopcatttpr";
 
@@ -36,9 +43,6 @@ public class SendEmailSvImpl implements SendEmailSv {
             }
         });
 
-
-        String message = "";
-
         try {
             Message mimeMessage = new MimeMessage(session);
             mimeMessage.setFrom(new InternetAddress(username));
@@ -55,32 +59,47 @@ public class SendEmailSvImpl implements SendEmailSv {
             mimeMessage.setContent(multipart);
 
             Transport.send(mimeMessage);
-            message = "Gửi email thành công!";
-            System.out.println(message);
+            System.out.println("Gửi email thành công!");
             return true;
         } catch (MessagingException e) {
-            message = "Gửi email thất bại: " + e.getMessage();
-            System.out.println(message);
+            System.out.println("Gửi email thất bại: " + e.getMessage());
             return false;
         }
     }
 
     @Override
-    public boolean sendEmailOTP(String email) {
-        //So sánh với database email đúng không
-
-        //Dúng thì tạo ra mã OTP //Sai thì return
-
-        //Gửi đi mail kèm OTP
-        //Lưu lại OTP ở seesison
-        String subject = "Khôi phục tài khoản TOYSKINGDOM của bạn";
-        String content = "Vui lòng không chia sẽ mã này. \n Mật mã khôi phục: 123456";
-        if(!sendEmail(email, subject, content)){
-            System.out.println("Loi gui mail");
-            return false;
+    public int sendEmailOTP(String email) {
+        // So sánh với database email
+        List<UserM> user = userSvlmpl.getUserByEmail(email);
+        if (user.isEmpty()) {
+            System.out.println("false");
+            return -1;
         }
-        return true;
+
+        // Tạo mã 6 số ngẫu nhiên
+        Random random = new Random();
+        int randomCode = 100000 + random.nextInt(900000);
+        otpStorage.put(email, randomCode); // Lưu mã OTP vào Map với email là key
+        // Gửi đi mail kèm OTP
+        String subject = "Khôi phục tài khoản TOYSKINGDOM của bạn";
+        String content = "Vui lòng không chia sẻ mã này. \n Mật mã khôi phục: " + randomCode;
+        if (!sendEmail(email, subject, content)) {
+            System.out.println("Lỗi gửi mail");
+            return -1;
+        }
+        return randomCode;
     }
 
 
+    public boolean verifyOTP(String email, int otp) {
+        Integer storedOtp = otpStorage.get(email);
+        System.out.println("OTP NHAP: " + otp);
+        System.out.println("OTP: " + storedOtp);
+        if (storedOtp != null && storedOtp == otp) {
+            otpStorage.remove(email); // Xóa OTP sau khi xác thực thành công
+            //Cho phep doi mat khau
+            return true;
+        }
+        return false;
+    }
 }

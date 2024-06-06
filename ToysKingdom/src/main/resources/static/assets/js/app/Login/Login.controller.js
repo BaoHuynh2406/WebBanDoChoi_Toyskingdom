@@ -14,7 +14,7 @@ angular.module('ToysKingdom').controller('LoginCtrl', function ($scope, $http, $
                     $rootScope.isLoggedIn = true;
                     $rootScope.userName = data[0].fullName || data[0].email;
                     console.log("Đăng nhập thành công !");
-                    $location.path('/index');
+                    $location.path('/home');
                 } else {
                     toastr.error(message || "Đã xảy ra lỗi. Vui lòng thử lại sau.");
                 }

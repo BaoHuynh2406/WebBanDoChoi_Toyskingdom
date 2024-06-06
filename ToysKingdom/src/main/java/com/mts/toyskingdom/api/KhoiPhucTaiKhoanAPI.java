@@ -1,6 +1,8 @@
 package com.mts.toyskingdom.api;
 
 
+import com.mts.toyskingdom.data.dto.OtpDTO;
+import com.mts.toyskingdom.data.dto.UserLoginDTO;
 import com.mts.toyskingdom.data.mgt.ResponseObject;
 import com.mts.toyskingdom.service.SendEmailSv;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +18,11 @@ public class KhoiPhucTaiKhoanAPI {
 
 
     @PostMapping("/getotp")
-    public ResponseObject<?> doPostOTP(@RequestParam("email") String email) {
+    public ResponseObject<?> doPostOTP(@RequestBody String email) {
         var resultApi = new ResponseObject<>();
         try {
-            if(sendEmailSv.sendEmailOTP(email)){
+            System.out.println(email);
+            if(sendEmailSv.sendEmailOTP(email) != -1){
                 resultApi.setData("Đã gửi OTP");
                 resultApi.setSuccess(true);
                 resultApi.setMessage("Gửi thành công");
@@ -37,5 +40,26 @@ public class KhoiPhucTaiKhoanAPI {
         return resultApi;
     }
 
-
+    @PostMapping("/verify")
+    public ResponseObject<?> verifyOTP(@RequestBody OtpDTO otpDTO) {
+        var resultApi = new ResponseObject<>();
+        try {
+            System.out.println(otpDTO.toString());
+            if(sendEmailSv.verifyOTP(otpDTO.getEmail() , otpDTO.getOtp())){
+                resultApi.setData("Đổi mật khẩu thành công.");
+                resultApi.setSuccess(true);
+                resultApi.setMessage("True");
+            }else{
+                //Gửi lỗi từ service ra ví dụ sài email, email không hợp lệ ...
+                resultApi.setData("Mã OTP không hợp lệ.");
+                resultApi.setSuccess(false);
+                resultApi.setMessage("Sai otp");
+            }
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lấy thông tin thất bại.");
+            log.error("Fail When Call API /api-public/products/getAllProducts : ", e);
+        }
+        return resultApi;
+    }
 }
