@@ -33,4 +33,13 @@
         VALUES (#{email},#{fullname}, #{password}, #{phoneNumber}, #{address}, #{birthday})
     </insert>
 
+    <update id="updateUser" parameterType="com.mts.toyskingdom.data.dto.UserRegistrationDto">
+        UPDATE users
+        SET full_name = #{fullname}, email = #{email}, password = #{password}, phone_number= #{phoneNumber}, address=#{address}, birthday=#{birthday}
+        WHERE id_user  = #{idUser}
+    </update>
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM users WHERE id_user = #{idUser}
+    </delete>
+
 </mapper>

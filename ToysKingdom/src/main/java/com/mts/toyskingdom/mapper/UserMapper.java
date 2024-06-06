@@ -11,8 +11,8 @@ public interface UserMapper {
 public List<UserE> getAllUser();
 public List<UserE> getUserByEmail(@Param("email") String email);
 public List<UserE> getUserByidUser(@Param("idUser") int idUser);
-
-    public int insertUser(UserRegistrationDto UserRegistration);
-
+public int insertUser(UserRegistrationDto UserRegistration);
+public int updateUser(UserRegistrationDto UserRegistration);
+public int deleteUser(@Param("idUser") int idUser);
 
 }

@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Data
 public class UserRegistrationDto {
+    private int idUser;
     private String email;
     private String fullname;
     private String password;

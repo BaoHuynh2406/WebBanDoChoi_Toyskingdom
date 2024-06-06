@@ -13,5 +13,6 @@ public interface UserSv {
     public List<UserM> getUserByEmail(String email) throws SQLException;
     public List<UserM> getUserByidUser(int idUser) throws SQLException;
     public  int insertUser(UserRegistrationDto UserRegistration) throws SQLException;
-
+    public  int updateUser(UserRegistrationDto UserRegistration) throws SQLException;
+    public  int deleteUser(int idUser) throws SQLException;
 }

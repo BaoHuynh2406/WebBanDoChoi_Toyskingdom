@@ -112,6 +112,47 @@ public class UserAPI {
         }
         return resultApi;
     }
+
+    @PostMapping("/update")
+    public ResponseObject<?> updateUser( UserRegistrationDto userRegistrationDto) {
+        var resultApi = new ResponseObject<>();
+        try {
+            int rowsAffected = userSv.updateUser(userRegistrationDto);
+            if (rowsAffected > 0) {
+                resultApi.setSuccess(true);
+                resultApi.setMessage("Cập nhật người dùng thành công");
+            } else {
+                resultApi.setSuccess(false);
+                resultApi.setMessage("Cập nhật người dùng thất bại");
+            }
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Cập nhật người dùng thất bại");
+            log.error("Fail when calling API to update user: ", e);
+        }
+        return resultApi;
+    }
+
+    @DeleteMapping("/delete/{idUser}")
+    public ResponseObject<?> deleteUser(@PathVariable int idUser) {
+        var resultApi = new ResponseObject<>();
+        try {
+            int rowsAffected = userSv.deleteUser(idUser);
+            if (rowsAffected > 0) {
+                resultApi.setSuccess(true);
+                resultApi.setMessage("Xóa người dùng thành công");
+            } else {
+                resultApi.setSuccess(false);
+                resultApi.setMessage("Xóa người dùng thất bại");
+            }
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Xóa người dùng thất bại");
+            log.error("Fail when calling API to delete user: ", e);
+        }
+        return resultApi;
+    }
+
 }
 
 

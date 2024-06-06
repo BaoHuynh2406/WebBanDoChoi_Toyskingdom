@@ -29,6 +29,17 @@ public class UserSvlmpl implements UserSv {
     }
 
     @Override
+    public int updateUser(UserRegistrationDto UserRegistration) throws SQLException {
+        return userMapper.updateUser(UserRegistration);
+
+    }
+
+    @Override
+    public int deleteUser(int idUser) throws SQLException {
+        return userMapper.deleteUser(idUser);
+    }
+
+    @Override
     public List<UserM> getAllUser()  throws SQLException {
         var listResultEntity = userMapper.getAllUser();
         if (Objects.nonNull(listResultEntity)) {
