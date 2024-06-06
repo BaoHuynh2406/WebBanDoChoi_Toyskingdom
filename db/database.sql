@@ -1,6 +1,6 @@
 create database if not exists toyskingdomdata;
 
-# drop database toyskingdomdata
+drop database toyskingdomdata
 
 use toyskingdomdata;
 
@@ -82,6 +82,7 @@ INSERT INTO users (email, password, full_name, phone_number, address, birthday, 
 VALUES ('hoa@gmail.com', '123123', 'Nguyên Hòa', '0388319013', 'Gò vấp, Hồ Chí Minh', '2000-01-01', 'ADMIN', 1),
        ('kiet@gmail.com', '123123', 'Đình Kiệt', '0388319013', 'Gò vấp, Hồ Chí Minh', '2000-01-01', 'ADMIN', 1),
        ('giabao@gmail.com', '123123', 'Gia Bảo', '0388319013', 'Gò vấp, Hồ Chí Minh', '2000-01-01', 'ADMIN', 1),
+       ('lynguyenhoa102@gmail.com', '123123', 'Hoà', '0338997477', 'Gò vấp, Hồ Chí Minh', '2004-05-08', 'ADMIN', 1),
        ('han@gmail.com', '123123', 'Hữu Hàn', '0388319013', 'Gò vấp, Hồ Chí Minh', '2000-06-24', 'ADMIN', 1);
 
 insert into categories(id_category ,category_name, description)
@@ -100,7 +101,7 @@ VALUES ('Xe Đạp Trẻ Em', 'RB', 'Xe đạp 3 bánh cho trẻ em, màu xanh l
        ('Bộ Xếp Hình 3D', 'RB', 'Bộ xếp hình 3D sáng tạo', 'lego3d.jpg', 500000.00, 'Bộ', 20, 1),
        ('Đàn Piano Điện Tử', 'RB', 'Đàn piano điện tử mini cho bé', 'dan.jpg', 1500000.00, 'Cái', 10, 1);
 
-delete from discounts
+# delete from discounts
 
 INSERT INTO discounts (id_prduct, discount_percent, start_day, end_day, active)
 VALUES (1, 10.00, '2024-01-01 00:00:00', '2024-06-10 23:59:59', 1),
