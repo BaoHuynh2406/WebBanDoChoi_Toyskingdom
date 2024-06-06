@@ -22,7 +22,7 @@ angular.module('ToysKingdom').controller('DoiMKCtrl', function ($scope, $http, $
         $http.post('/api-public/khoiphuctaikhoan/verify', data) // Chỉnh sửa ở đây
             .then(function (response) {
 
-                if (response.success) {
+                if (response.data.success) {
                     alert("Thành công")
                     // $location.path('/login');
                 } else {

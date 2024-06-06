@@ -6,9 +6,13 @@ angular.module('ToysKingdom').controller('KhoiphucTKCtrl', function($scope, $htt
         // Gửi yêu cầu đến backend để gửi OTP
         $http.post('/api-public/khoiphuctaikhoan/getotp', $scope.email) // Chỉnh sửa ở đây
             .then(function(response) {
-                alert("OTP đã được gửi tới email của bạn.");
-                $rootScope.email = $scope.email;
-                $location.path('/doiMK');
+                if(response.data.success) {
+                    alert("OTP đã được gửi tới email của bạn.");
+                    $rootScope.email = $scope.email;
+                    $location.path('/doiMK');
+                }else{
+                    alert("Email không tồn tài")
+                }
             })
             .catch(function(error) {
                 // Xử lý khi gửi email thất bại
