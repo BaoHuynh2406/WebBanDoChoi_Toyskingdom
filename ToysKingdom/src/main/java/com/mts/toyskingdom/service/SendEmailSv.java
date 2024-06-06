@@ -6,5 +6,7 @@ public interface SendEmailSv {
         return true;
     };
 
-    boolean sendEmailOTP(String email);
+    int sendEmailOTP(String email);
+
+    public boolean verifyOTP(String email, int otp);
 }
