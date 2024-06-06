@@ -5,7 +5,6 @@ import lombok.Data;
 import java.util.Date;
 @Data
 public class UserE {
-
     private int idUser;
     private String email;
     private String password;
