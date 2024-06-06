@@ -3,6 +3,7 @@ package com.mts.toyskingdom.api;
 
 import com.mts.toyskingdom.data.dto.TestDTO;
 import com.mts.toyskingdom.data.dto.UserLoginDTO;
+import com.mts.toyskingdom.data.dto.UserRegistrationDto;
 import com.mts.toyskingdom.data.mgt.ResponseObject;
 import com.mts.toyskingdom.data.model.UserM;
 import com.mts.toyskingdom.service.UserSv;
@@ -90,6 +91,27 @@ public class UserAPI {
             resultApi.setMessage("Đã xảy ra lỗi");
             log.error("SQL error while checking user login", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resultApi);
+        }}
+
+    @PostMapping("/register")
+    public ResponseObject<?> registerUser( UserRegistrationDto userRegistrationDto) {
+        var resultApi = new ResponseObject<>();
+        try {
+            int rowsAffected = userSv.insertUser(userRegistrationDto);
+            if (rowsAffected > 0) {
+                resultApi.setSuccess(true);
+                resultApi.setMessage("Đăng ký người dùng thành công");
+            } else {
+                resultApi.setSuccess(false);
+                resultApi.setMessage("Đăng ký người dùng thất bại");
+            }
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Đăng ký người dùng thất bại");
+            log.error("Fail when calling API to register user: ", e);
         }
+        return resultApi;
     }
 }
+
+

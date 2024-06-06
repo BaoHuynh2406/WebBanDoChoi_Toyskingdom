@@ -6,9 +6,10 @@ import java.util.Date;
 @Data
 public class UserE {
     private int idUser;
-    private String email;
-    private String password;
     private String fullname;
+    private String password;
+    private String email;
+
     private String phoneNumber;
     private String address;
     private Date birthday;
