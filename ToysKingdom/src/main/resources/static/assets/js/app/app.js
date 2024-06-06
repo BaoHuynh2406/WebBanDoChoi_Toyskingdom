@@ -1,4 +1,4 @@
-angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location) {
+angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location, $rootScope) {
     console.log("MainCtrl Load Done")
 
     $scope.search = function () {
@@ -13,10 +13,11 @@ angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location
             console.log("Product name cannot be null or empty");
         }
     };
+
+    $scope.redirectToLogin = function () {
+        $location.path('/login');
+    };
 })
-
-
-// Khai báo 
 
 // Directive Thẻ Sản phẩm loại 1
 angular.module('ToysKingdom').directive('cardItemType1', function () {

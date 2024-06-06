@@ -7,8 +7,9 @@ import java.util.Date;
 public class UserE {
 
     private int idUser;
-    private String password;
     private String email;
+    private String password;
+    private String fullname;
     private String phoneNumber;
     private String address;
     private Date birthday;

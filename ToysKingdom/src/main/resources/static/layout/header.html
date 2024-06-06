@@ -17,10 +17,11 @@
                     <i class="fas fa-shopping-cart me-1"></i>
                     <span>Giỏ hàng</span>
                 </div>
-                <div class="header__user">
+                <div class="header__user" ng-click="redirectToLogin()">
                     <i class="fas fa-user me-1"></i>
-                    <span>Đăng nhập</span>
-                </div>
+                    <span ng-if="!isLoggedIn">Đăng nhập</span>
+                    <span ng-if="isLoggedIn">{{ userName }}</span>
+                </div>                
             </div>
         </div>
         <!-- Hàng 2 - Menu -->
