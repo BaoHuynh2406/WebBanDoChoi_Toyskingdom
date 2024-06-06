@@ -1,6 +1,6 @@
 package com.mts.toyskingdom.service.impl;
 
-import com.mts.toyskingdom.data.dto.UserRegistrationDto;
+import com.mts.toyskingdom.data.dto.UserDTO;
 import com.mts.toyskingdom.data.entity.UserE;
 import com.mts.toyskingdom.data.model.UserM;
 import com.mts.toyskingdom.mapper.UserMapper;
@@ -18,13 +18,32 @@ import java.util.Optional;
 public class UserSvlmpl implements UserSv {
     final UserMapper userMapper;
 
+//    Lấy user bằng ID
     @Override
     public List<UserM> getUserByidUser(int idUser) {
         return convertList(userMapper.getUserByidUser(idUser));
     }
 
 
-    public int insertUser(UserRegistrationDto userRegistration) throws SQLException {
+
+    @Override
+    public int saveUser(UserDTO userDTO) throws SQLException {
+            // Kiểm tra nếu user đã có
+            if(userMapper.getUserByEmail(userDTO.getEmail()).isEmpty()) {
+                // Thêm mới
+                userDTO.setActive(true);
+                //Trả về 1 có nghĩa là thêm thành công
+                if(userMapper.insertUser(userDTO) > 0) return 1;
+            } else {
+                // Cập nhật
+                //Trả về 2 có nghĩa cập nhật thành công
+                if(userMapper.updateUser(userDTO) > 0) return 2;
+            }
+            return 0;
+    }
+
+
+    public int insertUser(UserDTO userRegistration) throws SQLException {
         return userMapper.insertUser(userRegistration);
     }
 

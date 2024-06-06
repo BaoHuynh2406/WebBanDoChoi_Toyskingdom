@@ -1,9 +1,8 @@
 package com.mts.toyskingdom.api;
 
 
-import com.mts.toyskingdom.data.dto.TestDTO;
 import com.mts.toyskingdom.data.dto.UserLoginDTO;
-import com.mts.toyskingdom.data.dto.UserRegistrationDto;
+import com.mts.toyskingdom.data.dto.UserDTO;
 import com.mts.toyskingdom.data.mgt.ResponseObject;
 import com.mts.toyskingdom.data.model.UserM;
 import com.mts.toyskingdom.service.UserSv;
@@ -93,25 +92,31 @@ public class UserAPI {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resultApi);
         }}
 
-    @PostMapping("/register")
-    public ResponseObject<?> registerUser( UserRegistrationDto userRegistrationDto) {
+    @PostMapping("/save")
+    public ResponseObject<?> add(@RequestBody UserDTO userDTO) {
         var resultApi = new ResponseObject<>();
         try {
-            int rowsAffected = userSv.insertUser(userRegistrationDto);
-            if (rowsAffected > 0) {
-                resultApi.setSuccess(true);
-                resultApi.setMessage("Đăng ký người dùng thành công");
-            } else {
+            int ketQua = userSv.saveUser(userDTO);
+            //Không có gì để lưu hoặc cập nhật
+            if (ketQua == 0) {
                 resultApi.setSuccess(false);
-                resultApi.setMessage("Đăng ký người dùng thất bại");
+                resultApi.setMessage("Không có gì để cập nhật hoặc thêm");
+            } else if(ketQua == 1) { // 1 khi lưu thành công
+                resultApi.setSuccess(true);
+                resultApi.setMessage("Thêm mới thành công");
+            } else { // 2 khi cập nhật thành công
+                resultApi.setSuccess(true);
+                resultApi.setMessage("Cập nhật thành công");
             }
         } catch (Exception e) {
             resultApi.setSuccess(false);
-            resultApi.setMessage("Đăng ký người dùng thất bại");
-            log.error("Fail when calling API to register user: ", e);
+            resultApi.setMessage("Lỗi save");
+            log.error("Fail when: ", e);
         }
         return resultApi;
     }
+
+
 }
 
 
