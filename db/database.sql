@@ -89,6 +89,8 @@ insert into categories(id_category ,category_name, description)
 values ('RB', 'Robot', 'robot, siêu anh hùng'),
        ('BB', 'Búp bê', 'Búp bê baby biết múa biết bay');
 
+
+
 INSERT INTO products (product_name, id_category, des, image, price, unit, quantity, active)
 VALUES ('Xe Đạp Trẻ Em', 'RB', 'Xe đạp 3 bánh cho trẻ em, màu xanh lá', 'OIP.jpg', 850000.00, 'Cái', 15, 1),
        ('Búp Bê Barbie', 'BB', 'Búp bê Barbie phiên bản công chúa', 'bup-be.jpg', 550000.00, 'Cái', 30, 1),
