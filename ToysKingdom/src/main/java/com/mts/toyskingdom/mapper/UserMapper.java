@@ -1,6 +1,6 @@
 package com.mts.toyskingdom.mapper;
 
-import com.mts.toyskingdom.data.dto.UserRegistrationDto;
+import com.mts.toyskingdom.data.dto.UserDTO;
 import com.mts.toyskingdom.data.entity.UserE;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,7 +15,9 @@ public interface UserMapper {
 
     public List<UserE> getUserByidUser(@Param("idUser") int idUser);
 
-    public int insertUser(UserRegistrationDto UserRegistration);
+    public int insertUser(UserDTO userDTO);
+
+    public int updateUser(UserDTO userDTO);
 
 
 }

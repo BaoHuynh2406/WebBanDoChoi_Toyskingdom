@@ -22,7 +22,7 @@ public class UserM {
     private String address;
     private Date birthday;
     private String role;
-    private boolean isActive;
+    private boolean active;
 
     public static UserM convertUserEToUserM(UserE userE) {
         return UserM.builder()
@@ -34,7 +34,7 @@ public class UserM {
                 .address(userE.getAddress())
                 .birthday(userE.getBirthday())
                 .role(userE.getRole())
-                .isActive(userE.isActive())
+                .active(userE.isActive())
                 .build();
     }
 

@@ -13,5 +13,5 @@ public class UserE {
     private String address;
     private Date birthday;
     private String role;
-    private boolean isActive;
+    private boolean active;
 }

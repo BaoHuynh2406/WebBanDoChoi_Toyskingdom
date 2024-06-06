@@ -11,26 +11,57 @@
         <result column="address" property="address"/>
         <result column="birthday" property="birthday"/>
         <result column="role" property="role"/>
-        <result column="active" property="isActive"/>
+        <result column="active" property="active"/>
     </resultMap>
 
     <select id="getAllUser" resultMap="userMap">
-        SELECT *
-        FROM users
+        SELECT * FROM users
     </select>
 
     <select id="getUserByEmail" parameterType="String" resultMap="userMap">
         SELECT * FROM users WHERE email = #{email}
     </select>
 
-    <select id="getUserByidUser" parameterType="int" resultMap="userMap">
+    <select id="getUserByIdUser" parameterType="int" resultMap="userMap">
         SELECT * FROM users WHERE id_user =#{idUser}
-        </select>
+    </select>
 
-
-    <insert id="insertUser" parameterType="com.mts.toyskingdom.data.dto.UserRegistrationDto">
-        INSERT INTO users (email,full_name, password, phone_number, address, birthday)
-        VALUES (#{email},#{fullname}, #{password}, #{phoneNumber}, #{address}, #{birthday})
+    <insert id="insertUser" parameterType="com.mts.toyskingdom.data.dto.UserDTO">
+        INSERT INTO users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            email,
+            full_name,
+            password,
+            <if test="phoneNumber != null">phone_number,</if>
+            <if test="address != null">address,</if>
+            <if test="birthday != null">birthday,</if>
+            <if test="role != null">role,</if>
+            <if test="active != null">active,</if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            #{email},
+            #{fullName},
+            #{password},
+            <if test="phoneNumber != null">#{phoneNumber},</if>
+            <if test="address != null">#{address},</if>
+            <if test="birthday != null">#{birthday},</if>
+            <if test="role != null">#{role},</if>
+            <if test="active != null">#{active},</if>
+        </trim>
     </insert>
+
+    <update id="updateUser" parameterType="com.mts.toyskingdom.data.dto.UserDTO">
+        UPDATE users
+        <set>
+            <if test="fullName != null">full_name = #{fullName},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+            <if test="role != null">role = #{role},</if>
+            <if test="active != null">active = #{active},</if>
+        </set>
+        WHERE email = #{email} OR id_user = #{idUser}
+    </update>
 
 </mapper>
