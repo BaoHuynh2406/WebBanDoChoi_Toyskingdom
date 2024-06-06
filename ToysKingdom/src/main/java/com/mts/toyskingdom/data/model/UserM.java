@@ -3,11 +3,7 @@ package com.mts.toyskingdom.data.model;
 import com.mts.toyskingdom.data.entity.UserE;
 import lombok.*;
 
-<<<<<<< HEAD
-import java.util.Date; // Thêm import này để sử dụng trường birthday
-=======
 import java.util.Date;
->>>>>>> admin_User
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,28 +24,16 @@ public class UserM {
     private String role;
     private boolean isActive;
 
-    private String phoneNumber;
-    private String address;
-    private java.sql.Date birthday;
-    private String role;
-    private boolean active;
-
     public static UserM convertUserEToUserM(UserE userE) {
         return UserM.builder()
                 .idUser(userE.getIdUser())
-                .fullname(userE.getFullname())
+                .fullName(userE.getFullName())
                 .password(userE.getPassword())
                 .email(userE.getEmail())
                 .password(userE.getPassword())
-                .fullname(userE.getFullname())
-                .phoneNumber(userE.getPhoneNumber())
-                .address(userE.getAddress())
-                .birthday(new java.sql.Date(userE.getBirthday().getTime()))
-                .role(userE.getRole())
-                .fullName(userE.getFullName())
-                .phoneNumber(userE.getPhoneNumber())
                 .address(userE.getAddress())
                 .birthday(userE.getBirthday())
+                .role(userE.getRole())
                 .isActive(userE.isActive())
                 .build();
     }
