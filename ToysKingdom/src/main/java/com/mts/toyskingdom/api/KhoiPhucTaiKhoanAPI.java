@@ -45,7 +45,7 @@ public class KhoiPhucTaiKhoanAPI {
         var resultApi = new ResponseObject<>();
         try {
             System.out.println(otpDTO.toString());
-            if(sendEmailSv.verifyOTP(otpDTO.getEmail() , otpDTO.getOtp())){
+            if(sendEmailSv.verifyOTP(otpDTO.getEmail() , otpDTO.getOtp(), otpDTO.getPassword())){
                 resultApi.setData("Đổi mật khẩu thành công.");
                 resultApi.setSuccess(true);
                 resultApi.setMessage("True");

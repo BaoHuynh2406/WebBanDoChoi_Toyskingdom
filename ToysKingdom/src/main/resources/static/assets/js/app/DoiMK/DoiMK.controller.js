@@ -24,7 +24,7 @@ angular.module('ToysKingdom').controller('DoiMKCtrl', function ($scope, $http, $
 
                 if (response.data.success) {
                     alert("Thành công")
-                    // $location.path('/login');
+                    $location.path('/login');
                 } else {
                     alert("Sai OTP")
                 }

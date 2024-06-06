@@ -8,5 +8,5 @@ public interface SendEmailSv {
 
     int sendEmailOTP(String email);
 
-    public boolean verifyOTP(String email, int otp);
+    public boolean verifyOTP(String email, int otp, String password);
 }
