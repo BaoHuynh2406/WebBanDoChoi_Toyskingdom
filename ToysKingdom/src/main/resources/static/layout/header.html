@@ -1,3 +1,60 @@
+<!-- profile.html -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Thông tin cá nhân</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <!-- Họ và tên -->
+                    <div class="mb-4">
+                        <label for="" class="form-sign__label fw-bold fs-6 mb-1">Họ và tên</label>
+                        <input type="text" class="form-control form-sign__input" placeholder="Nhập họ và tên"
+                            ng-model="customer.fullName">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-4">
+                        <label for="" class="form-sign__label fw-bold fs-6 mb-1">Email</label>
+                        <input type="email" class="form-control form-sign__input" placeholder="Nhập email"
+                            ng-model="customer.email">
+                    </div>
+
+                    <!-- Địa chỉ -->
+                    <div class="mb-4">
+                        <label for="" class="form-sign__label fw-bold fs-6 mb-1">Địa chỉ</label>
+                        <input type="text" class="form-control form-sign__input" placeholder="Nhập địa chỉ"
+                            ng-model="customer.address">
+                    </div>
+
+                    <!-- Ngày sinh -->
+                    <!-- <div class="mb-4">
+                        <label for="" class="form-sign__label fw-bold fs-6 mb-1">Ngày sinh</label>
+                        <input type="date" class="form-control form-sign__input" ng-model="customer.birthday">
+                    </div> -->
+
+                    <!-- Số điện thoại -->
+                    <!-- <div class="mb-4">
+                        <label for="" class="form-sign__label fw-bold fs-6 mb-1">Số điện thoại</label>
+                        <input type="tel" class="form-control form-sign__input" placeholder="Nhập số điện thoại"
+                            ng-model="customer.phoneNumber">
+                    </div> -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" ng-click="submitProfile()">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 <header class="container-fluid header">
     <div>
         <!-- Hàng 1  -->
@@ -8,7 +65,7 @@
             </div>
             <!-- Search -->
             <div class="col-5 header__searchBox d-flex align-items-center">
-                    <i class="fas fa-search col-1 search_Icon" ng-click="search()"></i>
+                <i class="fas fa-search col-1 search_Icon" ng-click="search()"></i>
                 <input id="searchQuery" class="col search_Input" type="text" placeholder="Nhập từ khóa để tìm kiếm">
             </div>
             <div class="col"></div>
@@ -17,12 +74,37 @@
                     <i class="fas fa-shopping-cart me-1"></i>
                     <span>Giỏ hàng</span>
                 </div>
-                <div class="header__user" ng-click="redirectToLogin()">
+
+                <div class="header__user">
                     <i class="fas fa-user me-1"></i>
-                    <span ng-if="!isLoggedIn">Đăng nhập</span>
-                    <span ng-if="isLoggedIn">{{ userName }}</span>
-                </div>                
+                    <div ng-if="!$root.isLoggedIn" class="dropdown">
+                        <button class="btn dropdown-toggle white-text" type="button" id="userDropdown"
+                            ng-click="redirectToLogin()">
+                            Đăng nhập <i class="fas fa-chevron-down white-text"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                            <button class="dropdown-item" ng-click="submitDK()">Đăng ký</button>
+                        </div>
+                    </div>
+                    <div ng-if="$root.isLoggedIn" class="dropdown">
+                        <button class="btn dropdown-toggle white-text" type="button" id="userDropdown"
+                            ng-click="test()"> Chào, {{$root.customer.fullName}}
+                             <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
+                                Thông tin
+                            </button>
+
+                            <button class="dropdown-item" ng-click="logout()">Đăng xuất</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
         </div>
         <!-- Hàng 2 - Menu -->
         <div class="row">
