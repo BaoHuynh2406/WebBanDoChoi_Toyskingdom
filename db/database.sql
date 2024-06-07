@@ -83,6 +83,7 @@ VALUES ('huynhbaomts2004@gmail.com', '123123', 'Bảo', '0388319013', 'Gò vấp
        ('kiet@gmail.com', '123123', 'Đình Kiệt', '0388319013', 'Gò vấp, Hồ Chí Minh', '2000-01-01', 'ADMIN', 1),
        ('giabao@gmail.com', '123123', 'Gia Bảo', '0388319013', 'Gò vấp, Hồ Chí Minh', '2000-01-01', 'ADMIN', 1),
        ('lynguyenhoa102@gmail.com', '123123', 'Hoà', '0338997477', 'Gò vấp, Hồ Chí Minh', '2004-05-08', 'ADMIN', 1),
+       ('superherovhv@gmail.com', '123123', 'Zinh', '0338997477', 'Gò vấp, Hồ Chí Minh', '2004-05-08', 'ADMIN', 1),
        ('han@gmail.com', '123123', 'Hữu Hàn', '0388319013', 'Gò vấp, Hồ Chí Minh', '2000-06-24', 'ADMIN', 1);
 
 insert into categories(id_category ,category_name, description)

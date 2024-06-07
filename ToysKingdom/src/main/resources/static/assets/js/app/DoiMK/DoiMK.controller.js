@@ -28,8 +28,6 @@ angular.module('ToysKingdom').controller('DoiMKCtrl', function ($scope, $http, $
                 } else {
                     alert("Sai OTP")
                 }
-
-
             })
             .catch(function (error) {
                 // Xử lý khi gửi email thất bại
