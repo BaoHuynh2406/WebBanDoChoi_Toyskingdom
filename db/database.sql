@@ -89,7 +89,7 @@ VALUES ('huynhbaomts2004@gmail.com', '123123', 'Bảo', '0388319013', 'Gò vấp
 
 insert into categories(id_category ,category_name, description)
 values ('RB', 'Robot', 'robot, siêu anh hùng'),
-       ('BB', 'Búp bê', 'Búp bê baby biết múa biết bay');
+       ('BB', 'Búp bê', 'Búp b  ê baby biết múa biết bay');
 
 select * from users
 
