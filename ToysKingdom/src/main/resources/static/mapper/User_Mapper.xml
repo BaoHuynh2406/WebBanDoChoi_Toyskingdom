@@ -15,15 +15,26 @@
     </resultMap>
 
     <select id="getAllUser" resultMap="userMap">
-        SELECT * FROM users
+        SELECT *
+        FROM users
+    </select>
+
+    <select id="getAllUserActive" resultMap="userMap">
+        SELECT *
+        FROM users
+        WHERE  active = 1
     </select>
 
     <select id="getUserByEmail" parameterType="String" resultMap="userMap">
-        SELECT * FROM users WHERE email = #{email}
+        SELECT *
+        FROM users
+        WHERE email = #{email}
     </select>
 
     <select id="getUserByIdUser" parameterType="int" resultMap="userMap">
-        SELECT * FROM users WHERE id_user =#{idUser}
+        SELECT *
+        FROM users
+        WHERE id_user = #{idUser}
     </select>
 
     <insert id="insertUser" parameterType="com.mts.toyskingdom.data.dto.UserDTO">
@@ -62,6 +73,18 @@
             <if test="active != null">active = #{active},</if>
         </set>
         WHERE email = #{email} OR id_user = #{idUser}
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        DELETE
+        FROM users
+        WHERE id_user = #{idUser}
+    </delete>
+
+    <update id="disableUser" parameterType="int">
+        UPDATE users
+        set active = 0
+        where id_user = #{idUser}
     </update>
 
 </mapper>

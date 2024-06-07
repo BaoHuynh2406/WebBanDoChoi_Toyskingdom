@@ -28,7 +28,7 @@ public class UserSvlmpl implements UserSv {
 
     @Override
     public int saveUser(UserDTO userDTO) throws SQLException {
-            // Kiểm tra nếu user đã có
+            // Kiểm tra nếu user neu chua co thi insert user
             if(userMapper.getUserByEmail(userDTO.getEmail()).isEmpty()) {
                 // Thêm mới
                 userDTO.setActive(true);
@@ -42,6 +42,16 @@ public class UserSvlmpl implements UserSv {
             return 0;
     }
 
+    @Override
+    public int deleteUser(int idUser) throws SQLException {
+        return userMapper.deleteUser(idUser);
+    }
+
+    @Override
+    public int disableUser(int idUser) throws SQLException {
+        return userMapper.disableUser(idUser);
+    }
+
 
     public int insertUser(UserDTO userRegistration) throws SQLException {
         return userMapper.insertUser(userRegistration);
@@ -50,6 +60,15 @@ public class UserSvlmpl implements UserSv {
     @Override
     public List<UserM> getAllUser()  throws SQLException {
         var listResultEntity = userMapper.getAllUser();
+        if (Objects.nonNull(listResultEntity)) {
+            return UserM.convertListUserEToUserM(listResultEntity);
+        }
+        return null;
+    }
+
+    @Override
+    public List<UserM> getAllUserActive() throws SQLException {
+        var listResultEntity = userMapper.getAllUserActive();
         if (Objects.nonNull(listResultEntity)) {
             return UserM.convertListUserEToUserM(listResultEntity);
         }

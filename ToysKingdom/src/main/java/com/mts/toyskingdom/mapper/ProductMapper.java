@@ -1,9 +1,11 @@
 package com.mts.toyskingdom.mapper;
 
+import com.mts.toyskingdom.data.dto.ProductDTO;
 import com.mts.toyskingdom.data.entity.ProductE;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Mapper
@@ -25,4 +27,16 @@ public interface ProductMapper {
 
 //    Lấy sản phẩm từ start
     List<ProductE> getProductFeaturePage(@Param("start") int start, @Param("quantity") int quantity);
+
+    //Insert
+    int insertProduct(ProductDTO productDTO) throws SQLException;
+
+    //Update product
+    int updateProduct(ProductDTO productDTO) throws SQLException;
+
+    //Delete product
+    int deleteProduct(@Param("idProduct") int idProduct) throws SQLException;
+
+    //Disable
+    int disableProduct(@Param("idProduct") int idProduct) throws SQLException;
 }

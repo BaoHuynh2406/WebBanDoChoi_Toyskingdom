@@ -16,12 +16,12 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel"
+<div class="modal  fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                <h5 class="modal-title" id="editUserModalLabel">Edit Product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -29,96 +29,60 @@
             <div class="modal-body">
                 <!-- Form fields to edit user details -->
                 <form>
-                    <div class="form-group w-100">
-                        <label for="editUsername">User name</label>
-                        <input type="text" class="form-control" id="editUsername" ng-model="editedUser.id" disabled>
-                    </div>
-                    <div class="row">
-
-                        <div class="col-6">
-
+                    <div class="d-flex">
+                        <div class="col-4">
                             <div class="form-group">
-                                <label for="editPassword">Password</label>
-                                <input type="password" class="form-control" id="editPassword"
-                                    ng-model="editedUser.password">
+                                <label for="editID">ID</label>
+                                <input type="number" class="form-control" id="editID" ng-model="productE.idProduct"
+                                    disabled>
                             </div>
 
                             <div class="form-group">
-                                <label for="editPassword">Email</label>
-                                <input type="text" class="form-control" id="editEmail" ng-model="editedUser.email">
+                                <label for="editCatory">Catory</label>
+                                <input type="text" class="form-control" id="editCatory" ng-model="productE.idCategory">
+                            </div>
+
+                            <div class="form-group">
+                                <span class="me-2">Name </span>
+                                <input ng-model="productE.productName" type="text" class="form-control">
                             </div>
                             <div class="form-group">
-                                <span class="me-2">Gender: </span>
-                                <div class="d-flex">
-                                    <div class="form-check" style="margin-right: 10px;">
-                                        <input ng-model="editedUser.gender" class="form-check-input" type="radio"
-                                            name="gender" id="genderMale" value="true"
-                                            ng-checked="editedUser.gender === true">
-
-                                        <label class="form-check-label" for="genderMale">
-                                            Nam
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input ng-model="editedUser.gender" class="form-check-input" type="radio"
-                                            name="gender" id="genderFemale" value="false"
-                                            ng-checked="editedUser.gender === false">
-
-                                        <label class="form-check-label" for="genderFemale">
-                                            Nữ
-                                        </label>
-                                    </div>
-                                </div>
+                                <span class="me-2">Describle </span>
+                                <input ng-model="productE.des" type="text" class="form-control">
                             </div>
 
                         </div>
 
-                        <div class="col-6">
-
-
+                        <div class="col-4">
                             <div class="form-group">
-                                <label for="editPassword">FullName</label>
-                                <input type="text" class="form-control" id="editFullName"
-                                    ng-model="editedUser.fullName">
+                                <label>Image</label>
+                                <input type="file" class="form-control" ng-model="productE.image">
                             </div>
                             <div class="form-group">
-                                <label for="editPassword">BirthDay</label>
-                                <input type="date" class="form-control" id="editBirthDay"
-                                    ng-model="editedUser.birthday">
+                                <label>Price</label>
+                                <input type="number" class="form-control" ng-model="productE.price">
                             </div>
-
                             <div class="form-group">
-                                <span class="me-2">Role: </span><br>
-                                <div class="d-flex">
-                                    <div class="form-check" style="margin-right: 10px;">
-                                        <input ng-model="editedUser.admin" class="form-check-input" type="radio"
-                                            name="role" id="roleAdmin" value="true"
-                                            ng-checked="editedUser.admin === true">
-
-                                        <label class="form-check-label" for="roleAdmin">
-                                            Admin
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input ng-model="editedUser.admin" class="form-check-input" type="radio"
-                                            name="role" id="roleUser" value="false"
-                                            ng-checked="editedUser.admin === false">
-
-                                        <label class="form-check-label" for="roleUser">
-                                            User
-                                        </label>
-                                    </div>
-                                </div>
+                                <label>Unit</label>
+                                <input type="text" class="form-control" ng-model="productE.unit">
                             </div>
-
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="text" class="form-control" ng-model="productE.quantity">
+                            </div>
                             <!-- Add other input fields here -->
                         </div>
+                        <div class="col-4 d-flex align-items-center justify-content-center">
+                            <div class="card" style="width: 150px; height: 150px">
+                                <img style="width: 100%; height: 100%;" src="/assets/image/{{productE.image}}" alt="">
+                            </div>
+
+                        </div>
+
                     </div>
-
-
-
                 </form>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" ng-click="saveChanges()">Save changes</button>
@@ -129,16 +93,19 @@
 </div>
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Quản lý sản phẩm hệ thống</h1>
-<p class="mb-4">Danh sách sản phẩm DB ToysKingdom</p>
+<h1 class="h3 mb-2 text-gray-800">QUẢN LÝ SẢN PHẨM TRONG HỆ THỐNG</h1>
+<p class="mb-4">Danh sách người dùng sản phẩm DB</p>
 
-<!-- DataTales Example -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Users <span id="rotate-button" ng-click="getAll()"
+    <div class="card-header py-3 d-flex justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Products <span id="rotate-button" ng-click="getAll()"
                 class=" btn btn-info btn-circle btn-sm">
                 <i class="fas fa-sync"></i>
             </span></h6>
+
+        <button ng-click="openEditModal()" type="button" class="btn btn-primary btn-circle">
+            <i class="fa-solid fa-plus"></i>
+        </button>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -147,13 +114,13 @@
                     <tr class="text-center">
                         <th>#</th>
                         <th>ID</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                        <th>Full name</th>
-                        <th>Phone number</th>
-                        <th>BirthDay</th>
-                        <th>Role</th>
-                        <th>Active</th>
+                        <th>Catory</th>
+                        <th>Name</th>
+                        <th>Describle</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th>Unit</th>
+                        <th>Quantity</th>
                         <th>Edit</th>
                     </tr>
                 </thead>
@@ -161,36 +128,34 @@
                     <tr class="text-center">
                         <th>#</th>
                         <th>ID</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                        <th>Full name</th>
-                        <th>Phone number</th>
-                        <th>BirthDay</th>
-                        <th>Role</th>
-                        <th>Active</th>
+                        <th>Catory</th>
+                        <th>Name</th>
+                        <th>Describle</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th>Unit</th>
+                        <th>Quantity</th>
                         <th>Edit</th>
                     </tr>
                 </tfoot>
                 <tbody>
-                    <tr ng-repeat="u in users">
+                    <tr ng-repeat="p in products">
                         <td class="text-center">{{$index+1}}</td>
-                        <td class="text-center">{{u.idUser}}</td>
-                        <td class="text-center">{{u.email}}</td>
-                        <td class="text-center">{{u.password}}</td>
-                        <td class="text-center">{{u.fullName}}</td>
-                        <td class="text-center">{{u.phoneNumber}}</td>
-                        <td class="text-center">{{u.birthday }}</td>
-                        <td class="text-center">{{u.role}}</td>
-                        <td class="text-center">{{u.active ? "TRUE" : "FALSE"}}</td>
+                        <td class="text-center">{{p.idProduct}}</td>
+                        <td class="text-center">{{p.idCategory}}</td>
+                        <td class="text-center">{{p.productName}}</td>
+                        <td class="text-center">{{p.des}}</td>
+                        <td class="text-center">
+                            <img style="height: 80px; width: 80px" src="/assets/image/{{p.image}}" alt="">
+                            <span>{{p.image}}</span>
+                        </td>
+                        <td class="text-center">{{p.price}}</td>
+                        <td class="text-center">{{p.unit}}</td>
+                        <td class="text-center">{{p.quantity}}</td>
                         <td class="text-center">
                             <!-- Nút chỉnh sửa -->
-                            <button ng-click="openEditModal(u)" class="btn btn-warning btn-circle btn-sm">
+                            <button ng-click="openEditModal(p)" class="btn btn-warning btn-circle btn-sm">
                                 <i class="fas fa-edit"></i>
-                            </button>
-
-                            <!-- Nút xóa -->
-                            <button class="btn btn-danger btn-circle btn-sm">
-                                <i class="fas fa-trash"></i>
                             </button>
                         </td>
                     </tr>
@@ -200,17 +165,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-<!-- Page level plugins -->
-<script src="/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="/admin/js/demo/datatables-demo.js"></script>
-
-<!-- JS main -->
-<script src="/admin/js/app/users/users.module.js"></script>

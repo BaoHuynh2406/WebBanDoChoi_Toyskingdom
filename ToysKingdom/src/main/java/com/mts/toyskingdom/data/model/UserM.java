@@ -1,7 +1,9 @@
 package com.mts.toyskingdom.data.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mts.toyskingdom.data.entity.UserE;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +22,8 @@ public class UserM {
     private String fullName;
     private String phoneNumber;
     private String address;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date birthday;
     private String role;
     private boolean active;
@@ -30,9 +34,9 @@ public class UserM {
                 .fullName(userE.getFullName())
                 .password(userE.getPassword())
                 .email(userE.getEmail())
-                .password(userE.getPassword())
                 .address(userE.getAddress())
                 .birthday(userE.getBirthday())
+                .phoneNumber(userE.getPhoneNumber())
                 .role(userE.getRole())
                 .active(userE.isActive())
                 .build();

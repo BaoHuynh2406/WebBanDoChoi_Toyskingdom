@@ -43,11 +43,10 @@ create table products
 );
 
 
-    create table discounts
+create table discounts
 (
     id_discount      int auto_increment primary key,
-    id_pr
-        duct        int,
+    id_prduct        int,
     discount_percent decimal(5, 2) not null,
     start_day        datetime      not null,
     end_day          datetime      not null,
@@ -86,7 +85,7 @@ VALUES ('huynhbaomts2004@gmail.com', '123123', 'Bảo', '0388319013', 'Gò vấp
        ('superherovhv@gmail.com', '123123', 'Zinh', '0338997477', 'Gò vấp, Hồ Chí Minh', '2004-05-08', 'ADMIN', 1),
        ('han@gmail.com', '123123', 'Hữu Hàn', '0388319013', 'Gò vấp, Hồ Chí Minh', '2000-06-24', 'ADMIN', 1);
 
-insert into categories(id_category ,category_name, description)
+insert into categories(id_category, category_name, description)
 values ('RB', 'Robot', 'robot, siêu anh hùng'),
        ('BB', 'Búp bê', 'Búp bê baby biết múa biết bay');
 
@@ -140,46 +139,44 @@ VALUES (1, 1, 1, 850000.00, 'Cái'),
        (5, 10, 1, 1500000.00, 'Cái');
 
 
-
 # Bảng phụ
 
 CREATE VIEW product_feature AS
-SELECT
-    p.id_product,
-    p.id_category,
-    p.product_name,
-    p.des,
-    p.image,
-    p.price,
-    COALESCE(d.discount_percent, 0) AS discount_percent
-FROM
-    products p
-        LEFT JOIN
-    discounts d
-    ON
-        p.id_product = d.id_prduct
-            AND p.active = 1
-            AND d.active = 1
-            AND NOW() BETWEEN d.start_day AND d.end_day;
+SELECT p.id_product,
+       p.id_category,
+       p.product_name,
+       p.des,
+       p.image,
+       p.price,
+       COALESCE(d.discount_percent, 0) AS discount_percent
+FROM products p
+         LEFT JOIN
+     discounts d
+     ON
+         p.id_product = d.id_prduct
+             AND p.active = 1
+             AND d.active = 1
+             AND NOW() BETWEEN d.start_day AND d.end_day;
 
-select * from product_feature where product_name like '%Xe đạp trẻ em%'
+select *
+from product_feature
+where product_name like '%Xe đạp trẻ em%'
 
 # PROCEDURE pờ rô si trơ
 CREATE PROCEDURE get_Quantity_Product(IN start INT, IN quantity INT)
 BEGIN
-    SELECT
-        id_product,
-        id_category,
-        product_name,
-        des,
-        image,
-        price,
-        discount_percent
-    FROM
-        product_feature
+    SELECT id_product,
+           id_category,
+           product_name,
+           des,
+           image,
+           price,
+           discount_percent
+    FROM product_feature
     LIMIT start, quantity;
-END
+END;
 
-select COUNT(id_product) from product_feature
 
-select * from users
+UPDATE products
+set active = 0
+where id_product = 1

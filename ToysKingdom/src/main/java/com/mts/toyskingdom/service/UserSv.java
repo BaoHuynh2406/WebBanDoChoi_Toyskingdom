@@ -8,8 +8,10 @@ import java.util.List;
 
 public interface UserSv {
     public List<UserM> getAllUser() throws SQLException;
+    public List<UserM> getAllUserActive() throws SQLException;
     public List<UserM> getUserByEmail(String email) throws SQLException;
     public List<UserM> getUserByidUser(int idUser) throws SQLException;
     public  int saveUser(UserDTO UserRegistration) throws SQLException;
-
+    public  int deleteUser(int idUser) throws SQLException;
+    public  int disableUser(int idUser) throws SQLException;
 }

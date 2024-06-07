@@ -1,5 +1,6 @@
 package com.mts.toyskingdom.service.impl;
 
+import com.mts.toyskingdom.data.dto.ProductDTO;
 import com.mts.toyskingdom.data.model.ProductFeatureM;
 import com.mts.toyskingdom.data.model.ProductM;
 import com.mts.toyskingdom.mapper.ProductMapper;
@@ -79,5 +80,29 @@ public class ProductSvImpl implements ProductSv {
             return ProductFeatureM.convertListProductEToProductFeatureM(listResultEntity);
         }
         return null;
+    }
+
+    @Override
+    public int saveProduct(ProductDTO productDTO) throws SQLException {
+        if(productMapper.getProductByID(productDTO.getIdProduct()) == null) {
+            productDTO.setActive(true);
+            productMapper.insertProduct(productDTO);
+            return 1;
+        } else {
+            productMapper.updateProduct(productDTO);
+            return 2;
+        }
+    }
+
+    @Override
+    public boolean deleteProduct(int idProduct) throws SQLException {
+        if(productMapper.deleteProduct(idProduct) > 0) return true;
+        return false;
+    }
+
+    @Override
+    public boolean disableProduct(int idProduct) throws SQLException {
+        if(productMapper.disableProduct(idProduct) > 0) return true;
+        return false;
     }
 }

@@ -26,7 +26,7 @@
 
 
 
-    <select id="getProduct" resultMap="productMap" parameterType="int">
+    <select id="getProductByID" resultMap="productMap" parameterType="int">
         SELECT * FROM products WHERE id_product = #{idProduct}
     </select>
 
@@ -54,5 +54,48 @@
     <select id="getProductFeaturePage" resultMap="productFeature" parameterType="map">
         CALL get_Quantity_Product(#{start, mode=IN}, #{quantity, mode=IN})
     </select>
+
+<!--    Insert-->
+    <insert id="insertProduct" parameterType="com.mts.toyskingdom.data.dto.ProductDTO">
+        INSERT INTO products (product_name, id_category, des, image, price, unit, quantity)
+        VALUES (
+                #{productName},
+                #{idCategory},
+                #{des},
+                #{image},
+                #{price},
+                #{unit},
+                #{quantity}
+               )
+    </insert>
+
+    <update id="updateProduct" parameterType="com.mts.toyskingdom.data.dto.ProductDTO">
+        UPDATE products
+        <set>
+            <if test="productName != null">product_name = #{productName},</if>
+            <if test="idCategory != null">id_category = #{idCategory},</if>
+            <if test="des != null">des = #{des},</if>
+            <if test="image != null">image = #{image},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="unit != null">unit = #{unit},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+        </set>
+        WHERE id_product = #{idProduct}
+    </update>
+
+
+    <delete id="deleteProduct" parameterType="int">
+        DELETE
+        FROM products
+        WHERE id_product = #{idProduct}
+    </delete>
+
+    <update id="disableProduct" parameterType="int">
+        UPDATE products
+        set active = 0
+        where id_product = #{idProduct}
+    </update>
+
+
 
 </mapper>
