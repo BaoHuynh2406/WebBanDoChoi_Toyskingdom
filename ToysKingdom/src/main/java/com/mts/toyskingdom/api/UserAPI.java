@@ -36,6 +36,24 @@ public class UserAPI {
         }
         return resultApi;
     }
+
+
+    @GetMapping("/getAllUsersActive")
+    public ResponseObject<?> doGetAllUsersActive() {
+        var resultApi = new ResponseObject<>();
+        try {
+            resultApi.setData(userSv.getAllUserActive());
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Lấy thông tin người dùng thành công");
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lấy thông tin người dùng thất bại");
+            log.error("Fail When Call API/api-public/user/getAllUsers : ", e);
+        }
+        return resultApi;
+    }
+
+
     @GetMapping("/getUserByEmail")
     public ResponseObject<?> doGetFindEmail(@RequestParam("email") String email) {
         var resultApi = new ResponseObject<>();
@@ -111,6 +129,46 @@ public class UserAPI {
         } catch (Exception e) {
             resultApi.setSuccess(false);
             resultApi.setMessage("Lỗi save");
+            log.error("Fail when: ", e);
+        }
+        return resultApi;
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseObject<?> delete(@RequestParam int idUser) {
+        var resultApi = new ResponseObject<>();
+        try {
+            int ketQua = userSv.deleteUser(idUser);
+            if (ketQua > 0) {
+                resultApi.setSuccess(true);
+                resultApi.setMessage("Đã xóa thành công");
+            } else { //Id không tồn tại
+                resultApi.setSuccess(false);
+                resultApi.setMessage("Id không tồn tại");
+            }
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lỗi");
+            log.error("Fail when: ", e);
+        }
+        return resultApi;
+    }
+
+    @DeleteMapping("/disable")
+    public ResponseObject<?> disable(@RequestParam int idUser) {
+        var resultApi = new ResponseObject<>();
+        try {
+            int ketQua = userSv.disableUser(idUser);
+            if (ketQua > 0) {
+                resultApi.setSuccess(true);
+                resultApi.setMessage("Đã xóa thành công");
+            } else { //Id không tồn tại
+                resultApi.setSuccess(false);
+                resultApi.setMessage("Id không tồn tại");
+            }
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lỗi");
             log.error("Fail when: ", e);
         }
         return resultApi;

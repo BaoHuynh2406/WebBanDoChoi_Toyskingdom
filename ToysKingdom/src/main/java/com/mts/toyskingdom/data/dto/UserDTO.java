@@ -1,5 +1,6 @@
 package com.mts.toyskingdom.data.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,7 +14,8 @@ public class UserDTO {
     private String password;
     private String phoneNumber;
     private String address;
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // Định dạng ngày hợp lệ
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date birthday;
     private String role;
     private boolean active;

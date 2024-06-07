@@ -1,47 +1,63 @@
-// users/users.controller.js
 angular.module('admin')
-  .controller('productsCtrl', function ($scope, $location, $http, $routeParams, $rootScope) {
-    console.log('productsCtrl');
-    $scope.products = [];
+    .controller('productsCtrl', function ($scope, $location, $http, $routeParams, $rootScope) {
+        console.log('productsCtrl');
 
-    function parseDate(dateString) {
-        var parts = dateString.split(' ');
-        var month = parts[1];
-        var day = parseInt(parts[2].replace(',', ''));
-        var year = parseInt(parts[3]);
-        return new Date(year, month - 1, day);
-    }
+        $scope.products = [];
 
-    $scope.getAll = function () {
-        var button = document.getElementById("rotate-button");
-        button.classList.add("rotate-icon");
-        $http.get('/PhimNew/admin/allUser')
-            .then(function (response) {
-                $scope.users = response.data;
-                $scope.users.forEach(function (user) {
-                    user.birthday = parseDate(user.birthday);
+
+        $scope.getAll = function () {
+            var button = document.getElementById("rotate-button");
+            button.classList.add("rotate-icon");
+            $http.get('http://localhost:8080/api-public/products/getAllActiveProducts')
+                .then(function (response) {
+                    $scope.products = response.data.data;
+                    button.classList.remove("rotate-icon");
+                })
+                .catch(function (error) {
+                    console.error('Error loading items:', error);
+                    button.classList.remove("rotate-icon");
                 });
-                button.classList.remove("rotate-icon");
-            })
-            .catch(function (error) {
+        };
+
+        $scope.getAll();
+
+        $scope.openEditModal = function (product) {
+            console.log('Selected:', product);
+            if (!product) {
+                $scope.productE = null;
+            } else {
+                $scope.productE = angular.copy(product);
+            }
+            $('#editUserModal').modal('show');
+        };
+
+        $scope.saveChanges = function () {
+            var user = angular.copy($scope.editedUser);
+            user.birthday = formatDate(user.birthday);
+
+            $http.post('/api-public/user/save', user).then(function (response) {
+                alert("Đã lưu thay đổi");
+                $scope.getAll();
+            }).catch(function (error) {
                 console.error('Error loading items:', error);
-                button.classList.remove("rotate-icon");
             });
-    };
+            $('#editUserModal').modal('hide');
+        };
 
-    $scope.getAll();
+        $scope.deleteUser = function () {
+            $http.delete('http://localhost:8080/api-public/user/disable', {
+                params: {
+                    idUser: $scope.editedUser.idUser
+                }
+            })
+                .then(function (r) {
+                    $scope.getAll();
+                    console.log('Deleted user:', r.data.message);
+                })
+                .catch(function (error) {
+                    console.error('Error loading items:', error);
+                });
 
-    $scope.openEditModal = function (user) {
-        console.log('Selected user:', user);
-        $scope.editedUser = angular.copy(user);
-        $('#editUserModal').modal('show');
-    };
-
-    $scope.saveChanges = function () {
-        $('#editUserModal').modal('hide');
-    };
-
-    $scope.deleteUser = function () {
-        $('#editUserModal').modal('hide');
-    };
-  });
+            $('#editUserModal').modal('hide');
+        };
+    });

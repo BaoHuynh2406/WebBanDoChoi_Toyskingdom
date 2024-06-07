@@ -3,8 +3,10 @@ package com.mts.toyskingdom.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.mts.toyskingdom.data.dto.ProductDTO;
 import com.mts.toyskingdom.data.model.ProductFeatureM;
 import com.mts.toyskingdom.data.model.ProductM;
+import org.apache.ibatis.annotations.Param;
 
 public interface ProductSv {
 
@@ -43,4 +45,14 @@ public interface ProductSv {
 
 //    Lấy sản phẩm từ start đến quantity
     List<ProductFeatureM> getProductFeaturePage(int start, int quantity) throws SQLException;
+
+    // insert or update
+    int saveProduct(ProductDTO productDTO) throws SQLException;
+
+    // Delete
+    boolean deleteProduct(int idProduct) throws SQLException;
+
+    //disable
+    boolean disableProduct(int idProduct) throws SQLException;
+
 }
