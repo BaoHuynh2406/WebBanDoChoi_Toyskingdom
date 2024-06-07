@@ -65,5 +65,14 @@ angular.module('ToysKingdom').config(function ($routeProvider) {
                 }]
             }
         })
+        .when("/chiteiSP", {
+            templateUrl: "layout/ChiTietSP.html",
+            controller: "ChiTietSPCtrl",
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load('/assets/js/app/ChiTietSP/ChiTietSP.controller.js');
+                }]
+            }
+        })
         .otherwise({ redirectTo: "/home" });
 });
