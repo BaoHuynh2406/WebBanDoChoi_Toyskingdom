@@ -31,17 +31,17 @@
                     </div>
 
                     <!-- Ngày sinh -->
-                    <div class="mb-4">
+                    <!-- <div class="mb-4">
                         <label for="" class="form-sign__label fw-bold fs-6 mb-1">Ngày sinh</label>
                         <input type="date" class="form-control form-sign__input" ng-model="customer.birthday">
-                    </div>
+                    </div> -->
 
                     <!-- Số điện thoại -->
-                    <div class="mb-4">
+                    <!-- <div class="mb-4">
                         <label for="" class="form-sign__label fw-bold fs-6 mb-1">Số điện thoại</label>
                         <input type="tel" class="form-control form-sign__input" placeholder="Nhập số điện thoại"
                             ng-model="customer.phoneNumber">
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="modal-footer">
@@ -77,7 +77,7 @@
 
                 <div class="header__user">
                     <i class="fas fa-user me-1"></i>
-                    <div ng-if="!isLoggedIn" class="dropdown">
+                    <div ng-if="!$root.isLoggedIn" class="dropdown">
                         <button class="btn dropdown-toggle white-text" type="button" id="userDropdown"
                             ng-click="redirectToLogin()">
                             Đăng nhập <i class="fas fa-chevron-down white-text"></i>
@@ -86,9 +86,9 @@
                             <button class="dropdown-item" ng-click="submitDK()">Đăng ký</button>
                         </div>
                     </div>
-                    <div ng-if="isLoggedIn" class="dropdown">
+                    <div ng-if="$root.isLoggedIn" class="dropdown">
                         <button class="btn dropdown-toggle white-text" type="button" id="userDropdown"
-                            ng-click="test()"> {{userIn.fullName}}
+                            ng-click="test()"> Chào, {{$root.customer.fullName}}
                              <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="userDropdown">

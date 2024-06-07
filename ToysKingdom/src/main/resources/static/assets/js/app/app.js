@@ -1,4 +1,4 @@
-angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location, $rootScope) {
+angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location, $rootScope, $http) {
     console.log("MainCtrl Load Done")
 
     // Khởi tạo thông tin người dùng từ $rootScope
@@ -35,10 +35,15 @@ angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location
 
 
     $scope.submitProfile = function () {
-        const { fullName, email, address, birthday, phone } = $scope.customer;
+        const { fullName, email, address } = $scope.customer;
 
         // Kiểm tra các trường để validate
-        if (!fullName || !email || !address || !birthday || !phone) {
+        // if (!fullName || !email || !address || !birthday || !phone) {
+        //     alert("Vui lòng điền đầy đủ thông tin.");
+        //     return;
+        // }
+
+        if (!fullName || !email || !address ) {
             alert("Vui lòng điền đầy đủ thông tin.");
             return;
         }
@@ -51,14 +56,14 @@ angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location
         }
 
         // Kiểm tra số điện thoại
-        const phonePattern = /^[0-9]{10}$/;
-        if (!phonePattern.test(phone)) {
-            alert("Số điện thoại không hợp lệ.");
-            return;
-        }
+        // const phonePattern = /^[0-9]{10}$/;
+        // if (!phonePattern.test(phoneNumber)) {
+        //     alert("Số điện thoại không hợp lệ.");
+        //     return;
+        // }
 
         // Nếu thông tin hợp lệ, gửi request cập nhật
-        $http.post('/api-public/user/update', { fullName, email, address, birthday, phone })
+        $http.post('/api-public/user/save', { fullName, email, address })
             .then(response => {
                 const { success, message, data } = response.data;
                 console.log("Dữ liệu của user:", response.data);
