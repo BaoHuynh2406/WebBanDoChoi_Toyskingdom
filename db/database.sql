@@ -180,3 +180,8 @@ END;
 UPDATE products
 set active = 0
 where id_product = 1
+
+
+update users
+set active = 1
+where 1=1

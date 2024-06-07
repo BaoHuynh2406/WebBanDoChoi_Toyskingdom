@@ -67,6 +67,7 @@ public class UserAPI {
         }
         return resultApi;
     }
+
     @GetMapping("/getUserByidUser")
     public ResponseObject<?> doGetFindidUser(@RequestParam("idUser") int idUser) {
         var resultApi = new ResponseObject<>();
@@ -83,32 +84,31 @@ public class UserAPI {
 
     // hàm checkUserLogin kiểm tra quá trình đăng nhập
     @PostMapping("/checkUserLogin")
-    public ResponseEntity<ResponseObject<?>> doCheckUserLogin(@RequestBody UserLoginDTO loginRequest) {
+    public ResponseObject<?> doCheckUserLogin(@RequestBody UserLoginDTO loginRequest) {
         var resultApi = new ResponseObject<>();
         try {
             List<UserM> users = userSv.getUserByEmail(loginRequest.getEmail());
             if (users == null || users.isEmpty()) {
                 resultApi.setSuccess(false);
                 resultApi.setMessage("Email không tồn tại");
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(resultApi);
+                return resultApi;
             }
             UserM user = users.get(0);
             if (user.getPassword().equals(loginRequest.getPassword())) {
                 resultApi.setSuccess(true);
                 resultApi.setMessage("Đăng nhập thành công");
                 resultApi.setData(List.of(user));
-                return ResponseEntity.ok(resultApi);
             } else {
                 resultApi.setSuccess(false);
                 resultApi.setMessage("Mật khẩu không đúng");
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resultApi);
             }
         } catch (SQLException e) {
             resultApi.setSuccess(false);
             resultApi.setMessage("Đã xảy ra lỗi");
             log.error("SQL error while checking user login", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resultApi);
-        }}
+        }
+        return resultApi;
+    }
 
     @PostMapping("/save")
     public ResponseObject<?> add(@RequestBody UserDTO userDTO) {
@@ -119,7 +119,7 @@ public class UserAPI {
             if (ketQua == 0) {
                 resultApi.setSuccess(false);
                 resultApi.setMessage("Không có gì để cập nhật hoặc thêm");
-            } else if(ketQua == 1) { // 1 khi lưu thành công
+            } else if (ketQua == 1) { // 1 khi lưu thành công
                 resultApi.setSuccess(true);
                 resultApi.setMessage("Thêm mới thành công");
             } else { // 2 khi cập nhật thành công

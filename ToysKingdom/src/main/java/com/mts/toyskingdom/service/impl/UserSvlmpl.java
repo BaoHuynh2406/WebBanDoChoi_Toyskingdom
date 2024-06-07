@@ -36,6 +36,7 @@ public class UserSvlmpl implements UserSv {
                 if(userMapper.insertUser(userDTO) > 0) return 1;
             } else {
                 // Cập nhật
+                userDTO.setActive(true);
                 //Trả về 2 có nghĩa cập nhật thành công
                 if(userMapper.updateUser(userDTO) > 0) return 2;
             }

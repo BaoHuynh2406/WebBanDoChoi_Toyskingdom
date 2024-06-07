@@ -23,15 +23,27 @@ angular.module('ToysKingdom').controller('DoiMKCtrl', function ($scope, $http, $
             .then(function (response) {
 
                 if (response.data.success) {
-                    alert("Thành công")
+                    Swal.fire({
+                        title: "Thành công",
+                        text: "Đã thay đổi mật khẩu",
+                        icon: "success"
+                    });
                     $location.path('/login');
                 } else {
-                    alert("Sai OTP")
+                    Swal.fire({
+                        title: "Thất bại",
+                        text: "OTP không hợp lệ, vui lòng thử lại!",
+                        icon: "error"
+                    });
                 }
             })
             .catch(function (error) {
                 // Xử lý khi gửi email thất bại
-                alert("Thất bài: " + error);
+                Swal.fire({
+                    title: "Thất bại",
+                    text: "OTP không hợp lệ, vui lòng thử lại!",
+                    icon: "error"
+                });
                 console.error(error);
             });
 

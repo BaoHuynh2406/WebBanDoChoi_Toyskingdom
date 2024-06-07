@@ -6,22 +6,28 @@ angular.module('ToysKingdom').controller('LoginCtrl', function ($scope, $http, $
 
         $http.post('/api-public/user/checkUserLogin', { email, password })
             .then(response => {
-                const { success, message, data } = response.data;
                 console.log("Dữ liệu của user:", response.data.data);
-
-                if (success) {
-                    // Handle successful login
+                if (response.data.success) {
                     $rootScope.isLoggedIn = true;
                     $rootScope.customer = response.data.data[0]; // Lưu thông tin user vào $rootScope
                     console.log("Đăng nhập thành công !");
+                    Swal.fire({
+                        title: "Đăng nhập thành công!",
+                        text: "Chào, " + response.data.data[0].fullName,
+                        icon: "success"
+                    });
                     $location.path('/home');
                 } else {
-                    toastr.error(message || "Đã xảy ra lỗi. Vui lòng thử lại sau.");
+                    console.error("Error:" + response.data.message);
+                    Swal.fire({
+                        title: "Sai Email hoặc mật khẩu!",
+                        text: "Vui lòng thử lại",
+                        icon: "error"
+                    });
                 }
             })
             .catch(error => {
-                console.error("Error:", error);
-                toastr.error("Email hoặc mật khẩu không hợp lệ. Vui lòng thử lại sau.");
+                console.error("Error: lỗi: ", error);
             });
     };
 });
