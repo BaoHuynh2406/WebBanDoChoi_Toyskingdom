@@ -1,6 +1,6 @@
 create database if not exists toyskingdomdata;
 
-# drop database toyskingdomdata
+drop database toyskingdomdata
 
 use toyskingdomdata;
 
@@ -45,10 +45,11 @@ create table products
 );
 
 
-create table discounts
+    create table discounts
 (
     id_discount      int auto_increment primary key,
-    id_prduct        int,
+    id_pr
+        duct        int,
     discount_percent decimal(5, 2) not null,
     start_day        datetime      not null,
     end_day          datetime      not null,
@@ -80,28 +81,32 @@ create table order_items
 
 # INSERT Dữ liệu
 INSERT INTO users (email, password, full_name, phone_number, address, birthday, role, active)
-VALUES ('hoa@gmail.com', '123123', 'Nguyên Hòa', '0388319013', 'Gò vấp, Hồ Chí Minh', '2000-01-01', 'ADMIN', 1),
+VALUES ('huynhbaomts2004@gmail.com', '123123', 'Bảo', '0388319013', 'Gò vấp, Hồ Chí Minh', '2000-01-01', 'ADMIN', 1),
        ('kiet@gmail.com', '123123', 'Đình Kiệt', '0388319013', 'Gò vấp, Hồ Chí Minh', '2000-01-01', 'ADMIN', 1),
        ('giabao@gmail.com', '123123', 'Gia Bảo', '0388319013', 'Gò vấp, Hồ Chí Minh', '2000-01-01', 'ADMIN', 1),
+       ('lynguyenhoa102@gmail.com', '123123', 'Hoà', '0338997477', 'Gò vấp, Hồ Chí Minh', '2004-05-08', 'ADMIN', 1),
+       ('superherovhv@gmail.com', '123123', 'Zinh', '0338997477', 'Gò vấp, Hồ Chí Minh', '2004-05-08', 'ADMIN', 1),
        ('han@gmail.com', '123123', 'Hữu Hàn', '0388319013', 'Gò vấp, Hồ Chí Minh', '2000-06-24', 'ADMIN', 1);
 
 insert into categories(id_category ,category_name, description)
 values ('RB', 'Robot', 'robot, siêu anh hùng'),
        ('BB', 'Búp bê', 'Búp bê baby biết múa biết bay');
 
-INSERT INTO products (product_name, id_category, des, image, price, unit, quantity, active)
-VALUES ('Xe Đạp Trẻ Em', 'RB', 'Xe đạp 3 bánh cho trẻ em, màu xanh lá', 'bike.png', 850000.00, 'Cái', 15, 1),
-       ('Búp Bê Barbie', 'BB', 'Búp bê Barbie phiên bản công chúa', 'barbie.png', 550000.00, 'Cái', 30, 1),
-       ('Lego Classic', 'BB', 'Bộ xếp hình Lego Classic với 500 mảnh', 'lego.png', 1200000.00, 'Hộp', 20, 1),
-       ('Đồ Chơi Nhà Bếp', 'BB', 'Bộ đồ chơi nhà bếp mini', 'kitchen_set.png', 300000.00, 'Bộ', 50, 1),
-       ('Ô Tô Điều Khiển Từ Xa', 'BB', 'Ô tô điều khiển từ xa màu đỏ', 'rc_car.png', 650000.00, 'Cái', 25, 1),
-       ('Gấu Bông Teddy', 'RB', 'Gấu bông Teddy cỡ lớn, cao 1m', 'teddy.png', 450000.00, 'Cái', 40, 1),
-       ('Bảng Vẽ Thông Minh', 'RB', 'Bảng vẽ thông minh cho bé', 'drawing_board.png', 200000.00, 'Cái', 35, 1),
-       ('Bộ Đồ Chơi Lắp Ráp', 'RB', 'Bộ đồ chơi lắp ráp mô hình ô tô', 'building_blocks.png', 350000.00, 'Bộ', 45, 1),
-       ('Bộ Xếp Hình 3D', 'RB', 'Bộ xếp hình 3D sáng tạo', '3d_puzzle.png', 500000.00, 'Bộ', 20, 1),
-       ('Đàn Piano Điện Tử', 'RB', 'Đàn piano điện tử mini cho bé', 'piano.png', 1500000.00, 'Cái', 10, 1);
 
-delete from discounts
+
+INSERT INTO products (product_name, id_category, des, image, price, unit, quantity, active)
+VALUES ('Xe Đạp Trẻ Em', 'RB', 'Xe đạp 3 bánh cho trẻ em, màu xanh lá', 'OIP.jpg', 850000.00, 'Cái', 15, 1),
+       ('Búp Bê Barbie', 'BB', 'Búp bê Barbie phiên bản công chúa', 'bup-be.jpg', 550000.00, 'Cái', 30, 1),
+       ('Lego Classic', 'BB', 'Bộ xếp hình Lego Classic với 500 mảnh', 'lego.jpg', 1200000.00, 'Hộp', 20, 1),
+       ('Đồ Chơi Nhà Bếp', 'BB', 'Bộ đồ chơi nhà bếp mini', 'dochoibep.jpg', 300000.00, 'Bộ', 50, 1),
+       ('Ô Tô Điều Khiển Từ Xa', 'BB', 'Ô tô điều khiển từ xa màu đỏ', 'xe.jpg', 650000.00, 'Cái', 25, 1),
+       ('Gấu Bông Teddy', 'RB', 'Gấu bông Teddy cỡ lớn, cao 1m', 'gauteddy.jpg', 450000.00, 'Cái', 40, 1),
+       ('Bảng Vẽ Thông Minh', 'RB', 'Bảng vẽ thông minh cho bé', 'bangve.jpg', 200000.00, 'Cái', 35, 1),
+       ('Bộ Đồ Chơi Lắp Ráp', 'RB', 'Bộ đồ chơi lắp ráp mô hình ô tô', 'dolaprap.jpg', 350000.00, 'Bộ', 45, 1),
+       ('Bộ Xếp Hình 3D', 'RB', 'Bộ xếp hình 3D sáng tạo', 'lego3d.jpg', 500000.00, 'Bộ', 20, 1),
+       ('Đàn Piano Điện Tử', 'RB', 'Đàn piano điện tử mini cho bé', 'dan.jpg', 1500000.00, 'Cái', 10, 1);
+
+# delete from discounts
 
 INSERT INTO discounts (id_prduct, discount_percent, start_day, end_day, active)
 VALUES (1, 10.00, '2024-01-01 00:00:00', '2024-06-10 23:59:59', 1),
@@ -178,3 +183,5 @@ BEGIN
 END
 
 select COUNT(id_product) from product_feature
+
+select * from users

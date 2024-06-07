@@ -4,6 +4,7 @@ angular.module('admin')
     $routeProvider
       .when("/dashboard", {
         templateUrl: "/admin/404.html",
+        controller: "dashboardCtrl",
         resolve: {
           loadMyCtrl:
             [
@@ -17,12 +18,13 @@ angular.module('admin')
       })
       .when("/users", {
         templateUrl: "/admin/user.html",
+        controller: "usersCtrl",
         resolve: {
           loadMyCtrl:
             [
               '$ocLazyLoad',
               function ($ocLazyLoad) {
-                return $ocLazyLoad.load('/admin/js/app/dashboard/dashboard.controller.js');
+                return $ocLazyLoad.load('/admin/js/app/users/users.controller.js');
               }
             ]
         },

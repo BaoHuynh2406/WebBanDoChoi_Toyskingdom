@@ -1,8 +1,8 @@
 // users/users.controller.js
 angular.module('admin')
-  .controller('usersCtrl', function ($scope, $location, $http, $routeParams, $rootScope) {
-    console.log('userCtrl');
-    $scope.users = [];
+  .controller('productsCtrl', function ($scope, $location, $http, $routeParams, $rootScope) {
+    console.log('productsCtrl');
+    $scope.products = [];
 
     function parseDate(dateString) {
         var parts = dateString.split(' ');
@@ -15,10 +15,12 @@ angular.module('admin')
     $scope.getAll = function () {
         var button = document.getElementById("rotate-button");
         button.classList.add("rotate-icon");
-        $scope.users = [];
-        $http.get('http://localhost:8080/api-public/user/getAllUsers')
+        $http.get('/PhimNew/admin/allUser')
             .then(function (response) {
-                $scope.users = response.data.data;
+                $scope.users = response.data;
+                $scope.users.forEach(function (user) {
+                    user.birthday = parseDate(user.birthday);
+                });
                 button.classList.remove("rotate-icon");
             })
             .catch(function (error) {
@@ -29,17 +31,17 @@ angular.module('admin')
 
     $scope.getAll();
 
-    // $scope.openEditModal = function (user) {
-    //     console.log('Selected user:', user);
-    //     $scope.editedUser = angular.copy(user);
-    //     $('#editUserModal').modal('show');
-    // };
+    $scope.openEditModal = function (user) {
+        console.log('Selected user:', user);
+        $scope.editedUser = angular.copy(user);
+        $('#editUserModal').modal('show');
+    };
 
-    // $scope.saveChanges = function () {
-    //     $('#editUserModal').modal('hide');
-    // };
+    $scope.saveChanges = function () {
+        $('#editUserModal').modal('hide');
+    };
 
-    // $scope.deleteUser = function () {
-    //     $('#editUserModal').modal('hide');
-    // };
+    $scope.deleteUser = function () {
+        $('#editUserModal').modal('hide');
+    };
   });

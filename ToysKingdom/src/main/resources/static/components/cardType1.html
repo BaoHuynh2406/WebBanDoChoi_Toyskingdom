@@ -1,10 +1,10 @@
 <div class="card__product card">
     <span class="badge badge__left">New</span>
     <span ng-show="product.discountPercent != 0" class="badge badge__right">-{{product.discountPercent}}%</span>
-    <img ng-src="/assets/image/image-default.webp" class="product__img card-img-top" alt="..."
-        style="border-radius: 1.5rem;">
+    <img src="/assets/image/{{product.image}}" class="product__img card-img-top" alt="..."
+        style="border-radius: 1.5rem; height: 200px;">
     <div class="card-body">
-        <h5 class="card-title">{{product.productName}}</h5>
+        <h5 class="card-title" >{{product.productName}}</h5>
         <p class="card-text text-danger fw-bold">
             <!-- Nếu có giảm giá sẽ hiện giá tiền gốc có định dạng -->
             <span ng-show="product.discountPercent != 0" class="me-1"
