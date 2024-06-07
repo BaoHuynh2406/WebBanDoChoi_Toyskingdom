@@ -4,6 +4,7 @@ import com.mts.toyskingdom.api.ProductAPI;
 import com.mts.toyskingdom.data.entity.ProductE;
 import com.mts.toyskingdom.service.ProductRepository;
 
+import com.mts.toyskingdom.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
     @Autowired
     private ProductRepository productRepository;
+    private ProductService productService;
 
 
     @GetMapping("/sorted")

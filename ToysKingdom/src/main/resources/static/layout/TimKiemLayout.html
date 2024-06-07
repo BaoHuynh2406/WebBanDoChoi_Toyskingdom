@@ -4,9 +4,10 @@
             <span class="fw-bold">Kết quả tìm kiếm cho: <span style="color: var(--main-color);">{{ searchQuery }}</span></h1></span>
             <div class="d-flex h-100 align-items-center">
                 <div class="w-100 fw-bold">Sắp xếp theo:</div>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected value="1">Giá tăng dần</option>
-                    <option value="2">Giá giảm dần</option>
+                <select class="form-select" aria-label="Default select example" ng-model="sortOrder"
+                        ng-change="sortProducts()">
+                    <option selected value="asc">Giá tăng dần</option>
+                    <option value="desc">Giá giảm dần</option>
                     <option value="3">Ngày bán</option>
                 </select>
             </div>
