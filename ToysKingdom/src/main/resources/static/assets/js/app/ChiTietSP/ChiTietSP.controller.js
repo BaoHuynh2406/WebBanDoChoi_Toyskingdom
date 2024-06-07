@@ -1,8 +1,8 @@
 angular.module('ToysKingdom', [])
 .controller('ChiTietSPCtrl', function ($scope, $http, $location, $rootScope) {
     console.log("ChiTietSPCtrl Load done");
-
-    // Sample product data
+    
+    // data test
     $scope.product = {
         images: ['product1.jpg', 'product2.jpg', 'product3.jpg'],
         image: 'product1.jpg',
@@ -12,23 +12,23 @@ angular.module('ToysKingdom', [])
         description: 'Đây là mô tả chi tiết của sản phẩm.'
     };
 
-    // Initialize selected image
+    // ảnh được chọn
     $scope.selectedImage = $scope.product.images[0];
 
-    // Function to select an image
+    // hàm chọn ảnh
     $scope.selectImage = function(image) {
         $scope.selectedImage = image;
     };
 
-    // Initialize quantity
+    // số lượng = 1
     $scope.quantity = 1;
 
-    // Function to increase quantity
+    // tăng
     $scope.increaseQuantity = function() {
         $scope.quantity++;
     };
 
-    // Function to decrease quantity
+    // giảm
     $scope.decreaseQuantity = function() {
         if ($scope.quantity > 1) {
             $scope.quantity--;
