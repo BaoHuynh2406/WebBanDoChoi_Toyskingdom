@@ -7,10 +7,10 @@
                         <h1 class="fw-bold">Đăng ký</h1>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="/account/register" accept-charset="UTF-8" novalidate>
+                        <form method="post" action="/api-public/user/register" accept-charset="UTF-8" novalidate>
                             <div class="mb-4">
-                                <label for="fullName" class="form-sign__label fw-bold fs-6 mb-1">Họ và tên</label>
-                                <input type="text" id="fullName" name="fullName" class="form-control form-sign__input" placeholder="Nhập họ và tên" required>
+                                <label for="fullname" class="form-sign__label fw-bold fs-6 mb-1">Họ và tên</label>
+                                <input type="text" id="fullname" name="fullname" class="form-control form-sign__input" placeholder="Nhập họ và tên" required>
                             </div>
                             <div class="mb-4">
                                 <label for="phoneNumber" class="form-sign__label fw-bold fs-6 mb-1">Số điện thoại</label>
@@ -36,6 +36,30 @@
                             <div class="mb-4">
                                 <label for="confirmPassword" class="form-sign__label fw-bold fs-6 mb-1">Nhập lại mật khẩu</label>
                                 <input type="password" id="confirmPassword" name="confirmPassword" class="form-control form-sign__input" placeholder="Vui lòng nhập lại mật khẩu" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="address" class="form-sign__label fw-bold fs-6 mb-1">Địa chỉ</label>
+                                <input type="text" id="address" name="address" class="form-control form-sign__input" placeholder="Nhập địa chỉ" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="birthday" class="form-sign__label fw-bold fs-6 mb-1">Ngày sinh</label>
+                                <input type="date" id="birthday" name="birthday" class="form-control form-sign__input" placeholder="Nhập ngày sinh" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="role" class="form-sign__label fw-bold fs-6 mb-1">Vai trò</label>
+                                <select id="role" name="role" class="form-select form-sign__input" required>
+                                    <option value="" disabled selected>Chọn vai trò</option>
+                                    <option value="User">User</option>
+                                    <option value="Admin">Admin</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="active" class="form-sign__label fw-bold fs-6 mb-1">Trạng thái kích hoạt</label>
+                                <select id="active" name="active" class="form-select form-sign__input" required>
+                                    <option value="" disabled selected>Chọn trạng thái</option>
+                                    <option value="true">Kích hoạt</option>
+                                    <option value="false">Chưa kích hoạt</option>
+                                </select>
                             </div>
                             <button type="submit" class="btn w-100 btn-primary mt-5 fw-bold fs-5 form-sign__btnSubmit">Xác nhận</button>
                         </form>
