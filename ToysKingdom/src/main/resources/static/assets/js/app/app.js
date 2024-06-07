@@ -1,6 +1,21 @@
 angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location, $rootScope) {
     console.log("MainCtrl Load Done")
 
+    // Khởi tạo thông tin người dùng từ $rootScope
+    $scope.userIn = $rootScope.customer ? angular.copy($rootScope.customer) : {};
+
+
+    // chuyển hướng
+    $scope.logout = function () {
+        $rootScope.isLoggedIn = false;
+        $rootScope.userName = "";
+        $location.path('/login');
+    };
+
+    $scope.submitDK = function () {
+        $location.path('/signUp');
+    };
+
     $scope.search = function () {
         // Sữ dụng jquery để lấy dữ liệu thay vì ng-model
         $scope.searchQuery = $('#searchQuery').val();
@@ -17,7 +32,53 @@ angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location
     $scope.redirectToLogin = function () {
         $location.path('/login');
     };
-})
+
+
+    $scope.submitProfile = function () {
+        const { fullName, email, address, birthday, phone } = $scope.customer;
+
+        // Kiểm tra các trường để validate
+        if (!fullName || !email || !address || !birthday || !phone) {
+            alert("Vui lòng điền đầy đủ thông tin.");
+            return;
+        }
+
+        // Kiểm tra định dạng email
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            alert("Email không hợp lệ.");
+            return;
+        }
+
+        // Kiểm tra số điện thoại
+        const phonePattern = /^[0-9]{10}$/;
+        if (!phonePattern.test(phone)) {
+            alert("Số điện thoại không hợp lệ.");
+            return;
+        }
+
+        // Nếu thông tin hợp lệ, gửi request cập nhật
+        $http.post('/api-public/user/update', { fullName, email, address, birthday, phone })
+            .then(response => {
+                const { success, message, data } = response.data;
+                console.log("Dữ liệu của user:", response.data);
+
+                if (success) {
+                    alert("Cập nhật thành công");
+                    $rootScope.customer = $scope.customer;
+                } else {
+                    alert("Cập nhật thất bại");
+                    $scope.message = message;
+                }
+            })
+            .catch(error => {
+                alert("Error");
+                console.log(error);
+            });
+    };
+
+    
+});
 
 // Directive Thẻ Sản phẩm loại 1
 angular.module('ToysKingdom').directive('cardItemType1', function () {
@@ -56,7 +117,7 @@ angular.module('ToysKingdom').directive('pagination', function () {
         link: function (scope) {
             scope.getPages = function () {
                 let pages = [];
-           
+
                 let maxPagesToShow = 3;
                 let startPage, endPage;
 
