@@ -6,7 +6,6 @@ use toyskingdomdata;
 
 
 
-drop
 
 create table users
 (
@@ -20,6 +19,7 @@ create table users
     role         ENUM ('USER', 'ADMIN') not null default 'USER',
     active       bit                             default 1
 ) AUTO_INCREMENT = 100000;
+
 
 CREATE TABLE categories
 (
@@ -48,8 +48,7 @@ create table products
     create table discounts
 (
     id_discount      int auto_increment primary key,
-    id_pr
-        duct        int,
+    id_prduct        int,
     discount_percent decimal(5, 2) not null,
     start_day        datetime      not null,
     end_day          datetime      not null,
