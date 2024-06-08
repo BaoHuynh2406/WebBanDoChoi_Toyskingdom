@@ -1,4 +1,4 @@
-package com.mts.toyskingdom.data.entity;
+package com.mts.toyskingdom.data.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class DiscountE {
+public class DiscountDTO {
     private int idDiscount;
     private int idPrduct;
     private double discountPercent;

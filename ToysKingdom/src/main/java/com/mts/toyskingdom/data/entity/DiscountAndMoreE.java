@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class DiscountE {
+public class DiscountAndMoreE {
     private int idDiscount;
     private int idPrduct;
     private double discountPercent;
@@ -16,4 +16,8 @@ public class DiscountE {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
     private Date endDay;
     private boolean active;
+    private String productName;
+    private String image;
+    private double price;
+
 }

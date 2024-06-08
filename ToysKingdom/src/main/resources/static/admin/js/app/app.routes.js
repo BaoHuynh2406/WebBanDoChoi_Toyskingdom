@@ -42,6 +42,19 @@ angular.module('admin')
                         ]
                 }
             })
+            .when("/discount", {
+                templateUrl: "/admin/discount.html",
+                controller: "discountCtrl",
+                resolve: {
+                    loadMyCtrl:
+                        [
+                            '$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load('/admin/js/app/discount/discount.controller.js');
+                            }
+                        ]
+                }
+            })
             .otherwise({
                 redirectTo: '/dashboard'
             });

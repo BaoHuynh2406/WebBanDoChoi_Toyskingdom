@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mts.toyskingdom.mapper.DiscountMapper">
+
+    <resultMap id="discountMap" type="com.mts.toyskingdom.data.entity.DiscountAndMoreE">
+        <result column="id_discount" property="idDiscount"/>
+        <result column="id_product" property="idPrduct"/>
+        <result column="discount_percent" property="discountPercent"/>
+        <result column="start_day" property="startDay"/>
+        <result column="end_day" property="endDay"/>
+        <result column="active" property="active"/>
+        <result column="product_name" property="productName"/>
+        <result column="image" property="image"/>
+        <result column="price" property="price"/>
+    </resultMap>
+
+
+    <select id="getAllDiscount" resultMap="discountMap">
+        SELECT d.id_discount,
+               p.id_product,
+               p.product_name,
+               p.image,
+               d.discount_percent,
+               d.start_day,
+               d.end_day,
+               p.price,
+               d.active
+        FROM discounts d
+        inner join products p on d.id_prduct = p.id_product
+    </select>
+
+
+    <select id="getAllDiscountActive" resultMap="discountMap">
+        SELECT d.id_discount,
+               p.id_product,
+               p.product_name,
+               p.image,
+               d.discount_percent,
+               d.start_day,
+               d.end_day,
+               p.price
+        FROM discounts d
+        inner join products p on d.id_prduct = p.id_product
+        where d.active = 1
+    </select>
+</mapper>
