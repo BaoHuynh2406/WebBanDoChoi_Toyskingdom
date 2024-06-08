@@ -1,8 +1,7 @@
 angular.module('ToysKingdom').config(function ($routeProvider) {
     $routeProvider
         .when("/home",
-            {
-                templateUrl: "layout/ViewProduct.html",
+            {                templateUrl: "layout/ViewProduct.html",
                 resolve:
                 {
                     loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
