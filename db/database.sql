@@ -40,7 +40,7 @@ create table products
     quantity     decimal(10, 2) default 0,
     active       bit            default 1,
     foreign key (id_category) references categories (id_category)
-);
+)AUTO_INCREMENT = 1000;
 
 
 create table discounts
@@ -52,7 +52,7 @@ create table discounts
     end_day          datetime      not null,
     active           bit default 1,
     foreign key (id_prduct) references products (id_product)
-);
+)AUTO_INCREMENT = 1000;
 
 create table orders
 (
@@ -62,7 +62,7 @@ create table orders
     total      decimal(15, 2),
     status     ENUM ('PENDING', 'PAID', 'CANCELLED') default 'PENDING',
     foreign key (id_user) references users (id_user)
-);
+) AUTO_INCREMENT = 100000;
 
 create table order_items
 (
@@ -176,12 +176,3 @@ BEGIN
     LIMIT start, quantity;
 END;
 
-
-UPDATE products
-set active = 0
-where id_product = 1
-
-
-update users
-set active = 1
-where 1=1
