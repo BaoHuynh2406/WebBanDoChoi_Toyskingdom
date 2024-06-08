@@ -1,29 +1,40 @@
 angular.module('ToysKingdom').controller('ChiTietSPCtrl', function($scope, $http, $routeParams) {
     console.log("ChiTietSPCtrl Load done");
 
-
-    $scope.product;
+    $scope.product = {};
+    $scope.isLoadingProduct = true;
     var idProduct = $routeParams.id; // Lấy id từ $routeParams
-    console.log(idProduct);
 
     $scope.loadData = function() {
-        $http.get('http://localhost:8080/api-public/products/getProductByID', {params: {idProduct: idProduct}} )
-        .then(function(response) {
-            // Gán dữ liệu sản phẩm nhận được từ API vào $scope.product
-            $scope.product = response.data.data;
-            console.log($scope.product);
-        }, function(error) {
-            console.log(error.message);
-            $scope.isLoading = false;
-        });
-    }
+        $http.get('http://localhost:8080/api-public/products/getProductByID', { params: { idProduct: idProduct } })
+            .then(function(response) {
+                // Gán dữ liệu sản phẩm nhận được từ API vào $scope.product
+                $scope.product = response.data.data;
+                console.log($scope.product);
+                $scope.isLoadingProduct = false;
+            }, function(error) {
+                console.log(error.message);
+                $scope.isLoadingProduct = false;
+            });
+    };
 
     $scope.loadData();
-    
-    // Hàm chọn ảnh
-    $scope.selectImage = function(image) {
-        $scope.selectedImage = image;
+
+    $scope.relatedProducts = [];
+    $scope.isLoadingRelatedProducts = true;
+
+    $scope.loadRelatedProducts = function() {
+        $http.get('http://localhost:8080/api-public/products/homePageProduct', { params: { page: 1 } })
+            .then(function(response) {
+                $scope.relatedProducts = response.data.data;
+                $scope.isLoadingRelatedProducts = false;
+            }, function(error) {
+                console.error(error.message);
+                $scope.isLoadingRelatedProducts = false;
+            });
     };
+
+    $scope.loadRelatedProducts();
 
     // Số lượng mặc định
     $scope.quantity = 1;
