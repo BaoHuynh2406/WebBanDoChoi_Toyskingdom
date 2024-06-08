@@ -59,28 +59,55 @@ angular.module('admin')
             user.birthday = formatDate(user.birthday);
 
             $http.post('/api-public/user/save', user).then(function (response) {
-                alert("Đã lưu thay đổi");
+                Swal.fire({
+                    title: "Thành công",
+                    text: "Đã lưu thay đổi!",
+                    icon: "success"
+                });
                 $scope.getAll();
             }).catch(function (error) {
+                Swal.fire({
+                    title: "Lỗi",
+                    text: "Có lỗi xảy ra trong quá trình Lưu!",
+                    icon: "error"
+                });
                 console.error('Error loading items:', error);
             });
             $('#editUserModal').modal('hide');
         };
 
         $scope.deleteUser = function () {
-            $http.delete('http://localhost:8080/api-public/user/disable', {
-                params: {
-                    idUser: $scope.editedUser.idUser
-                }
-            })
-                .then(function (r) {
-                    $scope.getAll();
-                    console.log('Deleted user:', r.data.message);
+            Swal.fire({
+                title: "Bạn có chắc?",
+                text: "Xóa người dùng này sẽ không thể khôi phục!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Đúng, hãy xóa nó!"
+            }).then((result) => {
+                $http.delete('http://localhost:8080/api-public/user/disable', {
+                    params: {
+                        idUser: $scope.editedUser.idUser
+                    }
                 })
-                .catch(function (error) {
-                    console.error('Error loading items:', error);
-                });
+                    .then(function (r) {
+                        $scope.getAll();
+                        Swal.fire({
+                            title: "Đã xóa!",
+                            text: "Xóa thành công",
+                            icon: "success"
+                        });
+                    })
+                    .catch(function (error) {
+                        Swal.fire({
+                            title: "Lỗi!",
+                            text: "Xóa thất bại",
+                            icon: "error"
+                        });
+                    });
 
-            $('#editUserModal').modal('hide');
+                $('#editUserModal').modal('hide');
+            });
         };
     });

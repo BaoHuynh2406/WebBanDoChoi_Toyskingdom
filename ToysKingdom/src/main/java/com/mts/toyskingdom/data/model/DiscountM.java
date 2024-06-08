@@ -1,5 +1,6 @@
 package com.mts.toyskingdom.data.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mts.toyskingdom.data.entity.DiscountE;
 import com.mts.toyskingdom.data.entity.OrderE;
 import lombok.*;
@@ -17,7 +18,10 @@ public class DiscountM {
     private int idDiscount;
     private int idPrduct;
     private double discountPercent;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
     private Date startDay;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
     private Date endDay;
     private boolean active;
 

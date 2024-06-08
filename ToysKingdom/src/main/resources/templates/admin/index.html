@@ -27,6 +27,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
 
 
+    <!-- Sweet Alert -->
+    <!-- Thư viện dùng để thay thế hộp thoại thông báo mặc định -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <!-- Lazy Load -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/oclazyload/1.1.0/ocLazyLoad.min.js"
         integrity="sha512-V59jxS4kcWe6bvHEeZCojXfPrwUx2XPLbaKXl2xff8jHpc9U0u+HYvA/JHFLX89VuZtyyUaVWcVOKgD1Umnjzw=="
@@ -40,7 +45,8 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul style="transition: all .3s ease-out;" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul style="transition: all .3s ease-out;" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+            id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/PhimNew/home">
@@ -80,6 +86,7 @@
                         <h6 class="collapse-header">Quản lý db</h6>
                         <a class="collapse-item" href="#!/users">Người dùng</a>
                         <a class="collapse-item" href="#!/product">Sản phẩm</a>
+                        <a class="collapse-item" href="#!/discount">Giảm giá</a>
                     </div>
                 </div>
             </li>
@@ -124,7 +131,7 @@
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d-flex flex-column" >
 
             <!-- Main Content -->
             <div id="content">
@@ -219,7 +226,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid ">
 
                     <ng-view></ng-view>
 
