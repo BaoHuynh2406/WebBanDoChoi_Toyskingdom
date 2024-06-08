@@ -62,7 +62,7 @@ public class ProductAPI {
         return resultApi;
     }
 
-    // tim sp theo ten api
+    // tim sp theo ten
     @GetMapping("/getproductbyname")
     public ResponseObject<?> searchProductbyName(@RequestParam("productName") String productName) {
         var resultApi = new ResponseObject<>();
@@ -77,6 +77,24 @@ public class ProductAPI {
         }
         return resultApi;
     }
+
+    // tìm sp theo ai
+    @GetMapping("/getProductByID")
+    public ResponseObject<?> getProductByID(@RequestParam("idProduct") int idProduct) {
+        var resultApi = new ResponseObject<>();
+        try {
+            resultApi.setData(productService.getProductByID(idProduct));
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Tìm thông tin sản phẩm theo id thành công");
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Tìm thông tin sản phẩm theo id thất bại");
+            log.error("Lỗi khi gọi API /api-public/products/getProductByID : ", e);
+        }
+        return resultApi;
+    }
+
+
 
 //    Lấy số lướng sản phẩm features trong db
     @GetMapping("/countFeatureProducts")

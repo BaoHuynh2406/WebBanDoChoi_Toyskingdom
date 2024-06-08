@@ -1,25 +1,27 @@
-<div class="card__product card">
-    <span class="badge badge__left">New</span>
-    <span ng-show="product.discountPercent != 0" class="badge badge__right">-{{product.discountPercent}}%</span>
-    <img src="/assets/image/{{product.image}}" class="product__img card-img-top" alt="..."
-        style="border-radius: 1.5rem; height: 200px;">
-    <div class="card-body">
-        <h5 class="card-title" >{{product.productName}}</h5>
-        <p class="card-text text-danger fw-bold">
-            <!-- Nếu có giảm giá sẽ hiện giá tiền gốc có định dạng -->
-            <span ng-show="product.discountPercent != 0" class="me-1"
-                style="font-size: 12px; font-style: italic; color: #5d5d5d; text-decoration: line-through;">
-                {{product.price| number: 0}}₫
-            </span>
-            <span>{{product.price*(1-product.discountPercent/100) | number: 0}}₫</span>
-        </p>
-        <div class="row">
-            <div class="col-9">
-                <a href="#" class="w-100 btn btn_add_to_card">Thêm vào giỏ</a>
-            </div>
-
-            <div class="col-3">
-                <button class="far fa-heart btn_yeu_thich"></button>
+<div ng-controller="ViewProductsCtrl">
+    <div class="card__product card" ng-click="chuyentrang(product.idProduct)">
+        <span class="badge badge__left">New</span>
+        <span ng-show="product.discountPercent != 0" class="badge badge__right">-{{product.discountPercent}}%</span>
+        <img src="/assets/image/{{product.image}}" class="product__img card-img-top" alt="..."
+            style="border-radius: 1.5rem; height: 200px;">
+        <div class="card-body">
+            <h5 class="card-title">{{product.productName}}</h5>
+            <p class="card-text text-danger fw-bold">
+                <!-- Nếu có giảm giá sẽ hiện giá tiền gốc có định dạng -->
+                <span ng-show="product.discountPercent != 0" class="me-1"
+                    style="font-size: 12px; font-style: italic; color: #5d5d5d; text-decoration: line-through;">
+                    {{product.price | number: 0}}₫
+                </span>
+                <span>{{product.price * (1 - product.discountPercent / 100) | number: 0}}₫</span>
+            </p>
+            <div class="row">
+                <div class="col-9">
+                    <!-- Để tạo một liên kết đến trang chi tiết sản phẩm và truyền idProduct -->
+                    <a href="#!/chiteiSP/{{product.idProduct}}" class="w-100 btn btn_add_to_card">Thêm vào giỏ</a>
+                </div>
+                <div class="col-3">
+                    <button class="far fa-heart btn_yeu_thich"></button>
+                </div>
             </div>
         </div>
     </div>
