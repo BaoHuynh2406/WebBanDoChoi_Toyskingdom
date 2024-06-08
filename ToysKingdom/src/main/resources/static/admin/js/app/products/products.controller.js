@@ -32,9 +32,10 @@ angular.module('admin')
                 $scope.imageSrc = '';
                 $('#imageFile').val('');
             } else {
+                $('#imageFile').val('');
                 $scope.productE = angular.copy(product);
                 $scope.imageFile = $scope.productE.image;
-                $scope.imageSrc = '/assets/image/' + $scope.productE.image;
+                document.querySelector('#preview').src = '/assets/image/' + $scope.productE.image;
             }
 
             document.querySelector('#imageFile').addEventListener("change", (event) => {
@@ -61,7 +62,7 @@ angular.module('admin')
             });
 
 
-           
+
         };
 
 
