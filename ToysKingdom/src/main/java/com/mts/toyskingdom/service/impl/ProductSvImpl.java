@@ -89,6 +89,7 @@ public class ProductSvImpl implements ProductSv {
             productMapper.insertProduct(productDTO);
             return 1;
         } else {
+            productDTO.setActive(true);
             productMapper.updateProduct(productDTO);
             return 2;
         }

@@ -5,8 +5,15 @@ import com.mts.toyskingdom.data.mgt.ResponseObject;
 import com.mts.toyskingdom.service.ProductSv;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 
 
@@ -15,6 +22,9 @@ import java.sql.SQLException;
 @RequiredArgsConstructor
 @RequestMapping("/api-public/products")
 public class ProductAPI {
+
+    @Value("${file.upload-dir}")
+    private String uploadDir;
     final ProductSv productService;
 
     @GetMapping("/getAllProducts")
@@ -155,4 +165,37 @@ public class ProductAPI {
         }
         return resultApi;
     }
+
+
+    @PostMapping("/uploadImage")
+    public ResponseObject<?> uploadImage(@RequestParam("file") MultipartFile file) {
+        var resultApi = new ResponseObject<>();
+        try {
+            if (file.isEmpty()) {
+                resultApi.setSuccess(false);
+                resultApi.setMessage("File is empty");
+                return resultApi;
+            }
+
+            // Convert relative path to absolute path
+            Path currentPath = Paths.get("").toAbsolutePath();
+            Path absolutePath = Paths.get(currentPath.toString(), uploadDir);
+
+            if (!Files.exists(absolutePath)) {
+                Files.createDirectories(absolutePath);
+            }
+
+            String filePath = absolutePath.resolve(file.getOriginalFilename()).toString();
+            file.transferTo(new File(filePath));
+
+            resultApi.setSuccess(true);
+            resultApi.setMessage("File uploaded successfully: " + file.getOriginalFilename());
+        } catch (IOException e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("File upload failed");
+            log.error("Fail When Call API /api-public/products/uploadImage : ", e);
+        }
+        return resultApi;
+    }
+
 }
