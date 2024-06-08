@@ -15,6 +15,17 @@
     </resultMap>
 
 
+    <resultMap id="discountMapBase" type="com.mts.toyskingdom.data.entity.DiscountE">
+        <result column="id_discount" property="idDiscount"/>
+        <result column="id_prduct" property="idPrduct"/>
+        <result column="discount_percent" property="discountPercent"/>
+        <result column="start_day" property="startDay"/>
+        <result column="end_day" property="endDay"/>
+        <result column="active" property="active"/>
+    </resultMap>
+
+
+
     <select id="getAllDiscount" resultMap="discountMap">
         SELECT d.id_discount,
                p.id_product,
@@ -43,4 +54,50 @@
         inner join products p on d.id_prduct = p.id_product
         where d.active = 1
     </select>
+
+
+    <select id="findById" resultMap="discountMapBase" parameterType="int">
+        SELECT * FROM discounts
+        WHERE id_discount = #{idDiscount}
+    </select>
+
+
+    <insert id="insert" parameterType="com.mts.toyskingdom.data.dto.DiscountDTO">
+        INSERT INTO discounts (id_prduct, discount_percent, start_day, end_day)
+        VALUES (
+                #{idPrduct},
+                #{discountPercent},
+                #{startDay},
+                #{endDay}
+               )
+    </insert>
+
+    <update id="update" parameterType="com.mts.toyskingdom.data.dto.DiscountDTO">
+        UPDATE discounts
+        <set>
+            <if test="idPrduct != null">id_prduct = #{idPrduct},</if>
+            <if test="discountPercent != null">discount_percent = #{discountPercent},</if>
+            <if test="startDay != null">start_day = #{startDay},</if>
+            <if test="endDay != null">end_day = #{endDay},</if>
+            <if test="active != null">active = #{active},</if>
+        </set>
+        WHERE id_discount = #{idDiscount}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE
+        FROM discounts
+        WHERE id_discount = #{idDiscount}
+    </delete>
+
+    <update id="disable" parameterType="int">
+        UPDATE discounts
+        set active = 0
+        where id_discount = #{idDiscount}
+    </update>
+
+
+
+
+
 </mapper>

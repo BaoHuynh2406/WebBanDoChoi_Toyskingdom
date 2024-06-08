@@ -55,7 +55,7 @@
 
                             <div class="form-group me-2">
                                 <label>Discount Percent </label>
-                                <input ng-model="discountE.discountPercent" type="number" class="form-control">
+                                <input min="0" max="100" ng-model="discountE.discountPercent" type="number" class="form-control">
                             </div>
                         </div>
 
@@ -160,7 +160,7 @@
         </button>
     </div>
     <div class="card-body">
-        <div class="table-responsive">
+        <div class="table-responsive" style="height: 500px !important;">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr class="text-center">
