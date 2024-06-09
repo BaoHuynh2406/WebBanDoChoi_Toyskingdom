@@ -67,11 +67,10 @@
     </update>
 
 
-    <update id="disable" parameterType="int">
-        UPDATE discounts
-        set active = 0
-        where id_discount = #{idDiscount}
-    </update>
+
+
+
+
 
 
 

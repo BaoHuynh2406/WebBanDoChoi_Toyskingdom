@@ -162,7 +162,8 @@ select *
 from product_feature
 where product_name like '%Xe đạp trẻ em%'
 
-# PROCEDURE pờ rô si trơ
+# PROCEDURE pờ rô si trơ ------------------------------------------------------------------
+
 CREATE PROCEDURE get_Quantity_Product(IN start INT, IN quantity INT)
 BEGIN
     SELECT id_product,
@@ -176,16 +177,69 @@ BEGIN
     LIMIT start, quantity;
 END;
 
-delete from orders
+DELIMITER //
+
+CREATE PROCEDURE delete_order_items_with_zero_quantity(IN order_id INT)
+BEGIN
+    DELETE FROM order_items
+    WHERE id_order = order_id AND order_quantity <= 0;
+END //
+
+DELIMITER ;
+
+
+# TRIGER ------------------------------------------------
+
+
+
+DELIMITER //
+
+CREATE TRIGGER update_order_total_after_insert
+    AFTER INSERT ON order_items
+    FOR EACH ROW
+BEGIN
+    DECLARE order_total DECIMAL(15, 2);
+
+    SELECT SUM(price * order_quantity) INTO order_total
+    FROM order_items
+    WHERE id_order = NEW.id_order;
+
+    UPDATE orders
+    SET total = IFNULL(order_total, 0.00)
+    WHERE id_order = NEW.id_order;
+END //
+
+CREATE TRIGGER update_order_total_after_update
+    AFTER UPDATE ON order_items
+    FOR EACH ROW
+BEGIN
+    DECLARE order_total DECIMAL(15, 2);
+
+    SELECT SUM(price * order_quantity) INTO order_total
+    FROM order_items
+    WHERE id_order = NEW.id_order;
+
+    UPDATE orders
+    SET total = IFNULL(order_total, 0.00)
+    WHERE id_order = NEW.id_order;
+END //
+
+CREATE TRIGGER update_order_total_after_delete
+    AFTER DELETE ON order_items
+    FOR EACH ROW
+BEGIN
+    DECLARE order_total DECIMAL(15, 2);
+
+    SELECT SUM(price * order_quantity) INTO order_total
+    FROM order_items
+    WHERE id_order = OLD.id_order;
+
+    UPDATE orders
+    SET total = IFNULL(order_total, 0.00)
+    WHERE id_order = OLD.id_order;
+END //
+
+DELIMITER ;
+
+
 select * from orders
-
-select * from order_items
-
-SELECT *
-FROM orders o
-WHERE o.id_user = 100000 and o.status = 'PENDING'
-
-
-SELECT *
-FROM order_items o
-WHERE o.id_order = 12 AND o.id_product = 6

@@ -57,5 +57,9 @@
     </delete>
 
 
+    <select id="delete_order_items_with_zero_quantity" parameterType="int">
+        CALL delete_order_items_with_zero_quantity(#{order_id, mode=IN})
+    </select>
+
 
 </mapper>

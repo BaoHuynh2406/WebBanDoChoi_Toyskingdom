@@ -52,10 +52,12 @@ public class OrderItemSvImpl implements OrderItemSv {
             System.out.println(orderItemDTO);
             //Nếu có thì cập nhật lại số lượng
             mapper.update(orderItemDTO);
+            mapper.delete_order_items_with_zero_quantity(orderItemDTO.getIdOrder());
             return;
         }
         //Nếu không có thì thêm mới sản phẩm vào đơn hàng chi tiết
         mapper.insert(orderItemDTO);
+        mapper.delete_order_items_with_zero_quantity(orderItemDTO.getIdOrder());
     }
 
     @Override

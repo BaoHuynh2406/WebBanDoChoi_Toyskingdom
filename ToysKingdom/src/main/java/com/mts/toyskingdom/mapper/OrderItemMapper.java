@@ -21,4 +21,6 @@ public interface OrderItemMapper {
     int update(OrderItemDTO orderItemDTO);
 
     int delete(int idOrderItem);
+
+    void delete_order_items_with_zero_quantity(int order_id);
 }
