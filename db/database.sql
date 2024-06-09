@@ -184,3 +184,5 @@ END
 select COUNT(id_product) from product_feature
 
 select * from users
+select * from categories
+select * from products

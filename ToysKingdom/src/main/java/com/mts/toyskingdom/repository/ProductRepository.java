@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Repository
-public interface ProductRepository extends JpaRepository<ProductE, Long> {
+public interface ProductRepository extends JpaRepository<ProductE, Integer> {
     List<ProductE> findAllByOrderByPriceAsc();
     List<ProductE> findAllByOrderByPriceDesc();
 }
