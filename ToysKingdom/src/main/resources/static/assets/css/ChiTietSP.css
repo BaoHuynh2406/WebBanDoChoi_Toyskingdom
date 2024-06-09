@@ -26,12 +26,13 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+
+
 /* Badge for Related Products */
 .badge__left {
     position: absolute;
     top: 10px;
     left: 10px;
-    background-color: #28a745; /* Màu cho trạng thái "New" */
     color: #fff;
     padding: 5px;
     border-radius: 5px;
@@ -100,7 +101,7 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 .custom-btn {
-    width: 25%;
+    width: 28%;
     background-color: #dc3545; 
     color: #fff; 
     transition: background-color 0.3s ease, color 0.3s ease;
