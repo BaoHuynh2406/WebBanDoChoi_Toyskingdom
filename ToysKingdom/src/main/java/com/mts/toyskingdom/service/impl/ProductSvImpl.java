@@ -1,6 +1,7 @@
 package com.mts.toyskingdom.service.impl;
 
 import com.mts.toyskingdom.data.dto.ProductDTO;
+import com.mts.toyskingdom.data.entity.ProductE;
 import com.mts.toyskingdom.data.model.ProductFeatureM;
 import com.mts.toyskingdom.data.model.ProductM;
 import com.mts.toyskingdom.mapper.ProductMapper;
@@ -38,13 +39,14 @@ public class ProductSvImpl implements ProductSv {
     }
 
     @Override
-    public ProductM getProductByID(int idProduct) throws SQLException {
+    public ProductFeatureM getProductByID(int idProduct) throws SQLException {
         var listResultEntity = productMapper.getProductByID(idProduct);
         if (Objects.nonNull(listResultEntity)) {
-            return ProductM.convertProductEToProductM(listResultEntity);
+            return ProductFeatureM.convertProductEToProductFeatureM(listResultEntity);
         }
         return null;
     }
+
 
     @Override
     public List<ProductFeatureM> getAllProductsFeature() throws SQLException {

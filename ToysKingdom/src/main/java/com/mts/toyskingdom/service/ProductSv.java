@@ -4,9 +4,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.mts.toyskingdom.data.dto.ProductDTO;
+import com.mts.toyskingdom.data.entity.ProductE;
 import com.mts.toyskingdom.data.model.ProductFeatureM;
 import com.mts.toyskingdom.data.model.ProductM;
-import org.apache.ibatis.annotations.Param;
 
 public interface ProductSv {
 
@@ -26,12 +26,11 @@ public interface ProductSv {
 
 
     /**
-     * @param idProduct
-     * Lấy tất cả thông tin: sản phẩm được chọn
-     *
+     * @param idProduct Lấy tất cả thông tin: sản phẩm được chọn
      * @return Sản phẩm có ID
      */
-    ProductM getProductByID(int idProduct) throws SQLException;
+    ProductFeatureM getProductByID(int idProduct) throws SQLException;
+
 
 
 

@@ -26,8 +26,8 @@
 
 
 
-    <select id="getProductByID" resultMap="productMap" parameterType="int">
-        SELECT * FROM products WHERE id_product = #{idProduct}
+    <select id="getProductByID" resultMap="productFeature" parameterType="int">
+        SELECT * FROM product_feature WHERE id_product = #{idProduct}
     </select>
 
     <select id="getAllProducts" resultMap="productMap">

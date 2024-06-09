@@ -1,18 +1,44 @@
+
+/* Product Image */
 .product-img {
     width: 100%;
     border-radius: 1.5rem;
     height: 400px;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.3s ease;
 }
+
 .product-img:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
+
+/* Related Product Image */
 .related-product-img {
     width: 100%;
     height: 150px;
     object-fit: cover;
+    transition: transform 0.3s ease;
 }
+
+.related-product-img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Badge for Related Products */
+.badge__left {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Discount Badge */
 .badge-discount {
     position: absolute;
     top: 10px;
@@ -22,13 +48,13 @@
     padding: 5px;
     border-radius: 5px;
 }
-.card-body {
-    position: relative;
-}
+
+/* Quantity Control */
 .quantity-control {
     display: flex;
     align-items: center;
 }
+
 .quantity-control .btn {
     border: 1px solid #ddd;
     background: #f8f9fa;
@@ -39,6 +65,7 @@
     font-size: 1.2rem;
     line-height: 1;
 }
+
 .quantity-control .quantity-input {
     text-align: center;
     width: 60px;
@@ -51,11 +78,56 @@
     height: 100px;
     margin-right: 10px;
     cursor: pointer;
-    transition: border 0.3s;
+    transition: border 0.3s, transform 0.3s ease; 
 }
+
 .thumbnail:hover {
     border: 2px solid #007bff;
+    transform: scale(1.05); 
 }
+
 .thumbnail.active {
     border: 2px solid #007bff;
+    transform: scale(1.05); 
 }
+
+
+.card.mb-3 {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card.mb-3:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.custom-btn {
+    width: 28%;
+    background-color: #dc3545; 
+    color: #fff; 
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: none; 
+    font-weight: bold;
+}
+
+.custom-btn:hover {
+    font-weight: bold;
+    background-color: #041675; 
+    color: #fff; 
+}
+.custom-btn-color {
+    width: 100%;
+    background-color: #dc3545; 
+    color: #fff; 
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.custom-btn-color:hover {
+    font-weight: bold;
+    background-color: #041675; 
+    color: #fff; 
+}
+
+
+
