@@ -1,12 +1,16 @@
 package com.mts.toyskingdom.service.impl;
 
+
 import com.mts.toyskingdom.data.dto.ProductDTO;
+
 import com.mts.toyskingdom.data.entity.ProductE;
 import com.mts.toyskingdom.data.model.ProductFeatureM;
 import com.mts.toyskingdom.data.model.ProductM;
 import com.mts.toyskingdom.mapper.ProductMapper;
+import com.mts.toyskingdom.repository.ProductRepository;
 import com.mts.toyskingdom.service.ProductSv;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -18,7 +22,21 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class ProductSvImpl implements ProductSv {
 
+    @Autowired
+    private ProductRepository productRepository;
     final ProductMapper productMapper;
+
+
+    @Override
+    public List<ProductM> getAllProductsSorted(String direction) throws SQLException {
+        List<ProductE> products;
+        if ("asc".equalsIgnoreCase(direction)) {
+            products = productRepository.findAllByOrderByPriceAsc();
+        } else {
+            products = productRepository.findAllByOrderByPriceDesc();
+        }
+        return ProductM.convertListProductEToProductM(products);
+    }
 
     @Override
     public List<ProductM> getAllProducts() throws SQLException {

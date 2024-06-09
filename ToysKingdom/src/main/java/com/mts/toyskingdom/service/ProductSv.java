@@ -45,6 +45,7 @@ public interface ProductSv {
 //    Lấy sản phẩm từ start đến quantity
     List<ProductFeatureM> getProductFeaturePage(int start, int quantity) throws SQLException;
 
+
     // insert or update
     int saveProduct(ProductDTO productDTO) throws SQLException;
 
@@ -53,5 +54,10 @@ public interface ProductSv {
 
     //disable
     boolean disableProduct(int idProduct) throws SQLException;
+
+
+    // lấy sản phẩm để sắp xếp
+    List<ProductM> getAllProductsSorted(String direction) throws SQLException;
+
 
 }

@@ -16,6 +16,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 
+import java.util.Optional;
+
 
 @RestController
 @Slf4j
@@ -38,6 +40,22 @@ public class ProductAPI {
             resultApi.setSuccess(false);
             resultApi.setMessage("Lấy thông tin sản phẩm thất bại");
             log.error("Fail When Call API /api-public/products/getAllProducts : ", e);
+        }
+        return resultApi;
+    }
+
+    @GetMapping("/getAllProductsSorted")
+    public ResponseObject<?> doGetAllProductsSorted(@RequestParam("direction") Optional<String> direction) {
+        var resultApi = new ResponseObject<>();
+        try {
+            String sortDirection = direction.orElse("asc");
+            resultApi.setData(productService.getAllProductsSorted(sortDirection));
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Lấy thông tin sản phẩm theo thứ tự " + sortDirection + " thành công");
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lấy thông tin sản phẩm thất bại");
+            log.error("Fail When Call API /api-public/products/getAllProductsSorted : ", e);
         }
         return resultApi;
     }
@@ -122,7 +140,9 @@ public class ProductAPI {
         return resultApi;
     }
 
-//    Trả dữ liệu về trang home page
+
+
+    //    Trả dữ liệu về trang home page
     @GetMapping("/homePageProduct")
     public ResponseObject<?> getHomePageProduct(@RequestParam("page") int page){
         var resultApi = new ResponseObject<>();
@@ -217,3 +237,4 @@ public class ProductAPI {
     }
 
 }
+
