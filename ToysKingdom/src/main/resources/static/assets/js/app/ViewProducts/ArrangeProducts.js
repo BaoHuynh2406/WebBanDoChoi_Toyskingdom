@@ -1,35 +1,24 @@
-app.controller('ProductController', function ($scope, $http)
-{
-   $scope.currentPage = 0;
-   $scope.totalPages = 0;
-   $scope.productsData = [];
-   $scope.sortOrder = 'asc';
-   $scope.isLoading = false;
-
-   $scope.loadData = function (page)
-   {
-       $scope.isLoading = true;
-       $http.get('/api/products/sorted',
-       {
-         params:
-             {
-                 order: $scope.sortOrder,
-                 page: page,
-                 size: 10
-             }
-       }).then(function (response)
-       {
-        $scope.productsData = response.data.content;
-        $scope.totalPages = response.data.totalPages;
-        $scope.currentPage = response.data.number;
-        $scope.isLoading = false;
-       });
-   };
-        $scope.sortProducts = function ()
-        {
-            $scope.loadData($scope.currentPage);
-        };
-
-        $scope.loadData($scope.currentPage);
-
-});
+// angular.module('ToysKingdom', [])
+//     .controller('mainCtrl', ['$scope', '$http', function ($scope, $http) {
+//         $scope.products = [];
+//         $scope.sortOrder = 'priceAsc';
+//         $scope.isLoading = true;
+//
+//         $scope.loadProducts = function () {
+//             $http.get('http://localhost:8080/api/products/sort', { params: { direction: $scope.sortOrder === 'priceAsc' ? 'asc' : 'desc' } })
+//                 .then(function (response) {
+//                     $scope.products = response.data;
+//                     $scope.isLoading = false;
+//                 }, function (error) {
+//                     console.error('Error loading products:', error);
+//                     $scope.isLoading = false;
+//                 });
+//         };
+//
+//         $scope.sortProducts = function () {
+//             $scope.isLoading = true;
+//             $scope.loadProducts();
+//         };
+//
+//         $scope.loadProducts();
+//     }]);

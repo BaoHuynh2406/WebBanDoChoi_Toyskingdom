@@ -1,32 +1,35 @@
 package com.mts.toyskingdom.controller.product;
 
-import com.mts.toyskingdom.api.ProductAPI;
 import com.mts.toyskingdom.data.entity.ProductE;
-import com.mts.toyskingdom.service.ProductRepository;
 
+import com.mts.toyskingdom.repository.ProductRepository;
 import com.mts.toyskingdom.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
-    @Autowired
 
+    @Autowired
     private ProductService productService;
 
-
-    @GetMapping("/sorted")
-    public ResponseEntity<Page<ProductE>> getProductsSortedByPrice(
-            @RequestParam(defaultValue = "asc") String order,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        Page<ProductE> products = productService.getAllProductsSortedByPrice(order, page, size);
-        return ResponseEntity.ok(products);
+    @GetMapping("/sort")
+    public List<ProductE> sort(@RequestParam("direction")Optional<String> direction){
+        if (direction.orElse("asc").equalsIgnoreCase("asc")) {
+            return productService.getProductsSortedByPriceAsc();
+        } else {
+            return productService.getProductsSortedByPriceDesc();
+        }
     }
 }
+
