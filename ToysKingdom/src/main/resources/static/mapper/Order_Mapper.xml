@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mts.toyskingdom.mapper.OrderMapper">
+
+    <resultMap id="orderMap" type="com.mts.toyskingdom.data.entity.OrderE">
+        <result column="id_discount" property="idOrder"/>
+        <result column="id_product" property="idUser"/>
+        <result column="discount_percent" property="orderDate"/>
+        <result column="start_day" property="total"/>
+        <result column="end_day" property="orderStatus"/>
+    </resultMap>
+
+
+
+
+
+    <select id="getAll" resultMap="orderMap">
+        SELECT *
+        FROM orders
+    </select>
+
+
+    <select id="findById" resultMap="orderMap" parameterType="int">
+        SELECT *
+        FROM orders o
+        WHERE o.id_order = #{idOrder}
+    </select>
+
+
+    <select id="findPendingByIdUser" resultMap="orderMap" parameterType="int">
+        SELECT *
+        FROM orders o
+        WHERE o.id_user = #{idUser} and o.status = 'PENDING'
+    </select>
+
+
+    <insert id="insert" parameterType="com.mts.toyskingdom.data.dto.OrderDTO">
+        INSERT INTO orders (id_user, total, status)
+        VALUES (
+                   #{idUser},
+                   #{total},
+                   #{orderStatus},
+               )
+    </insert>
+
+    <update id="update" parameterType="com.mts.toyskingdom.data.dto.OrderDTO">
+        UPDATE orders
+        <set>
+            <if test="idUser != null">id_user = #{idUser},</if>
+            <if test="total != null">total = #{total},</if>
+            <if test="orderStatus != null">status = #{orderStatus},</if>
+            <if test="orderDate != null">order_date = #{orderDate},</if>
+        </set>
+        WHERE id_order = #{idOrder}
+    </update>
+
+
+    <update id="disable" parameterType="int">
+        UPDATE discounts
+        set active = 0
+        where id_discount = #{idDiscount}
+    </update>
+
+
+
+</mapper>
