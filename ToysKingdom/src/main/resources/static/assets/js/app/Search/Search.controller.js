@@ -17,6 +17,4 @@ angular.module('ToysKingdom').controller('searchCtrl', function ($scope, $locati
         $("#searchQuery").val($scope.searchQuery);
         $scope.loadData();
     }
-
-
 });

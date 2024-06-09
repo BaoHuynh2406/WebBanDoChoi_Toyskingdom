@@ -37,11 +37,11 @@
                     </div> -->
 
                     <!-- Số điện thoại -->
-                    <!-- <div class="mb-4">
+                    <div class="mb-4">
                         <label for="" class="form-sign__label fw-bold fs-6 mb-1">Số điện thoại</label>
                         <input type="tel" class="form-control form-sign__input" placeholder="Nhập số điện thoại"
                             ng-model="customer.phoneNumber">
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -53,69 +53,57 @@
 </div>
 
 
-
-
 <header class="container-fluid header">
-    <div>
-        <!-- Hàng 1  -->
-        <div class="row d-flex align-items-center">
-            <!-- Logo -->
-            <div class="col-3">
-                <img src="assets/image/toys-logo.svg" alt="" class="header__logo">
+    <div class="row align-items-center">
+        <!-- Logo -->
+        <div class="col-3" ng-click="backHome()">
+            <img src="assets/image/toys-logo.svg" alt="Logo" class="header__logo">
+        </div>
+        <!-- Search -->
+        <div class="col-5 mx-auto header__searchBox d-flex align-items-center">
+            <i class="fas fa-search search_Icon" ng-click="search()"></i>
+            <input id="searchQuery" class="search_Input" type="text" placeholder="Nhập từ khóa để tìm kiếm" ng-keypress="handleKeyPress($event)">
+        </div>
+        
+        <div class="col-3 d-flex justify-content-end">
+            <!-- Cart -->
+            <div class="header__cart me-3">
+                <i class="fas fa-shopping-cart me-1"></i>
+                <span>Giỏ hàng</span>
             </div>
-            <!-- Search -->
-            <div class="col-5 header__searchBox d-flex align-items-center">
-                <i class="fas fa-search col-1 search_Icon" ng-click="search()"></i>
-                <input id="searchQuery" class="col search_Input" type="text" placeholder="Nhập từ khóa để tìm kiếm">
-            </div>
-            <div class="col"></div>
-            <div class="col-3 d-flex justify-content-between">
-                <div class="header__cart">
-                    <i class="fas fa-shopping-cart me-1"></i>
-                    <span>Giỏ hàng</span>
-                </div>
-
-                <div class="header__user">
-                    <i class="fas fa-user me-1"></i>
-                    <div ng-if="!$root.isLoggedIn" class="dropdown">
-                        <button class="btn dropdown-toggle white-text" type="button" id="userDropdown"
-                            ng-click="redirectToLogin()">
-                            Đăng nhập <i class="fas fa-chevron-down white-text"></i>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="userDropdown">
-                            <button class="dropdown-item" ng-click="submitDK()">Đăng ký</button>
-                        </div>
-                    </div>
-                    <div ng-if="$root.isLoggedIn" class="dropdown">
-                        <button class="btn dropdown-toggle white-text" type="button" id="userDropdown"
-                            ng-click="test()"> Chào, {{$root.customer.fullName}}
-                             <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="userDropdown">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="dropdown-item" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop">
-                                Thông tin
-                            </button>
-
-                            <button class="dropdown-item" ng-click="logout()">Đăng xuất</button>
-                        </div>
+            <!-- User -->
+            <div class="header__user">
+                <i class="fas fa-user me-1"></i>
+                <div ng-if="!$root.isLoggedIn" class="dropdown">
+                    <button class="btn dropdown-toggle white-text" type="button" id="userDropdown" ng-click="redirectToLogin()" style="font-weight: bold;">
+                        Đăng nhập <i class="fas fa-chevron-down white-text"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="userDropdown">
+                        <button class="dropdown-item" ng-click="submitDK()" style="font-weight: bold;">Đăng ký</button>
                     </div>
                 </div>
-
+                <div ng-if="$root.isLoggedIn" class="dropdown">
+                    <button class="btn dropdown-toggle white-text" type="button" id="userDropdown" ng-click="test()" style="font-weight: bold;">
+                        Chào, {{$root.customer.fullName}} <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="userDropdown">
+                        <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="font-weight: bold;">Thông tin</button>
+                        <button class="dropdown-item" ng-click="logout()" style="font-weight: bold;">Đăng xuất</button>
+                    </div>
+                </div>
             </div>
-
         </div>
-        <!-- Hàng 2 - Menu -->
-        <div class="row">
-            <ul class="nav justify-content-center">
-                <li class="px-3 fw-bold text-light fs-5">Hàng mới</li>
-                <li class="px-3 fw-bold text-light fs-5">Flash Sale</li>
-                <li class="px-3 fw-bold text-light fs-5">Khuyến mãi</li>
-                <li class="px-3 fw-bold text-light fs-5">Trending</li>
-                <li class="px-3 fw-bold text-light fs-5">Yêu thích</li>
-                <li class="px-3 fw-bold text-light fs-5">Đã xem</li>
-            </ul>
-        </div>
+    </div>
+    <!-- Menu -->
+    <div class="row mt-2">
+        <ul class="nav justify-content-center">
+            <li class="nav-item px-3 fw-bold text-light fs-5">Hàng mới</li>
+            <li class="nav-item px-3 fw-bold text-light fs-5">Flash Sale</li>
+            <li class="nav-item px-3 fw-bold text-light fs-5">Khuyến mãi</li>
+            <li class="nav-item px-3 fw-bold text-light fs-5">Trending</li>
+            <li class="nav-item px-3 fw-bold text-light fs-5">Yêu thích</li>
+            <li class="nav-item px-3 fw-bold text-light fs-5">Đã xem</li>
+        </ul>
+        <div class="col"></div> 
     </div>
 </header>

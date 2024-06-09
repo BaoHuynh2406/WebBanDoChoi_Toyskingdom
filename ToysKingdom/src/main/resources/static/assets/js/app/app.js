@@ -16,6 +16,10 @@ angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location
         $location.path('/signUp');
     };
 
+    $scope.backHome = function () {
+        $location.path('/home');
+    };
+
     $scope.search = function () {
         // Sữ dụng jquery để lấy dữ liệu thay vì ng-model
         $scope.searchQuery = $('#searchQuery').val();
@@ -26,6 +30,13 @@ angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location
             $location.path('/search').search({ query: $scope.searchQuery });
         } else {
             console.log("Product name cannot be null or empty");
+        }
+    };
+    // nhấn enter có key = 13
+    $scope.handleKeyPress = function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') { // Kiểm tra nếu phím được nhấn là Enter
+            $scope.search(); 
         }
     };
 
@@ -43,7 +54,7 @@ angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location
         //     return;
         // }
 
-        if (!fullName || !email || !address ) {
+        if (!fullName || !email || !address) {
             alert("Vui lòng điền đầy đủ thông tin.");
             return;
         }
@@ -56,11 +67,11 @@ angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location
         }
 
         // Kiểm tra số điện thoại
-        // const phonePattern = /^[0-9]{10}$/;
-        // if (!phonePattern.test(phoneNumber)) {
-        //     alert("Số điện thoại không hợp lệ.");
-        //     return;
-        // }
+        const phonePattern = /^[0-9]{10}$/;
+        if (!phonePattern.test(phoneNumber)) {
+            alert("Số điện thoại không hợp lệ.");
+            return;
+        }
 
         // Nếu thông tin hợp lệ, gửi request cập nhật
         $http.post('/api-public/user/save', { fullName, email, address })
@@ -82,7 +93,7 @@ angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location
             });
     };
 
-    
+
 });
 
 // Directive Thẻ Sản phẩm loại 1
