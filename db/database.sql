@@ -24,7 +24,7 @@ CREATE TABLE categories
     id_category   varchar(10) PRIMARY KEY,
     category_name NVARCHAR(50) NOT NULL,
     description   TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-);
+) ;
 
 
 
@@ -40,7 +40,7 @@ create table products
     quantity     decimal(10, 2) default 0,
     active       bit            default 1,
     foreign key (id_category) references categories (id_category)
-);
+) AUTO_INCREMENT = 1000;
 
 
 create table discounts
@@ -52,7 +52,7 @@ create table discounts
     end_day          datetime      not null,
     active           bit default 1,
     foreign key (id_prduct) references products (id_product)
-);
+) AUTO_INCREMENT = 2000;
 
 create table orders
 (
@@ -62,7 +62,7 @@ create table orders
     total      decimal(15, 2),
     status     ENUM ('PENDING', 'PAID', 'CANCELLED') default 'PENDING',
     foreign key (id_user) references users (id_user)
-);
+) AUTO_INCREMENT = 300000;
 
 create table order_items
 (
@@ -74,7 +74,7 @@ create table order_items
     unit           nvarchar(20) default 'Cái',
     foreign key (id_order) references orders (id_order),
     foreign key (id_product) references products (id_product)
-);
+) AUTO_INCREMENT = 100000;
 
 # INSERT Dữ liệu
 INSERT INTO users (email, password, full_name, phone_number, address, birthday, role, active)
@@ -162,7 +162,8 @@ select *
 from product_feature
 where product_name like '%Xe đạp trẻ em%'
 
-# PROCEDURE pờ rô si trơ
+# PROCEDURE pờ rô si trơ ------------------------------------------------------------------
+
 CREATE PROCEDURE get_Quantity_Product(IN start INT, IN quantity INT)
 BEGIN
     SELECT id_product,
@@ -176,14 +177,69 @@ BEGIN
     LIMIT start, quantity;
 END;
 
+DELIMITER //
 
-UPDATE products
-set active = 0
-where id_product = 1
+CREATE PROCEDURE delete_order_items_with_zero_quantity(IN order_id INT)
+BEGIN
+    DELETE FROM order_items
+    WHERE id_order = order_id AND order_quantity <= 0;
+END //
+
+DELIMITER ;
 
 
-update users
-set active = 1
-where 1=1
+# TRIGER ------------------------------------------------
 
-select * from products
+
+
+DELIMITER //
+
+CREATE TRIGGER update_order_total_after_insert
+    AFTER INSERT ON order_items
+    FOR EACH ROW
+BEGIN
+    DECLARE order_total DECIMAL(15, 2);
+
+    SELECT SUM(price * order_quantity) INTO order_total
+    FROM order_items
+    WHERE id_order = NEW.id_order;
+
+    UPDATE orders
+    SET total = IFNULL(order_total, 0.00)
+    WHERE id_order = NEW.id_order;
+END //
+
+CREATE TRIGGER update_order_total_after_update
+    AFTER UPDATE ON order_items
+    FOR EACH ROW
+BEGIN
+    DECLARE order_total DECIMAL(15, 2);
+
+    SELECT SUM(price * order_quantity) INTO order_total
+    FROM order_items
+    WHERE id_order = NEW.id_order;
+
+    UPDATE orders
+    SET total = IFNULL(order_total, 0.00)
+    WHERE id_order = NEW.id_order;
+END //
+
+CREATE TRIGGER update_order_total_after_delete
+    AFTER DELETE ON order_items
+    FOR EACH ROW
+BEGIN
+    DECLARE order_total DECIMAL(15, 2);
+
+    SELECT SUM(price * order_quantity) INTO order_total
+    FROM order_items
+    WHERE id_order = OLD.id_order;
+
+    UPDATE orders
+    SET total = IFNULL(order_total, 0.00)
+    WHERE id_order = OLD.id_order;
+END //
+
+DELIMITER ;
+
+
+select * from orders

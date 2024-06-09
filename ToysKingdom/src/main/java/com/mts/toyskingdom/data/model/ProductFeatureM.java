@@ -21,6 +21,10 @@ public class ProductFeatureM {
     private double discountPercent;
 
 
+    public double getPriceAfterDiscount() {
+        return this.price * (1-discountPercent/100);
+    }
+
     public static ProductFeatureM convertProductEToProductFeatureM(ProductE productE) {
         return ProductFeatureM.builder()
                 .idProduct(productE.getIdProduct())

@@ -1,9 +1,9 @@
-package com.mts.toyskingdom.data.entity;
+package com.mts.toyskingdom.data.dto;
 
 import lombok.Data;
 
 @Data
-public class OrderE {
+public class OrderDTO {
     private int idOrder;
     private int idUser;
     private String orderDate;
