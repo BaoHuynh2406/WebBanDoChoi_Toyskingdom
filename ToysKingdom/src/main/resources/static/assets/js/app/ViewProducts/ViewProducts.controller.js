@@ -21,6 +21,7 @@ angular.module('ToysKingdom').controller('ViewProductsCtrl', function($scope, $h
             });
     };
 
+
     $scope.getTotalProducts = function() {
         $scope.isLoading = true;
         $http.get('http://localhost:8080/api-public/products/countFeatureProducts')
