@@ -1,9 +1,14 @@
-angular.module('ToysKingdom').controller('ChiTietSPCtrl', function($scope, $http, $routeParams) {
+angular.module('ToysKingdom').controller('ChiTietSPCtrl', function($scope, $http, $routeParams, $location) {
     console.log("ChiTietSPCtrl Load done");
 
     $scope.product = {};
     $scope.isLoadingProduct = true;
-    var idProduct = $routeParams.id; // Lấy id từ $routeParams
+    var idProduct = $routeParams.id; 
+
+    $scope.chuyentrang = function(id) {
+        console.log(id);
+        $location.path('/chiteiSP/' + id);
+    };
 
     $scope.loadData = function() {
         $http.get('http://localhost:8080/api-public/products/getProductByID', { params: { idProduct: idProduct } })
@@ -35,6 +40,8 @@ angular.module('ToysKingdom').controller('ChiTietSPCtrl', function($scope, $http
     };
 
     $scope.loadRelatedProducts();
+
+
 
     // Số lượng mặc định
     $scope.quantity = 1;
