@@ -21,11 +21,11 @@ public class ProductService {
 
     // Phương thức sắp xếp sản phẩm theo giá tăng dần
     public List<ProductE> getProductsSortedByPriceAsc() {
-        return productRepository.findAll(Sort.by(Sort.Direction.ASC, "price"));
+        return productRepository.findAllByOrderByPriceAsc();
     }
 
     // Phương thức sắp xếp sản phẩm theo giá giảm dần
     public List<ProductE> getProductsSortedByPriceDesc() {
-        return productRepository.findAll(Sort.by(Sort.Direction.DESC, "price"));
+        return productRepository.findAllByOrderByPriceDesc();
     }
 }

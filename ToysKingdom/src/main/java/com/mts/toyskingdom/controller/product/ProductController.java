@@ -24,7 +24,7 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/sort")
-    public List<ProductE> sort(@RequestParam("direction")Optional<String> direction){
+    public List<ProductE> sort(@RequestParam("direction") Optional<String> direction) {
         if (direction.orElse("asc").equalsIgnoreCase("asc")) {
             return productService.getProductsSortedByPriceAsc();
         } else {
@@ -32,4 +32,5 @@ public class ProductController {
         }
     }
 }
+
 
