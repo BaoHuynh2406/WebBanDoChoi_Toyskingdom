@@ -13,5 +13,6 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductE, Long> {
-    List<ProductE> findAll(Sort sort);
+    List<ProductE> findAllByOrderByPriceAsc();
+    List<ProductE> findAllByOrderByPriceDesc();
 }

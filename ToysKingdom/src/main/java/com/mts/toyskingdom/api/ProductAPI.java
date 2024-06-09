@@ -94,7 +94,9 @@ public class ProductAPI {
         return resultApi;
     }
 
-//    Trả dữ liệu về trang home page
+
+
+    //    Trả dữ liệu về trang home page
     @GetMapping("/homePageProduct")
     public ResponseObject<?> getHomePageProduct(@RequestParam("page") int page){
         var resultApi = new ResponseObject<>();
@@ -111,3 +113,4 @@ public class ProductAPI {
         return resultApi;
     }
 }
+
