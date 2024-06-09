@@ -6,6 +6,7 @@ import com.mts.toyskingdom.data.dto.UserDTO;
 import com.mts.toyskingdom.data.mgt.ResponseObject;
 import com.mts.toyskingdom.data.model.UserM;
 import com.mts.toyskingdom.service.UserSv;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -84,7 +85,7 @@ public class UserAPI {
 
     // hàm checkUserLogin kiểm tra quá trình đăng nhập
     @PostMapping("/checkUserLogin")
-    public ResponseObject<?> doCheckUserLogin(@RequestBody UserLoginDTO loginRequest) {
+    public ResponseObject<?> doCheckUserLogin(@RequestBody UserLoginDTO loginRequest, HttpSession session) {
         var resultApi = new ResponseObject<>();
         try {
             List<UserM> users = userSv.getUserByEmail(loginRequest.getEmail());
@@ -96,6 +97,10 @@ public class UserAPI {
             UserM user = users.get(0);
             if (user.getPassword().equals(loginRequest.getPassword())) {
                 resultApi.setSuccess(true);
+
+                session.setAttribute("user", user);
+                System.out.println(user.getFullName());
+
                 resultApi.setMessage("Đăng nhập thành công");
                 resultApi.setData(List.of(user));
             } else {
