@@ -3,13 +3,13 @@ angular.module('ToysKingdom').config(function ($routeProvider) {
         .when("/home",
             {
                 templateUrl: "layout/ViewProduct.html",
+                controller: "ViewProductsCtrl",
                 resolve:
                 {
                     loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                         return $ocLazyLoad.load('/assets/js/app/ViewProducts/ViewProducts.controller.js');
                     }]
-                },
-                controller: "ViewProductsCtrl"
+                }
 
             })
         .when("/login",
@@ -71,6 +71,15 @@ angular.module('ToysKingdom').config(function ($routeProvider) {
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load('/assets/js/app/ChiTietSP/ChiTietSP.controller.js');
+                }]
+            }
+        })
+        .when("/cart", {
+            templateUrl: "layout/Cart.html",
+            controller: "CartCtrl",
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load('/assets/js/app/Cart/Cart.controller.js');
                 }]
             }
         })

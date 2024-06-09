@@ -24,7 +24,7 @@ CREATE TABLE categories
     id_category   varchar(10) PRIMARY KEY,
     category_name NVARCHAR(50) NOT NULL,
     description   TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-) ;
+);
 
 
 
@@ -148,7 +148,8 @@ SELECT p.id_product,
        p.des,
        p.image,
        p.price,
-       COALESCE(d.discount_percent, 0) AS discount_percent
+       COALESCE(d.discount_percent, 0) AS discount_percent,
+       p.active
 FROM products p
          LEFT JOIN
      discounts d
@@ -156,11 +157,9 @@ FROM products p
          p.id_product = d.id_prduct
              AND p.active = 1
              AND d.active = 1
-             AND NOW() BETWEEN d.start_day AND d.end_day;
+             AND NOW() BETWEEN d.start_day AND d.end_day
+WHERE p.active = 1;
 
-select *
-from product_feature
-where product_name like '%Xe đạp trẻ em%'
 
 # PROCEDURE pờ rô si trơ ------------------------------------------------------------------
 
@@ -181,8 +180,10 @@ DELIMITER //
 
 CREATE PROCEDURE delete_order_items_with_zero_quantity(IN order_id INT)
 BEGIN
-    DELETE FROM order_items
-    WHERE id_order = order_id AND order_quantity <= 0;
+    DELETE
+    FROM order_items
+    WHERE id_order = order_id
+      AND order_quantity <= 0;
 END //
 
 DELIMITER ;
@@ -191,16 +192,17 @@ DELIMITER ;
 # TRIGER ------------------------------------------------
 
 
-
 DELIMITER //
 
 CREATE TRIGGER update_order_total_after_insert
-    AFTER INSERT ON order_items
+    AFTER INSERT
+    ON order_items
     FOR EACH ROW
 BEGIN
     DECLARE order_total DECIMAL(15, 2);
 
-    SELECT SUM(price * order_quantity) INTO order_total
+    SELECT SUM(price * order_quantity)
+    INTO order_total
     FROM order_items
     WHERE id_order = NEW.id_order;
 
@@ -210,12 +212,14 @@ BEGIN
 END //
 
 CREATE TRIGGER update_order_total_after_update
-    AFTER UPDATE ON order_items
+    AFTER UPDATE
+    ON order_items
     FOR EACH ROW
 BEGIN
     DECLARE order_total DECIMAL(15, 2);
 
-    SELECT SUM(price * order_quantity) INTO order_total
+    SELECT SUM(price * order_quantity)
+    INTO order_total
     FROM order_items
     WHERE id_order = NEW.id_order;
 
@@ -225,12 +229,14 @@ BEGIN
 END //
 
 CREATE TRIGGER update_order_total_after_delete
-    AFTER DELETE ON order_items
+    AFTER DELETE
+    ON order_items
     FOR EACH ROW
 BEGIN
     DECLARE order_total DECIMAL(15, 2);
 
-    SELECT SUM(price * order_quantity) INTO order_total
+    SELECT SUM(price * order_quantity)
+    INTO order_total
     FROM order_items
     WHERE id_order = OLD.id_order;
 
@@ -242,4 +248,5 @@ END //
 DELIMITER ;
 
 
-select * from orders
+select *
+from orders
