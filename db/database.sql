@@ -24,7 +24,7 @@ CREATE TABLE categories
     id_category   varchar(10) PRIMARY KEY,
     category_name NVARCHAR(50) NOT NULL,
     description   TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-);
+) ;
 
 
 
@@ -40,7 +40,7 @@ create table products
     quantity     decimal(10, 2) default 0,
     active       bit            default 1,
     foreign key (id_category) references categories (id_category)
-);
+) AUTO_INCREMENT = 1000;
 
 
 create table discounts
@@ -52,7 +52,7 @@ create table discounts
     end_day          datetime      not null,
     active           bit default 1,
     foreign key (id_prduct) references products (id_product)
-);
+) AUTO_INCREMENT = 2000;
 
 create table orders
 (
@@ -62,7 +62,7 @@ create table orders
     total      decimal(15, 2),
     status     ENUM ('PENDING', 'PAID', 'CANCELLED') default 'PENDING',
     foreign key (id_user) references users (id_user)
-);
+) AUTO_INCREMENT = 300000;
 
 create table order_items
 (
@@ -74,7 +74,7 @@ create table order_items
     unit           nvarchar(20) default 'Cái',
     foreign key (id_order) references orders (id_order),
     foreign key (id_product) references products (id_product)
-);
+) AUTO_INCREMENT = 100000;
 
 # INSERT Dữ liệu
 INSERT INTO users (email, password, full_name, phone_number, address, birthday, role, active)
