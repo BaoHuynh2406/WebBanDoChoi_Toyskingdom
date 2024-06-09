@@ -45,5 +45,7 @@ public interface ProductSv {
     List<ProductFeatureM> getProductFeaturePage(int start, int quantity) throws SQLException;
 
 
+    // lấy sản phẩm để sắp xếp
+    List<ProductM> getAllProductsSorted(String direction) throws SQLException;
 
 }

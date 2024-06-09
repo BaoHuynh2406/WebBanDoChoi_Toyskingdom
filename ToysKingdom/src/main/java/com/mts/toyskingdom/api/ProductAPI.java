@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 
 @RestController
 @Slf4j
@@ -28,6 +30,22 @@ public class ProductAPI {
             resultApi.setSuccess(false);
             resultApi.setMessage("Lấy thông tin sản phẩm thất bại");
             log.error("Fail When Call API /api-public/products/getAllProducts : ", e);
+        }
+        return resultApi;
+    }
+
+    @GetMapping("/getAllProductsSorted")
+    public ResponseObject<?> doGetAllProductsSorted(@RequestParam("direction") Optional<String> direction) {
+        var resultApi = new ResponseObject<>();
+        try {
+            String sortDirection = direction.orElse("asc");
+            resultApi.setData(productService.getAllProductsSorted(sortDirection));
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Lấy thông tin sản phẩm theo thứ tự " + sortDirection + " thành công");
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lấy thông tin sản phẩm thất bại");
+            log.error("Fail When Call API /api-public/products/getAllProductsSorted : ", e);
         }
         return resultApi;
     }

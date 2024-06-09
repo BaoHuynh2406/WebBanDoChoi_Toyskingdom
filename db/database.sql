@@ -105,6 +105,9 @@ VALUES ('Xe Đạp Trẻ Em', 'RB', 'Xe đạp 3 bánh cho trẻ em, màu xanh l
        ('Bộ Xếp Hình 3D', 'RB', 'Bộ xếp hình 3D sáng tạo', 'lego3d.jpg', 500000.00, 'Bộ', 20, 1),
        ('Đàn Piano Điện Tử', 'RB', 'Đàn piano điện tử mini cho bé', 'dan.jpg', 1500000.00, 'Cái', 10, 1);
 
+
+
+
 # delete from discounts
 
 INSERT INTO discounts (id_prduct, discount_percent, start_day, end_day, active)
@@ -125,6 +128,7 @@ VALUES (100000, 500000.00, 'PAID'),
        (100000, 750000.00, 'CANCELLED'),
        (100000, 1200000.00, 'PAID'),
        (100000, 900000.00, 'PENDING');
+
 
 
 
