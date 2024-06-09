@@ -1,69 +1,60 @@
-angular.module('ToysKingdom', [])
-.controller('ChiTietSPCtrl', function ($scope, $http, $location, $rootScope) {
+angular.module('ToysKingdom').controller('ChiTietSPCtrl', function($scope, $http, $routeParams, $location) {
     console.log("ChiTietSPCtrl Load done");
-    
-    // data test
-    $scope.product = {
-        images: ['product1.jpg', 'product2.jpg', 'product3.jpg'],
-        image: 'product1.jpg',
-        productName: 'Tên sản phẩm',
-        price: 500000,
-        discountPercent: 10,
-        description: 'Đây là mô tả chi tiết của sản phẩm.'
+
+    $scope.product = {};
+    $scope.isLoadingProduct = true;
+    var idProduct = $routeParams.id; 
+
+    $scope.chuyentrang = function(id) {
+        console.log(id);
+        $location.path('/chiteiSP/' + id);
     };
 
-    // ảnh được chọn
-    $scope.selectedImage = $scope.product.images[0];
-
-    // hàm chọn ảnh
-    $scope.selectImage = function(image) {
-        $scope.selectedImage = image;
+    $scope.loadData = function() {
+        $http.get('http://localhost:8080/api-public/products/getProductByID', { params: { idProduct: idProduct } })
+            .then(function(response) {
+                // Gán dữ liệu sản phẩm nhận được từ API vào $scope.product
+                $scope.product = response.data.data;
+                console.log($scope.product);
+                $scope.isLoadingProduct = false;
+            }, function(error) {
+                console.log(error.message);
+                $scope.isLoadingProduct = false;
+            });
     };
 
-    // số lượng = 1
+    $scope.loadData();
+
+    $scope.relatedProducts = [];
+    $scope.isLoadingRelatedProducts = true;
+
+    $scope.loadRelatedProducts = function() {
+        $http.get('http://localhost:8080/api-public/products/homePageProduct', { params: { page: 1 } })
+            .then(function(response) {
+                $scope.relatedProducts = response.data.data;
+                $scope.isLoadingRelatedProducts = false;
+            }, function(error) {
+                console.error(error.message);
+                $scope.isLoadingRelatedProducts = false;
+            });
+    };
+
+    $scope.loadRelatedProducts();
+
+
+
+    // Số lượng mặc định
     $scope.quantity = 1;
 
-    // tăng
+    // Tăng số lượng
     $scope.increaseQuantity = function() {
         $scope.quantity++;
     };
 
-    // giảm
+    // Giảm số lượng
     $scope.decreaseQuantity = function() {
         if ($scope.quantity > 1) {
             $scope.quantity--;
         }
     };
-
-    // Sample related products data
-    $scope.relatedProducts = [
-        {
-            id: 1,
-            image: 'related1.jpg',
-            productName: 'Sản phẩm liên quan 1',
-            price: 300000,
-            discountPercent: 5
-        },
-        {
-            id: 2,
-            image: 'related2.jpg',
-            productName: 'Sản phẩm liên quan 2',
-            price: 400000,
-            discountPercent: 15
-        },
-        {
-            id: 3,
-            image: 'related3.jpg',
-            productName: 'Sản phẩm liên quan 3',
-            price: 200000,
-            discountPercent: 0
-        },
-        {
-            id: 4,
-            image: 'related4.jpg',
-            productName: 'Sản phẩm liên quan 4',
-            price: 350000,
-            discountPercent: 10
-        }
-    ];
 });

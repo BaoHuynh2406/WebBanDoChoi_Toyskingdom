@@ -65,7 +65,7 @@ angular.module('ToysKingdom').config(function ($routeProvider) {
                 }]
             }
         })
-        .when("/chiteiSP", {
+        .when("/chiteiSP/:id", {
             templateUrl: "layout/ChiTietSP.html",
             controller: "ChiTietSPCtrl",
             resolve: {

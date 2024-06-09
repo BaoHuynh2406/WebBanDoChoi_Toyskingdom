@@ -1,4 +1,4 @@
-angular.module('ToysKingdom').controller('ViewProductsCtrl', function($scope, $http) {
+angular.module('ToysKingdom').controller('ViewProductsCtrl', function($scope, $http, $location) {
 
     $scope.productsData = [];
     $scope.categoriesData = [];
@@ -14,7 +14,7 @@ angular.module('ToysKingdom').controller('ViewProductsCtrl', function($scope, $h
                 $scope.productsData = response.data.data;
                 $scope.isLoading = false;
             }, function(error) {
-                console.log(error.message);
+                console.error(error.message);
                 $scope.isLoading = false;
             });
     };
@@ -24,10 +24,10 @@ angular.module('ToysKingdom').controller('ViewProductsCtrl', function($scope, $h
         $http.get('http://localhost:8080/api-public/products/countFeatureProducts')
             .then(function(response) {
                 const totalProducts = response.data.data;
-                $scope.totalPages = Math.ceil(totalProducts / 12); // 10 products per page
+                $scope.totalPages = Math.ceil(totalProducts / 12); // 12 sản phẩm mỗi trang
                 $scope.isLoading = false;
             }, function(error) {
-                console.log(error.message);
+                console.error(error.message);
                 $scope.isLoading = false;
             });
     };
@@ -39,7 +39,7 @@ angular.module('ToysKingdom').controller('ViewProductsCtrl', function($scope, $h
                 $scope.categoriesData = response.data.data;
                 $scope.isLoading = false;
             }, function(error) {
-                console.log(error.message);
+                console.error(error.message);
                 $scope.isLoading = false;
             });
 
@@ -48,4 +48,8 @@ angular.module('ToysKingdom').controller('ViewProductsCtrl', function($scope, $h
     };
 
     $scope.getData();
+
+    $scope.chuyentrang = function(id) {
+        $location.path('/chiteiSP/' + id);
+    };
 });
