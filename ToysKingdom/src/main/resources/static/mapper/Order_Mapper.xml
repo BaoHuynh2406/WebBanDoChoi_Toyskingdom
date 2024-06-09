@@ -3,13 +3,20 @@
 <mapper namespace="com.mts.toyskingdom.mapper.OrderMapper">
 
     <resultMap id="orderMap" type="com.mts.toyskingdom.data.entity.OrderE">
-        <result column="id_discount" property="idOrder"/>
-        <result column="id_product" property="idUser"/>
-        <result column="discount_percent" property="orderDate"/>
-        <result column="start_day" property="total"/>
-        <result column="end_day" property="orderStatus"/>
+        <result column="id_order" property="idOrder"/>
+        <result column="id_user" property="idUser"/>
+        <result column="order_date" property="orderDate"/>
+        <result column="total" property="total"/>
+        <result column="status" property="orderStatus"/>
     </resultMap>
 
+    <resultMap id="orderByUser" type="com.mts.toyskingdom.data.model.CartItemM">
+        <result column="id_product" property="idProduct"/>
+        <result column="order_quantity" property="quantity"/>
+        <result column="product_name" property="productName"/>
+        <result column="image" property="image"/>
+        <result column="price" property="price"/>
+    </resultMap>
 
 
 
@@ -17,6 +24,13 @@
     <select id="getAll" resultMap="orderMap">
         SELECT *
         FROM orders
+    </select>
+
+    <select id="getOrderItemByIdOrder" resultMap="orderByUser" parameterType="int">
+        SELECT p.id_product, p.product_name, p.image, oi.order_quantity, oi.price
+        FROM order_items oi
+                 INNER JOIN products p on oi.id_product = p.id_product
+        where oi.id_order = #{idOrder}
     </select>
 
 
@@ -35,11 +49,9 @@
 
 
     <insert id="insert" parameterType="com.mts.toyskingdom.data.dto.OrderDTO">
-        INSERT INTO orders (id_user, total, status)
+        INSERT INTO orders (id_user)
         VALUES (
-                   #{idUser},
-                   #{total},
-                   #{orderStatus},
+                   #{idUser}
                )
     </insert>
 

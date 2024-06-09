@@ -176,6 +176,16 @@ BEGIN
     LIMIT start, quantity;
 END;
 
-
-
+delete from orders
 select * from orders
+
+select * from order_items
+
+SELECT *
+FROM orders o
+WHERE o.id_user = 100000 and o.status = 'PENDING'
+
+
+SELECT *
+FROM order_items o
+WHERE o.id_order = 12 AND o.id_product = 6

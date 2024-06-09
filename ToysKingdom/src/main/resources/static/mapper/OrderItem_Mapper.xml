@@ -26,40 +26,35 @@
         WHERE o.id_order_item = #{idOrderItem}
     </select>
 
-
-    <select id="findPendingByIdUser" resultMap="orderMap" parameterType="int">
+    <select id="findItemInOrderDetail" resultMap="orderItemMap" parameterType="com.mts.toyskingdom.data.dto.OrderItemDTO">
         SELECT *
-        FROM orders o
-        WHERE o.id_user = #{idUser} and o.status = 'PENDING'
+        FROM order_items o
+        WHERE o.id_order = #{idOrder} AND o.id_product = #{idProduct}
     </select>
 
-
-    <insert id="insert" parameterType="com.mts.toyskingdom.data.dto.OrderDTO">
-        INSERT INTO orders (id_user, total, status)
-        VALUES (
-                   #{idUser},
-                   #{total},
-                   #{orderStatus},
-               )
+    <insert id="insert" parameterType="com.mts.toyskingdom.data.dto.OrderItemDTO">
+        INSERT INTO order_items (id_order, id_product, order_quantity, price)
+        VALUES (#{idOrder},
+                #{idProduct},
+                #{orderQuantity},
+                #{price})
     </insert>
 
-    <update id="update" parameterType="com.mts.toyskingdom.data.dto.OrderDTO">
-        UPDATE orders
+    <update id="update" parameterType="com.mts.toyskingdom.data.dto.OrderItemDTO">
+        UPDATE order_items
         <set>
-            <if test="idUser != null">id_user = #{idUser},</if>
-            <if test="total != null">total = #{total},</if>
-            <if test="orderStatus != null">status = #{orderStatus},</if>
-            <if test="orderDate != null">order_date = #{orderDate},</if>
+            <if test="idOrder != null">id_order = #{idOrder},</if>
+            <if test="idProduct != null">id_product = #{idProduct},</if>
+            <if test="orderQuantity != null">order_quantity = #{orderQuantity},</if>
+            <if test="price != null">price = #{price},</if>
         </set>
-        WHERE id_order = #{idOrder}
+        WHERE id_order_item = #{idOrderItem} OR (id_order = #{idOrder} AND id_product = #{idProduct})
     </update>
 
 
-    <update id="disable" parameterType="int">
-        UPDATE discounts
-        set active = 0
-        where id_discount = #{idDiscount}
-    </update>
+    <delete id="delete" parameterType="int">
+        DELETE FROM order_items where id_order_item = #{idOrderItem}
+    </delete>
 
 
 

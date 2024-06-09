@@ -1,6 +1,7 @@
 package com.mts.toyskingdom.service.impl;
 
 import com.mts.toyskingdom.data.dto.OrderDTO;
+import com.mts.toyskingdom.data.model.CartItemM;
 import com.mts.toyskingdom.data.model.OrderM;
 import com.mts.toyskingdom.mapper.OrderMapper;
 import com.mts.toyskingdom.service.OrderSv;
@@ -25,6 +26,8 @@ public class OrderSvImpl implements OrderSv {
         return null;
     }
 
+
+
     @Override
     public OrderM findById(int idOrder) throws SQLException {
         var listResultEntity = mapper.findById(idOrder);
@@ -36,9 +39,9 @@ public class OrderSvImpl implements OrderSv {
 
     @Override
     public OrderM findPendingByIdUser(int idUser) throws SQLException {
-        var listResultEntity = mapper.findPendingByIdUser(idUser);
-        if (Objects.nonNull(listResultEntity)) {
-            return OrderM.convertOrderEtoOrderM(listResultEntity);
+        var resultEntity = mapper.findPendingByIdUser(idUser);
+        if (resultEntity != null) {
+            return OrderM.convertOrderEtoOrderM(resultEntity);
         }
         return null;
     }
@@ -47,13 +50,11 @@ public class OrderSvImpl implements OrderSv {
     public boolean createOrder(OrderDTO orderDTO) throws SQLException {
         //Tạo đơn hàng mới khi khách hàng chưa có đơn hàng nào PENDING
         //Nếu khách hàng đã có đơn hàng đang PENDING thì không tạo
-
         if (mapper.findPendingByIdUser(orderDTO.getIdUser()) == null) {
             mapper.insert(orderDTO);
             return true;
         }
         return false;
-
 
     }
 
