@@ -32,17 +32,15 @@ public interface ProductSv {
     ProductFeatureM getProductByID(int idProduct) throws SQLException;
 
 
-
-
     List<ProductFeatureM> getAllProductsFeature() throws SQLException;
 
-//    tim sp theo ten
+    //    tim sp theo ten
     List<ProductFeatureM> searchProduct(String productName) throws SQLException;
 
-//    Lấy số lượng của bảng product
+    //    Lấy số lượng của bảng product
     int countFeatureProducts() throws SQLException;
 
-//    Lấy sản phẩm từ start đến quantity
+    //    Lấy sản phẩm từ start đến quantity
     List<ProductFeatureM> getProductFeaturePage(int start, int quantity) throws SQLException;
 
     // insert or update

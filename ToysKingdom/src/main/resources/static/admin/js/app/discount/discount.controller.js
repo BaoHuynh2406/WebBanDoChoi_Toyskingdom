@@ -129,7 +129,6 @@ angular.module('admin')
         };
 
 
-
         $scope.deleteProduct = function () {
             Swal.fire({
                 title: "Bạn có chắc?",

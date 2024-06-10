@@ -20,7 +20,7 @@ public class DiscountSvImpl implements DiscountSv {
     @Override
     public List<DiscountAndMoreM> getAllDiscount() throws SQLException {
         var listResultEntity = mapper.getAllDiscount();
-        if(Objects.nonNull(listResultEntity)){
+        if (Objects.nonNull(listResultEntity)) {
             return DiscountAndMoreM.convertListDiscountEtoListDiscountM(listResultEntity);
         }
         return null;
@@ -29,7 +29,7 @@ public class DiscountSvImpl implements DiscountSv {
     @Override
     public List<DiscountAndMoreM> getAllDiscountActive() throws SQLException {
         var listResultEntity = mapper.getAllDiscountActive();
-        if(Objects.nonNull(listResultEntity)){
+        if (Objects.nonNull(listResultEntity)) {
             return DiscountAndMoreM.convertListDiscountEtoListDiscountM(listResultEntity);
         }
         return null;
@@ -37,7 +37,7 @@ public class DiscountSvImpl implements DiscountSv {
 
     @Override
     public int save(DiscountDTO discountDTO) throws SQLException {
-        if(mapper.findById(discountDTO.getIdDiscount()) == null) {
+        if (mapper.findById(discountDTO.getIdDiscount()) == null) {
             discountDTO.setActive(true);
             System.out.println(mapper.insert(discountDTO));
             return 1;
@@ -50,20 +50,20 @@ public class DiscountSvImpl implements DiscountSv {
 
     @Override
     public boolean disable(int idDiscount) throws SQLException {
-        try{
+        try {
             mapper.disable(idDiscount);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
     @Override
     public boolean delete(int idDiscount) throws SQLException {
-        try{
+        try {
             mapper.delete(idDiscount);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
