@@ -5,3 +5,7 @@ Các chức năng:
 - thanh toán
 - tìm kiếm, phân lại sản phẩm
 - admin quản lý sản phẩm, quản lý người dùng
+Thành viên
+Huỳnh Thiên Bảo - Trưởng nhómL
+Nguyên Hòa - Phó
+Gia Bảo
