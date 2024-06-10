@@ -1,6 +1,6 @@
 create database if not exists toyskingdomdata;
 
-drop database toyskingdomdata
+drop database toyskingdomdata;
 
 use toyskingdomdata;
 
@@ -102,41 +102,6 @@ VALUES ('Xe Đạp Trẻ Em', 'RB', 'Xe đạp 3 bánh cho trẻ em, màu xanh l
        ('Bộ Đồ Chơi Lắp Ráp', 'RB', 'Bộ đồ chơi lắp ráp mô hình ô tô', 'dolaprap.jpg', 350000.00, 'Bộ', 45, 1),
        ('Bộ Xếp Hình 3D', 'RB', 'Bộ xếp hình 3D sáng tạo', 'lego3d.jpg', 500000.00, 'Bộ', 20, 1),
        ('Đàn Piano Điện Tử', 'RB', 'Đàn piano điện tử mini cho bé', 'dan.jpg', 1500000.00, 'Cái', 10, 1);
-
-# delete from discounts
-
-INSERT INTO discounts (id_prduct, discount_percent, start_day, end_day, active)
-VALUES (1, 10.00, '2024-01-01 00:00:00', '2024-06-10 23:59:59', 1),
-       (2, 15.00, '2024-01-01 00:00:00', '2024-06-15 23:59:59', 1),
-       (3, 20.00, '2024-01-01 00:00:00', '2024-06-20 23:59:59', 1),
-       (4, 25.00, '2024-01-15 00:00:00', '2024-06-25 23:59:59', 1),
-       (5, 30.00, '2024-01-20 00:00:00', '2024-06-30 23:59:59', 1),
-       (6, 35.00, '2024-01-01 00:00:00', '2024-06-07 23:59:59', 1),
-       (7, 40.00, '2024-01-08 00:00:00', '2024-06-14 23:59:59', 1),
-       (8, 45.00, '2024-01-15 00:00:00', '2024-06-21 23:59:59', 1),
-       (9, 50.00, '2024-01-22 00:00:00', '2024-06-28 23:59:59', 1),
-       (10, 55.00, '2024-01-25 00:00:00', '2024-07-05 23:59:59', 1);
-
-INSERT INTO orders (id_user, total, status)
-VALUES (100000, 500000.00, 'PAID'),
-       (100000, 1500000.00, 'PENDING'),
-       (100000, 750000.00, 'CANCELLED'),
-       (100000, 1200000.00, 'PAID'),
-       (100000, 900000.00, 'PENDING');
-
-
-
-INSERT INTO order_items (id_order, id_product, order_quantity, price, unit)
-VALUES (1, 1, 1, 850000.00, 'Cái'),
-       (1, 2, 1, 550000.00, 'Cái'),
-       (2, 3, 2, 1200000.00, 'Hộp'),
-       (2, 4, 1, 300000.00, 'Bộ'),
-       (3, 5, 1, 650000.00, 'Cái'),
-       (3, 6, 1, 450000.00, 'Cái'),
-       (4, 7, 1, 200000.00, 'Cái'),
-       (4, 8, 2, 350000.00, 'Bộ'),
-       (5, 9, 1, 500000.00, 'Bộ'),
-       (5, 10, 1, 1500000.00, 'Cái');
 
 
 # Bảng phụ
