@@ -1,0 +1,222 @@
+<style>
+    @keyframes rotate {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .rotate-icon {
+        animation: rotate 1s infinite linear;
+    }
+</style>
+
+
+<!-- Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalLabel">Edit Discount</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Form fields to edit user details -->
+                <form>
+                    <div class="d-flex">
+                        <div class="col-5">
+                            <div class="form-group me-2">
+                                <label for="editID">ID</label>
+                                <input type="number" class="form-control" id="editID" ng-model="discountE.idDiscount"
+                                    disabled>
+                            </div>
+
+                            <div class="form-group me-2">
+                                <label for="editCatory">ID Product</label>
+                                <div class="d-flex">
+                                    <input type="text" class="form-control col" id="editCatory"
+                                        ng-model="discountE.idPrduct">
+                                    <button ng-click="openChooseModal()" class="btn btn-primary col-3 mx-2"> <i
+                                            class="fas fa-search"></i> </button>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group me-2">
+                                <label>Product Name </label>
+                                <input disabled ng-model="discountE.productName" type="text" class="form-control">
+                            </div>
+
+                            <div class="form-group me-2">
+                                <label>Discount Percent </label>
+                                <input min="0" max="100" ng-model="discountE.discountPercent" type="number" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-7">
+                            <div class="form-group me-2">
+                                <label>Original Price</label>
+                                <input disabled type="number" class="form-control" ng-model="discountE.price"
+                                    id="imageFile">
+                            </div>
+
+                            <div class="form-group me-2">
+                                <label>Price After</label>
+                                <input disabled type="number" class="form-control"
+                                    value="{{discountE.price* (1-discountE.discountPercent/100)}}">
+                            </div>
+                            <div class="form-group me-2">
+                                <label>Start Day</label>
+                                <input type="datetime-local" class="form-control" ng-model="discountE.startDay">
+                            </div>
+                            <div class="form-group me-2">
+                                <label>End Day</label>
+                                <input type="datetime-local" class="form-control" ng-model="discountE.endDay">
+                            </div>
+                            <!-- Add other input fields here -->
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="saveChanges()">Save changes</button>
+                <button type="button" class="btn btn-danger" ng-click="deleteProduct()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 2 -->
+<div class="modal fade" role="dialog" id="chooseProduct" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel2">Choose a product</h5>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr class="text-center">
+                                <th>#</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Image</th>
+                                <th>Price</th>
+                                <th>Select</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="p in products">
+                                <td class="text-center">{{$index+1}}</td>
+                                <td class="text-center">{{p.idProduct}}</td>
+                                <td class="text-center">{{p.productName }}</td>
+                                <td class="text-center">
+                                    <img style="height: 80px; width: 80px" src="/assets/image/{{p.image}}" alt="">
+                                    <span>{{p.image}}</span>
+                                </td>
+                                <td class="text-center">{{p.price | number : 0 }}đ</td>
+                                <td class="text-center">
+                                    <!-- Nút chỉnh sửa -->
+                                    <button ng-click="select(p)" class="btn btn-success btn-circle btn-sm">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="closeChooseModal()">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">THỐNG KÊ DOANH THU</h1>
+<p class="mb-4">Tổng doanh thu theo: </p>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">DISCOUNTS <span id="rotate-button" ng-click="getAll()"
+                class=" btn btn-info btn-circle btn-sm">
+                <i class="fas fa-sync"></i>
+            </span></h6>
+
+        <button ng-click="openEditModal()" type="button" class="btn btn-primary btn-circle">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive" style="height: 500px !important;">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr class="text-center">
+                        <th>#</th>
+                        <th>ID</th>
+                        <th>ID Product</th>
+                        <th>Product Name</th>
+                        <th>Image</th>
+                        <th>Discount Percent</th>
+                        <th>Start Day</th>
+                        <th>End Day</th>
+                        <th>Original Price</th>
+                        <th>Price After</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class="text-center">
+                        <th>#</th>
+                        <th>ID</th>
+                        <th>ID Product</th>
+                        <th>Product Name</th>
+                        <th>Image</th>
+                        <th>Discount Percent</th>
+                        <th>Start Day</th>
+                        <th>End Day</th>
+                        <th>Original Price</th>
+                        <th>Price After</th>
+                        <th>Edit</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr ng-repeat="d in discounts">
+                        <td class="text-center">{{$index+1}}</td>
+                        <td class="text-center">{{d.idDiscount}}</td>
+                        <td class="text-center">{{d.idPrduct}}</td>
+                        <td class="text-center">{{d.productName}}</td>
+                        <td class="text-center">
+                            <img style="height: 80px; width: 80px" src="/assets/image/{{d.image}}" alt="">
+                            <span>{{d.image}}</span>
+                        </td>
+                        <td class="text-center">{{d.discountPercent}}%</td>
+                        <td class="text-center">{{d.startDay}}</td>
+                        <td class="text-center">{{d.endDay}}</td>
+                        <td class="text-center">{{d.price | number : 0}}đ</td>
+                        <td class="text-center">{{d.price* (1-d.discountPercent/100) | number : 0 }}đ</td>
+                        <td class="text-center">
+                            <!-- Nút chỉnh sửa -->
+                            <button ng-click="openEditModal(d)" class="btn btn-warning btn-circle btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -55,6 +55,19 @@ angular.module('admin')
                         ]
                 }
             })
+            .when("/doanhthu", {
+                templateUrl: "/admin/doanhthu.html",
+                controller: "doanhthuCtrl",
+                resolve: {
+                    loadMyCtrl:
+                        [
+                            '$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load('/admin/js/app/thongke/doanhthu.controller.js');
+                            }
+                        ]
+                }
+            })
             .otherwise({
                 redirectTo: '/dashboard'
             });
