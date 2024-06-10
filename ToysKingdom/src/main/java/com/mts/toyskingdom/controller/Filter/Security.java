@@ -26,13 +26,22 @@ public class Security implements Filter {
                 // Kiểm tra quyền của người dùng
                 UserM user = (UserM) session.getAttribute("user");
                 if ("ADMIN".equals(user.getRole())) {
-                    // In ra console thông tin của người dùng
-                    System.out.println(":(( : " + user.getEmail());
+                    // Người dùng là ADMIN, tiếp tục xử lý request
+                    chain.doFilter(request, response);
+                    return;
+                } else {
+                    // Người dùng không có quyền ADMIN, chuyển hướng đến trang lỗi hoặc thông báo
+                    httpResponse.sendRedirect(httpRequest.getContextPath() + "/error/forbidden");
+                    return;
                 }
+            } else {
+                // Người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
+                httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
+                return;
             }
         }
 
-        // Tiếp tục xử lý request
+        // Nếu không phải request tới trang admin, tiếp tục xử lý request
         chain.doFilter(request, response);
     }
 
