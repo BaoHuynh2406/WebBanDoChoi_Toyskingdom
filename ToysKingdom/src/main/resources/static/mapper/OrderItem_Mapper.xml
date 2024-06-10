@@ -51,7 +51,6 @@
         WHERE id_order_item = #{idOrderItem} OR (id_order = #{idOrder} AND id_product = #{idProduct})
     </update>
 
-
     <delete id="delete" parameterType="int">
         DELETE FROM order_items where id_order_item = #{idOrderItem}
     </delete>
