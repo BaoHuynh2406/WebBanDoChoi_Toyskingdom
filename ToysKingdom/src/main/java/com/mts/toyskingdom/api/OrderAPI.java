@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLException;
+
 @RestController
 @Slf4j
 @RequiredArgsConstructor
@@ -35,6 +37,27 @@ public class OrderAPI {
             resultApi.setSuccess(false);
             resultApi.setMessage("Lấy thông tin thất bại");
             log.error("Fail When: ", e);
+        }
+        return resultApi;
+    }
+
+    @GetMapping("/totalRevenueBetweenDates")
+    public ResponseObject<?> getTotalRevenueBetweenDates(@RequestParam("startDate") String startDate,
+                                                         @RequestParam("endDate") String endDate) {
+        var resultApi = new ResponseObject<>();
+        try {
+            Double totalRevenue = sv.getTotalRevenueBetweenDates(startDate, endDate);
+            resultApi.setData(totalRevenue);
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Tổng doanh thu đã được lấy thành công");
+        } catch (SQLException e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage(e.getMessage());
+            log.error("Lỗi sau: ", e);
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lấy tổng doanh thu thất bại");
+            log.error("Lỗi sau: ", e);
         }
         return resultApi;
     }

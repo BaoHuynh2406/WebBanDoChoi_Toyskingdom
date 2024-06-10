@@ -19,7 +19,12 @@
     </resultMap>
 
 
-
+        <select id="getTotalRevenueBetweenDates" parameterType="map" resultType="java.lang.Double">
+            SELECT SUM(total)
+            FROM orders
+            WHERE status = 'PAID'
+              AND order_date BETWEEN #{startDate} AND #{endDate}
+        </select>
 
     <select id="getAll" resultMap="orderMap">
         SELECT *
@@ -65,13 +70,5 @@
         </set>
         WHERE id_order = #{idOrder}
     </update>
-
-
-
-
-
-
-
-
 
 </mapper>

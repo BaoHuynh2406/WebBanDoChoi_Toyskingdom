@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface OrderMapper {
@@ -23,4 +24,5 @@ public interface OrderMapper {
     int update(OrderDTO orderDTO);
 
 
+    Double getTotalRevenueBetweenDates(Map<String, Object> params);
 }
