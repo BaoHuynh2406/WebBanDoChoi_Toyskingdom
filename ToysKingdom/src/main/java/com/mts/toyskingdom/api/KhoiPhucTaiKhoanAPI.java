@@ -22,11 +22,11 @@ public class KhoiPhucTaiKhoanAPI {
         var resultApi = new ResponseObject<>();
         try {
             System.out.println(email);
-            if(sendEmailSv.sendEmailOTP(email) != -1){
+            if (sendEmailSv.sendEmailOTP(email) != -1) {
                 resultApi.setData("Đã gửi OTP");
                 resultApi.setSuccess(true);
                 resultApi.setMessage("Gửi thành công");
-            }else{
+            } else {
                 //Gửi lỗi từ service ra ví dụ sài email, email không hợp lệ ...
                 resultApi.setData("Gửi otp that bai");
                 resultApi.setSuccess(false);
@@ -45,11 +45,11 @@ public class KhoiPhucTaiKhoanAPI {
         var resultApi = new ResponseObject<>();
         try {
             System.out.println(otpDTO.toString());
-            if(sendEmailSv.verifyOTP(otpDTO.getEmail() , otpDTO.getOtp(), otpDTO.getPassword())){
+            if (sendEmailSv.verifyOTP(otpDTO.getEmail(), otpDTO.getOtp(), otpDTO.getPassword())) {
                 resultApi.setData("Đổi mật khẩu thành công.");
                 resultApi.setSuccess(true);
                 resultApi.setMessage("True");
-            }else{
+            } else {
                 //Gửi lỗi từ service ra ví dụ sài email, email không hợp lệ ...
                 resultApi.setData("Mã OTP không hợp lệ.");
                 resultApi.setSuccess(false);

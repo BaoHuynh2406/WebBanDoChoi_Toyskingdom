@@ -18,29 +18,28 @@ import java.util.Optional;
 public class UserSvlmpl implements UserSv {
     final UserMapper userMapper;
 
-//    Lấy user bằng ID
+    //    Lấy user bằng ID
     @Override
     public List<UserM> getUserByidUser(int idUser) {
         return convertList(userMapper.getUserByidUser(idUser));
     }
 
 
-
     @Override
     public int saveUser(UserDTO userDTO) throws SQLException {
-            // Kiểm tra nếu user neu chua co thi insert user
-            if(userMapper.getUserByEmail(userDTO.getEmail()).isEmpty()) {
-                // Thêm mới
-                userDTO.setActive(true);
-                //Trả về 1 có nghĩa là thêm thành công
-                if(userMapper.insertUser(userDTO) > 0) return 1;
-            } else {
-                // Cập nhật
-                userDTO.setActive(true);
-                //Trả về 2 có nghĩa cập nhật thành công
-                if(userMapper.updateUser(userDTO) > 0) return 2;
-            }
-            return 0;
+        // Kiểm tra nếu user neu chua co thi insert user
+        if (userMapper.getUserByEmail(userDTO.getEmail()).isEmpty()) {
+            // Thêm mới
+            userDTO.setActive(true);
+            //Trả về 1 có nghĩa là thêm thành công
+            if (userMapper.insertUser(userDTO) > 0) return 1;
+        } else {
+            // Cập nhật
+            userDTO.setActive(true);
+            //Trả về 2 có nghĩa cập nhật thành công
+            if (userMapper.updateUser(userDTO) > 0) return 2;
+        }
+        return 0;
     }
 
     @Override
@@ -59,7 +58,7 @@ public class UserSvlmpl implements UserSv {
     }
 
     @Override
-    public List<UserM> getAllUser()  throws SQLException {
+    public List<UserM> getAllUser() throws SQLException {
         var listResultEntity = userMapper.getAllUser();
         if (Objects.nonNull(listResultEntity)) {
             return UserM.convertListUserEToUserM(listResultEntity);

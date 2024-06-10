@@ -11,4 +11,9 @@ public class AdminController {
     public String index(){
         return "admin/index";
     }
+
+    @GetMapping("/toyskingdom/login")
+    public String login(){
+        return "admin/login";
+    }
 }

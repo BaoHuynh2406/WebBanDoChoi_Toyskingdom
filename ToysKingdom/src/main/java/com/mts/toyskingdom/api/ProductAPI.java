@@ -16,8 +16,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 
-import java.util.Optional;
-
 
 @RestController
 @Slf4j
@@ -40,22 +38,6 @@ public class ProductAPI {
             resultApi.setSuccess(false);
             resultApi.setMessage("Lấy thông tin sản phẩm thất bại");
             log.error("Fail When Call API /api-public/products/getAllProducts : ", e);
-        }
-        return resultApi;
-    }
-
-    @GetMapping("/getAllProductsSorted")
-    public ResponseObject<?> doGetAllProductsSorted(@RequestParam("direction") Optional<String> direction) {
-        var resultApi = new ResponseObject<>();
-        try {
-            String sortDirection = direction.orElse("asc");
-            resultApi.setData(productService.getAllProductsSorted(sortDirection));
-            resultApi.setSuccess(true);
-            resultApi.setMessage("Lấy thông tin sản phẩm theo thứ tự " + sortDirection + " thành công");
-        } catch (Exception e) {
-            resultApi.setSuccess(false);
-            resultApi.setMessage("Lấy thông tin sản phẩm thất bại");
-            log.error("Fail When Call API /api-public/products/getAllProductsSorted : ", e);
         }
         return resultApi;
     }
@@ -123,10 +105,9 @@ public class ProductAPI {
     }
 
 
-
-//    Lấy số lướng sản phẩm features trong db
+    //    Lấy số lướng sản phẩm features trong db
     @GetMapping("/countFeatureProducts")
-    public ResponseObject<?> getCountFeatureProducts(){
+    public ResponseObject<?> getCountFeatureProducts() {
         var resultApi = new ResponseObject<>();
         try {
             resultApi.setData(productService.countFeatureProducts());
@@ -140,17 +121,15 @@ public class ProductAPI {
         return resultApi;
     }
 
-
-
     //    Trả dữ liệu về trang home page
     @GetMapping("/homePageProduct")
-    public ResponseObject<?> getHomePageProduct(@RequestParam("page") int page){
+    public ResponseObject<?> getHomePageProduct(@RequestParam("page") int page) {
         var resultApi = new ResponseObject<>();
         try {
-            int pageNumber = (page-1)*12;
+            int pageNumber = (page - 1) * 12;
             resultApi.setData(productService.getProductFeaturePage(pageNumber, 12));
             resultApi.setSuccess(true);
-            resultApi.setMessage(page+"");
+            resultApi.setMessage(page + "");
         } catch (Exception e) {
             resultApi.setSuccess(false);
             resultApi.setMessage("Lấy trang thất bại");
@@ -160,9 +139,8 @@ public class ProductAPI {
     }
 
 
-
     @PostMapping("/save")
-    public ResponseObject<?> doPostSaveProduct(@RequestBody ProductDTO productDTO){
+    public ResponseObject<?> doPostSaveProduct(@RequestBody ProductDTO productDTO) {
         var resultApi = new ResponseObject<>();
         try {
             int ketQua = productService.saveProduct(productDTO);
@@ -170,7 +148,7 @@ public class ProductAPI {
             if (ketQua == 0) {
                 resultApi.setSuccess(false);
                 resultApi.setMessage("Không có gì để cập nhật hoặc thêm");
-            } else if(ketQua == 1) { // 1 khi lưu thành công
+            } else if (ketQua == 1) { // 1 khi lưu thành công
                 resultApi.setSuccess(true);
                 resultApi.setMessage("Thêm mới thành công");
             } else { // 2 khi cập nhật thành công
@@ -237,4 +215,3 @@ public class ProductAPI {
     }
 
 }
-

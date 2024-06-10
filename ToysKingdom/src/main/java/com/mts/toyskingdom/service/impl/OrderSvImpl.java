@@ -27,7 +27,6 @@ public class OrderSvImpl implements OrderSv {
     }
 
 
-
     @Override
     public OrderM findById(int idOrder) throws SQLException {
         var listResultEntity = mapper.findById(idOrder);

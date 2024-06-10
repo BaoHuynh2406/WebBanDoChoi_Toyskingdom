@@ -10,7 +10,11 @@ angular.module('ToysKingdom').controller('LoginCtrl', function ($scope, $http, $
                 if (response.data.success) {
                     $rootScope.isLoggedIn = true;
                     $rootScope.customer = response.data.data[0]; // Lưu thông tin user vào $rootScope
-                    console.log("Đăng nhập thành công !");
+
+                    // Lưu thông tin người dùng vào sessionStorage
+                    localStorage.setItem('isLoggedIn', true);
+                    localStorage.setItem('customer', JSON.stringify(response.data.data[0]));
+
                     Swal.fire({
                         title: "Đăng nhập thành công!",
                         text: "Chào, " + response.data.data[0].fullName,

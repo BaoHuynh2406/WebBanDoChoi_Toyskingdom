@@ -47,6 +47,7 @@
         <!-- Sweet Alert -->
         <!-- Thư viện dùng để thay thế hộp thoại thông báo mặc định -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <link rel="stylesheet" href="/assets/css/toastify.css">
 
 
         <!-- Lazy Load -->
@@ -65,9 +66,7 @@
         <!-- Header -->
         <div ng-include="'/layout/header.html'"></div>
 
-        <!-- định hướng trang -->
-        <div ng-include="'/layout/DieuHuong.html'"></div>
-
+      
         <!-- View -->
         <section>
                 <ng-view></ng-view>
@@ -83,7 +82,7 @@
         <script src="/assets/js/app/app.js"></script>
         <script src="/assets/js/app/routes.js"></script>
 
-
+        <script src="/assets/js/custom/toastify.js"></script>
 
 </body>
 

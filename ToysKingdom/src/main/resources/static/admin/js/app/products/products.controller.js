@@ -62,7 +62,6 @@ angular.module('admin')
             });
 
 
-
         };
 
 
@@ -134,7 +133,6 @@ angular.module('admin')
         };
 
 
-
         $scope.deleteProduct = function () {
             Swal.fire({
                 title: "Bạn có chắc?",
@@ -174,7 +172,6 @@ angular.module('admin')
 
 
         };
-
 
 
     });

@@ -22,7 +22,7 @@ public class ProductFeatureM {
 
 
     public double getPriceAfterDiscount() {
-        return this.price * (1-discountPercent/100);
+        return this.price * (1 - discountPercent / 100);
     }
 
     public static ProductFeatureM convertProductEToProductFeatureM(ProductE productE) {
@@ -37,8 +37,7 @@ public class ProductFeatureM {
                 .build();
     }
 
-    public static List<ProductFeatureM> convertListProductEToProductFeatureM(List<ProductE> productEList)
-    {
+    public static List<ProductFeatureM> convertListProductEToProductFeatureM(List<ProductE> productEList) {
         return productEList.stream()
                 .map(productE -> convertProductEToProductFeatureM(productE))
                 .collect(Collectors.toList());

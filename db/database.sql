@@ -1,9 +1,8 @@
 create database if not exists toyskingdomdata;
 
-drop database toyskingdomdata
+drop database toyskingdomdata;
 
 use toyskingdomdata;
-
 
 
 
@@ -20,13 +19,12 @@ create table users
     active       bit                             default 1
 ) AUTO_INCREMENT = 100000;
 
-
 CREATE TABLE categories
 (
     id_category   varchar(10) PRIMARY KEY,
     category_name NVARCHAR(50) NOT NULL,
     description   TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-) ;
+);
 
 
 
@@ -89,7 +87,7 @@ VALUES ('huynhbaomts2004@gmail.com', '123123', 'Bảo', '0388319013', 'Gò vấp
 
 insert into categories(id_category, category_name, description)
 values ('RB', 'Robot', 'robot, siêu anh hùng'),
-       ('BB', 'Búp bê', 'Búp b  ê baby biết múa biết bay');
+       ('BB', 'Búp bê', 'Búp bê baby biết múa biết bay');
 
 
 
@@ -106,45 +104,6 @@ VALUES ('Xe Đạp Trẻ Em', 'RB', 'Xe đạp 3 bánh cho trẻ em, màu xanh l
        ('Đàn Piano Điện Tử', 'RB', 'Đàn piano điện tử mini cho bé', 'dan.jpg', 1500000.00, 'Cái', 10, 1);
 
 
-
-
-# delete from discounts
-
-INSERT INTO discounts (id_prduct, discount_percent, start_day, end_day, active)
-VALUES (1, 10.00, '2024-01-01 00:00:00', '2024-06-10 23:59:59', 1),
-       (2, 15.00, '2024-01-01 00:00:00', '2024-06-15 23:59:59', 1),
-       (3, 20.00, '2024-01-01 00:00:00', '2024-06-20 23:59:59', 1),
-       (4, 25.00, '2024-01-15 00:00:00', '2024-06-25 23:59:59', 1),
-       (5, 30.00, '2024-01-20 00:00:00', '2024-06-30 23:59:59', 1),
-       (6, 35.00, '2024-01-01 00:00:00', '2024-06-07 23:59:59', 1),
-       (7, 40.00, '2024-01-08 00:00:00', '2024-06-14 23:59:59', 1),
-       (8, 45.00, '2024-01-15 00:00:00', '2024-06-21 23:59:59', 1),
-       (9, 50.00, '2024-01-22 00:00:00', '2024-06-28 23:59:59', 1),
-       (10, 55.00, '2024-01-25 00:00:00', '2024-07-05 23:59:59', 1);
-
-INSERT INTO orders (id_user, total, status)
-VALUES (100000, 500000.00, 'PAID'),
-       (100000, 1500000.00, 'PENDING'),
-       (100000, 750000.00, 'CANCELLED'),
-       (100000, 1200000.00, 'PAID'),
-       (100000, 900000.00, 'PENDING');
-
-
-
-
-INSERT INTO order_items (id_order, id_product, order_quantity, price, unit)
-VALUES (1, 1, 1, 850000.00, 'Cái'),
-       (1, 2, 1, 550000.00, 'Cái'),
-       (2, 3, 2, 1200000.00, 'Hộp'),
-       (2, 4, 1, 300000.00, 'Bộ'),
-       (3, 5, 1, 650000.00, 'Cái'),
-       (3, 6, 1, 450000.00, 'Cái'),
-       (4, 7, 1, 200000.00, 'Cái'),
-       (4, 8, 2, 350000.00, 'Bộ'),
-       (5, 9, 1, 500000.00, 'Bộ'),
-       (5, 10, 1, 1500000.00, 'Cái');
-
-
 # Bảng phụ
 
 CREATE VIEW product_feature AS
@@ -154,7 +113,8 @@ SELECT p.id_product,
        p.des,
        p.image,
        p.price,
-       COALESCE(d.discount_percent, 0) AS discount_percent
+       COALESCE(d.discount_percent, 0) AS discount_percent,
+       p.active
 FROM products p
          LEFT JOIN
      discounts d
@@ -162,11 +122,9 @@ FROM products p
          p.id_product = d.id_prduct
              AND p.active = 1
              AND d.active = 1
-             AND NOW() BETWEEN d.start_day AND d.end_day;
+             AND NOW() BETWEEN d.start_day AND d.end_day
+WHERE p.active = 1;
 
-select *
-from product_feature
-where product_name like '%Xe đạp trẻ em%'
 
 # PROCEDURE pờ rô si trơ ------------------------------------------------------------------
 
@@ -185,11 +143,12 @@ END;
 
 DELIMITER //
 
-<<<<<<< HEAD
 CREATE PROCEDURE delete_order_items_with_zero_quantity(IN order_id INT)
 BEGIN
-    DELETE FROM order_items
-    WHERE id_order = order_id AND order_quantity <= 0;
+    DELETE
+    FROM order_items
+    WHERE id_order = order_id
+      AND order_quantity <= 0;
 END //
 
 DELIMITER ;
@@ -198,16 +157,17 @@ DELIMITER ;
 # TRIGER ------------------------------------------------
 
 
-
 DELIMITER //
 
 CREATE TRIGGER update_order_total_after_insert
-    AFTER INSERT ON order_items
+    AFTER INSERT
+    ON order_items
     FOR EACH ROW
 BEGIN
     DECLARE order_total DECIMAL(15, 2);
 
-    SELECT SUM(price * order_quantity) INTO order_total
+    SELECT SUM(price * order_quantity)
+    INTO order_total
     FROM order_items
     WHERE id_order = NEW.id_order;
 
@@ -217,12 +177,14 @@ BEGIN
 END //
 
 CREATE TRIGGER update_order_total_after_update
-    AFTER UPDATE ON order_items
+    AFTER UPDATE
+    ON order_items
     FOR EACH ROW
 BEGIN
     DECLARE order_total DECIMAL(15, 2);
 
-    SELECT SUM(price * order_quantity) INTO order_total
+    SELECT SUM(price * order_quantity)
+    INTO order_total
     FROM order_items
     WHERE id_order = NEW.id_order;
 
@@ -232,12 +194,14 @@ BEGIN
 END //
 
 CREATE TRIGGER update_order_total_after_delete
-    AFTER DELETE ON order_items
+    AFTER DELETE
+    ON order_items
     FOR EACH ROW
 BEGIN
     DECLARE order_total DECIMAL(15, 2);
 
-    SELECT SUM(price * order_quantity) INTO order_total
+    SELECT SUM(price * order_quantity)
+    INTO order_total
     FROM order_items
     WHERE id_order = OLD.id_order;
 
@@ -249,9 +213,5 @@ END //
 DELIMITER ;
 
 
-select * from orders
-=======
-select * from users
-select * from categories
-select * from products
->>>>>>> Han
+select *
+from orders
