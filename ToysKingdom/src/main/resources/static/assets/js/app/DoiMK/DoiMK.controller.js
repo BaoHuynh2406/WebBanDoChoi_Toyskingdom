@@ -1,4 +1,4 @@
-angular.module('ToysKingdom').controller('DoiMKCtrl', function ($scope, $http, $location, $rootScope) {
+                      angular.module('ToysKingdom').controller('DoiMKCtrl', function ($scope, $http, $location, $rootScope) {
     console.log("DoiMKCtrl Load done");
 
     $scope.submit = function () {

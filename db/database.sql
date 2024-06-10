@@ -6,6 +6,7 @@ use toyskingdomdata;
 
 
 
+
 create table users
 (
     id_user      int auto_increment primary key,
@@ -18,6 +19,7 @@ create table users
     role         ENUM ('USER', 'ADMIN') not null default 'USER',
     active       bit                             default 1
 ) AUTO_INCREMENT = 100000;
+
 
 CREATE TABLE categories
 (
@@ -87,7 +89,7 @@ VALUES ('huynhbaomts2004@gmail.com', '123123', 'Bảo', '0388319013', 'Gò vấp
 
 insert into categories(id_category, category_name, description)
 values ('RB', 'Robot', 'robot, siêu anh hùng'),
-       ('BB', 'Búp bê', 'Búp bê baby biết múa biết bay');
+       ('BB', 'Búp bê', 'Búp b  ê baby biết múa biết bay');
 
 
 
@@ -102,6 +104,9 @@ VALUES ('Xe Đạp Trẻ Em', 'RB', 'Xe đạp 3 bánh cho trẻ em, màu xanh l
        ('Bộ Đồ Chơi Lắp Ráp', 'RB', 'Bộ đồ chơi lắp ráp mô hình ô tô', 'dolaprap.jpg', 350000.00, 'Bộ', 45, 1),
        ('Bộ Xếp Hình 3D', 'RB', 'Bộ xếp hình 3D sáng tạo', 'lego3d.jpg', 500000.00, 'Bộ', 20, 1),
        ('Đàn Piano Điện Tử', 'RB', 'Đàn piano điện tử mini cho bé', 'dan.jpg', 1500000.00, 'Cái', 10, 1);
+
+
+
 
 # delete from discounts
 
@@ -123,6 +128,7 @@ VALUES (100000, 500000.00, 'PAID'),
        (100000, 750000.00, 'CANCELLED'),
        (100000, 1200000.00, 'PAID'),
        (100000, 900000.00, 'PENDING');
+
 
 
 
@@ -179,6 +185,7 @@ END;
 
 DELIMITER //
 
+<<<<<<< HEAD
 CREATE PROCEDURE delete_order_items_with_zero_quantity(IN order_id INT)
 BEGIN
     DELETE FROM order_items
@@ -243,3 +250,8 @@ DELIMITER ;
 
 
 select * from orders
+=======
+select * from users
+select * from categories
+select * from products
+>>>>>>> Han
