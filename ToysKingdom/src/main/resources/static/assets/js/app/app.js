@@ -1,15 +1,58 @@
 angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location, $rootScope, $http) {
     console.log("MainCtrl Load Done")
 
-    // Khởi tạo thông tin người dùng từ $rootScope
-    $scope.userIn = $rootScope.customer ? angular.copy($rootScope.customer) : {};
+    $rootScope.isLoggedIn = false;
+    $rootScope.customer = null;
+    $rootScope.cart = [];
+    $rootScope.soLuongSanPham = 0;
+    $rootScope.tongTien = 0;
+
+    // Lấy thông tin giỏ hàng theo id người dùng
+    $rootScope.getCart = function () {
+        if (!$rootScope.isLoggedIn) {
+            $rootScope.cart = [];
+            $rootScope.soLuongSanPham = 0;
+            $rootScope.tongTien = 0;
+            return;
+        }
+        $http.get('/api-public/cart/getCart', {
+            params: {
+                idUser: $rootScope.customer.idUser
+            }
+        }).then(function (response) {
+            $rootScope.cart = response.data.data;
+            $rootScope.soLuongSanPham = 0;
+            $rootScope.tongTien = 0;
+            $rootScope.cart.forEach(e => {
+                $rootScope.tongTien += e.price * e.quantity;
+                $rootScope.soLuongSanPham += e.quantity;
+            });
+        }).catch(function (e) {
+            console.log(e);
+        });
+    }
+
+    // Khi load trang web kiểm tra nếu đã đăng nhập thì lấy thông tin 
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+        $rootScope.isLoggedIn = true;
+        $rootScope.customer = JSON.parse(localStorage.getItem('customer'));
+        console.log(localStorage.getItem('isLoggedIn'));
+        $rootScope.getCart();
+    }
+
 
 
     // chuyển hướng
     $scope.logout = function () {
+        // Xóa thông tin
+        localStorage.setItem('isLoggedIn', false);
+        localStorage.removeItem('customer');
+
         $rootScope.isLoggedIn = false;
-        $rootScope.userName = "";
+        $rootScope.customer = null;
+
         $location.path('/login');
+        $rootScope.getCart();
     };
 
     $scope.submitDK = function () {
@@ -32,11 +75,15 @@ angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location
             console.log("Product name cannot be null or empty");
         }
     };
+
+    $scope.toCart = function () {
+        $location.path('/cart');
+    };
     // nhấn enter có key = 13
     $scope.handleKeyPress = function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') { // Kiểm tra nếu phím được nhấn là Enter
-            $scope.search(); 
+            $scope.search();
         }
     };
 
@@ -96,6 +143,65 @@ angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location
 
 });
 
+angular.module('ToysKingdom').controller('itemType1Ctrl', function ($scope, $rootScope, $http, $location) {
+    $scope.addToCart = function (idProduct) {
+        console.log($rootScope.customer);
+        console.log(idProduct);
+        if (!$rootScope.isLoggedIn) {
+            Swal.fire({
+                title: "Bạn chưa đăng nhập á?",
+                text: "Đăng nhập rồi mua hàng tiếp nhe, mất vài giây thoi à :33",
+                icon: "question"
+            });
+
+            $location.path('/login')
+            return;
+        }
+
+        var product;
+        try {
+            product = $rootScope.cart.find(function (item) {
+                return item.idProduct === idProduct;
+            });
+        } catch (e) {
+            console.log(e);
+        }
+
+        var quantity = 1;
+
+        //Nếu có thì tăng lên 1
+        if (product) {
+            quantity = product.quantity + 1;
+        }
+
+        //Gọi api
+        var data = {
+            idUser: $rootScope.customer.idUser,
+            idProduct: idProduct,
+            quantity: quantity,
+        }
+
+        $http.post('/api-public/cart/addToCart', data)
+            .then(function (response) {
+                Toastify({
+                    text: "Đã thêm vào giỏ hàng.",
+                    close: true,
+                    duration: 1000,
+                    gravity: 'bottom'
+                }).showToast();
+                $rootScope.getCart();
+            })
+            .catch(function (error) {
+                console.error(error.message);
+            });
+    }
+
+
+    $scope.chuyentrang = function (id) {
+        $location.path('/chiteiSP/' + id);
+    };
+});
+
 // Directive Thẻ Sản phẩm loại 1
 angular.module('ToysKingdom').directive('cardItemType1', function () {
     return {
@@ -103,7 +209,8 @@ angular.module('ToysKingdom').directive('cardItemType1', function () {
             product: '=product'
         },
         templateUrl: 'components/cardType1.html',
-        restrict: 'AE'
+        restrict: 'AE',
+        controller: 'itemType1Ctrl',
     }
 });
 

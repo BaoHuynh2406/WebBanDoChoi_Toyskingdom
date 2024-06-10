@@ -60,50 +60,11 @@ html {
     font-size: 1.2rem;
 }
 
-.dropdown-toggle::after {
-    display: none;
+.btn__header{
+    color: white !important;
+    border: none !important;
 }
 
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 120px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    top: 100%;
-    left: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-
-.dropdown-menu .dropdown-item {
-    color: black;
-    padding: 10px 20px;
-    text-decoration: none;
-    display: block;
-    transition: background-color 0.3s ease;
-}
-
-.dropdown-menu .dropdown-item:hover {
-    background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-menu {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-}
-
-.dropdown-toggle .fa-chevron-down {
-    margin-left: 5px;
-    transition: transform 0.3s ease-in-out;
-}
-
-.dropdown-toggle.collapsed .fa-chevron-down {
-    transform: rotate(-180deg);
-}
 
 .white-text {
     color: white !important;

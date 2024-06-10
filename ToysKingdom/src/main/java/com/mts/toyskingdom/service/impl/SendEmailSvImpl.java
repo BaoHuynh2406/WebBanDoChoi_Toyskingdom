@@ -92,7 +92,7 @@ public class SendEmailSvImpl implements SendEmailSv {
     }
 
 
-    public boolean verifyOTP(String email, int otp, String password)  {
+    public boolean verifyOTP(String email, int otp, String password) {
         Integer storedOtp = otpStorage.get(email);
         System.out.println("OTP NHAP: " + otp);
         System.out.println("OTP: " + storedOtp);
@@ -100,12 +100,12 @@ public class SendEmailSvImpl implements SendEmailSv {
             otpStorage.remove(email); // Xóa OTP sau khi xác thực thành công
             try {
                 //Cho phep doi mat
-                UserDTO userDTO  = new UserDTO();
+                UserDTO userDTO = new UserDTO();
                 userDTO.setEmail(email);
                 userDTO.setPassword(password);
                 int kq = userSvlmpl.saveUser(userDTO);
                 return true;
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e);
             }
             return false;

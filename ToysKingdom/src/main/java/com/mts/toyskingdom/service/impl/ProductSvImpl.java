@@ -104,7 +104,7 @@ public class ProductSvImpl implements ProductSv {
 
     @Override
     public int saveProduct(ProductDTO productDTO) throws SQLException {
-        if(productMapper.getProductByID(productDTO.getIdProduct()) == null) {
+        if (productMapper.getProductByID(productDTO.getIdProduct()) == null) {
             productDTO.setActive(true);
             productMapper.insertProduct(productDTO);
             return 1;
@@ -117,13 +117,13 @@ public class ProductSvImpl implements ProductSv {
 
     @Override
     public boolean deleteProduct(int idProduct) throws SQLException {
-        if(productMapper.deleteProduct(idProduct) > 0) return true;
+        if (productMapper.deleteProduct(idProduct) > 0) return true;
         return false;
     }
 
     @Override
     public boolean disableProduct(int idProduct) throws SQLException {
-        if(productMapper.disableProduct(idProduct) > 0) return true;
+        if (productMapper.disableProduct(idProduct) > 0) return true;
         return false;
     }
 }

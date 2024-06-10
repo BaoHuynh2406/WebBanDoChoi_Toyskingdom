@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface CartSv {
     boolean addToCart(CartItemDTO cartItemDTO) throws SQLException;
+
     boolean removeFromCart(CartItemDTO cartItemDTO) throws SQLException;
+
     List<CartItemM> getCartByIdUser(int idUser) throws SQLException;
 }

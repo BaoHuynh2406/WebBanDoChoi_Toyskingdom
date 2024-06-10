@@ -17,7 +17,7 @@ public class CartAPI {
 
 
     @PostMapping("/addToCart")
-    public ResponseObject<?> doPostAddToCart(@RequestBody CartItemDTO cartItemDTO){
+    public ResponseObject<?> doPostAddToCart(@RequestBody CartItemDTO cartItemDTO) {
         var resultApi = new ResponseObject<>();
         try {
             if (sv.addToCart(cartItemDTO)) {
@@ -37,7 +37,7 @@ public class CartAPI {
 
 
     @GetMapping("/getCart")
-    public ResponseObject<?> doGetCart(@RequestParam("idUser") int idUser){
+    public ResponseObject<?> doGetCart(@RequestParam("idUser") int idUser) {
         var resultApi = new ResponseObject<>();
         try {
             resultApi.setData(sv.getCartByIdUser(idUser));
@@ -50,7 +50,6 @@ public class CartAPI {
         }
         return resultApi;
     }
-
 
 
 }

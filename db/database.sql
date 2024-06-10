@@ -6,7 +6,6 @@ use toyskingdomdata;
 
 
 
-
 create table users
 (
     id_user      int auto_increment primary key,
@@ -20,13 +19,12 @@ create table users
     active       bit                             default 1
 ) AUTO_INCREMENT = 100000;
 
-
 CREATE TABLE categories
 (
     id_category   varchar(10) PRIMARY KEY,
     category_name NVARCHAR(50) NOT NULL,
     description   TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-) ;
+);
 
 
 
@@ -89,7 +87,7 @@ VALUES ('huynhbaomts2004@gmail.com', '123123', 'Bảo', '0388319013', 'Gò vấp
 
 insert into categories(id_category, category_name, description)
 values ('RB', 'Robot', 'robot, siêu anh hùng'),
-       ('BB', 'Búp bê', 'Búp b  ê baby biết múa biết bay');
+       ('BB', 'Búp bê', 'Búp bê baby biết múa biết bay');
 
 
 
@@ -104,9 +102,6 @@ VALUES ('Xe Đạp Trẻ Em', 'RB', 'Xe đạp 3 bánh cho trẻ em, màu xanh l
        ('Bộ Đồ Chơi Lắp Ráp', 'RB', 'Bộ đồ chơi lắp ráp mô hình ô tô', 'dolaprap.jpg', 350000.00, 'Bộ', 45, 1),
        ('Bộ Xếp Hình 3D', 'RB', 'Bộ xếp hình 3D sáng tạo', 'lego3d.jpg', 500000.00, 'Bộ', 20, 1),
        ('Đàn Piano Điện Tử', 'RB', 'Đàn piano điện tử mini cho bé', 'dan.jpg', 1500000.00, 'Cái', 10, 1);
-
-
-
 
 # delete from discounts
 
@@ -128,7 +123,6 @@ VALUES (100000, 500000.00, 'PAID'),
        (100000, 750000.00, 'CANCELLED'),
        (100000, 1200000.00, 'PAID'),
        (100000, 900000.00, 'PENDING');
-
 
 
 
@@ -154,7 +148,8 @@ SELECT p.id_product,
        p.des,
        p.image,
        p.price,
-       COALESCE(d.discount_percent, 0) AS discount_percent
+       COALESCE(d.discount_percent, 0) AS discount_percent,
+       p.active
 FROM products p
          LEFT JOIN
      discounts d
@@ -162,11 +157,9 @@ FROM products p
          p.id_product = d.id_prduct
              AND p.active = 1
              AND d.active = 1
-             AND NOW() BETWEEN d.start_day AND d.end_day;
+             AND NOW() BETWEEN d.start_day AND d.end_day
+WHERE p.active = 1;
 
-select *
-from product_feature
-where product_name like '%Xe đạp trẻ em%'
 
 # PROCEDURE pờ rô si trơ ------------------------------------------------------------------
 
@@ -185,11 +178,12 @@ END;
 
 DELIMITER //
 
-<<<<<<< HEAD
 CREATE PROCEDURE delete_order_items_with_zero_quantity(IN order_id INT)
 BEGIN
-    DELETE FROM order_items
-    WHERE id_order = order_id AND order_quantity <= 0;
+    DELETE
+    FROM order_items
+    WHERE id_order = order_id
+      AND order_quantity <= 0;
 END //
 
 DELIMITER ;
@@ -198,16 +192,17 @@ DELIMITER ;
 # TRIGER ------------------------------------------------
 
 
-
 DELIMITER //
 
 CREATE TRIGGER update_order_total_after_insert
-    AFTER INSERT ON order_items
+    AFTER INSERT
+    ON order_items
     FOR EACH ROW
 BEGIN
     DECLARE order_total DECIMAL(15, 2);
 
-    SELECT SUM(price * order_quantity) INTO order_total
+    SELECT SUM(price * order_quantity)
+    INTO order_total
     FROM order_items
     WHERE id_order = NEW.id_order;
 
@@ -217,12 +212,14 @@ BEGIN
 END //
 
 CREATE TRIGGER update_order_total_after_update
-    AFTER UPDATE ON order_items
+    AFTER UPDATE
+    ON order_items
     FOR EACH ROW
 BEGIN
     DECLARE order_total DECIMAL(15, 2);
 
-    SELECT SUM(price * order_quantity) INTO order_total
+    SELECT SUM(price * order_quantity)
+    INTO order_total
     FROM order_items
     WHERE id_order = NEW.id_order;
 
@@ -232,12 +229,14 @@ BEGIN
 END //
 
 CREATE TRIGGER update_order_total_after_delete
-    AFTER DELETE ON order_items
+    AFTER DELETE
+    ON order_items
     FOR EACH ROW
 BEGIN
     DECLARE order_total DECIMAL(15, 2);
 
-    SELECT SUM(price * order_quantity) INTO order_total
+    SELECT SUM(price * order_quantity)
+    INTO order_total
     FROM order_items
     WHERE id_order = OLD.id_order;
 
@@ -249,9 +248,5 @@ END //
 DELIMITER ;
 
 
-select * from orders
-=======
-select * from users
-select * from categories
-select * from products
->>>>>>> Han
+select *
+from orders

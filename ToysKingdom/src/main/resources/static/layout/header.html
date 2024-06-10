@@ -62,35 +62,51 @@
         <!-- Search -->
         <div class="col-5 mx-auto header__searchBox d-flex align-items-center">
             <i class="fas fa-search search_Icon" ng-click="search()"></i>
-            <input id="searchQuery" class="search_Input" type="text" placeholder="Nhập từ khóa để tìm kiếm" ng-keypress="handleKeyPress($event)">
+            <input id="searchQuery" class="search_Input" type="text" placeholder="Nhập từ khóa để tìm kiếm"
+                ng-keypress="handleKeyPress($event)">
         </div>
-        
+
         <div class="col-3 d-flex justify-content-end">
             <!-- Cart -->
-            <div class="header__cart me-3">
+            <div ng-click="toCart()" style="cursor: pointer;" class="header__cart me-3">
                 <i class="fas fa-shopping-cart me-1"></i>
-                <span>Giỏ hàng</span>
+                <div  class="position-relative">Giỏ hàng
+                    <span ng-if="$root.cart.lenght !== 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-success">
+                        {{$root.soLuongSanPham}}
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                </div>
             </div>
             <!-- User -->
             <div class="header__user">
-                <i class="fas fa-user me-1"></i>
-                <div ng-if="!$root.isLoggedIn" class="dropdown">
-                    <button class="btn dropdown-toggle white-text" type="button" id="userDropdown" ng-click="redirectToLogin()" style="font-weight: bold;">
-                        Đăng nhập <i class="fas fa-chevron-down white-text"></i>
+                <div class="dropdown">
+                    <i class="fas fa-user me-1"></i>
+                    <label ng-if="$root.isLoggedIn">{{$root.customer.fullName}}</label>
+                    <label ng-if="!$root.isLoggedIn" ng-click="redirectToLogin()" style="cursor: pointer;">Đăng
+                        nhập</label>
+                    <button type="button" class="btn btn__header dropdown-toggle dropdown-toggle-split"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="userDropdown">
-                        <button class="dropdown-item" ng-click="submitDK()" style="font-weight: bold;">Đăng ký</button>
-                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li ng-if="$root.isLoggedIn">
+                            <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
+                                Thay đổi thông tin
+                            </button>
+                        </li>
+                        <li  ng-if="!$root.isLoggedIn">
+                            <lable ng-click="submitDK()" style="cursor: pointer;" class="dropdown-item">Đăng ký</label>
+                        </li>
+                        <li ng-if="$root.isLoggedIn">
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li ng-if="$root.isLoggedIn" >
+                            <span ng-click="logout()" style="cursor: pointer;" class="dropdown-item" href="#">Đăng xuất</span>
+                        </li>
+                    </ul>
                 </div>
-                <div ng-if="$root.isLoggedIn" class="dropdown">
-                    <button class="btn dropdown-toggle white-text" type="button" id="userDropdown" ng-click="test()" style="font-weight: bold;">
-                        Chào, {{$root.customer.fullName}} <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="userDropdown">
-                        <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="font-weight: bold;">Thông tin</button>
-                        <button class="dropdown-item" ng-click="logout()" style="font-weight: bold;">Đăng xuất</button>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -104,6 +120,6 @@
             <li class="nav-item px-3 fw-bold text-light fs-5">Yêu thích</li>
             <li class="nav-item px-3 fw-bold text-light fs-5">Đã xem</li>
         </ul>
-        <div class="col"></div> 
+        <div class="col"></div>
     </div>
 </header>

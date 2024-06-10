@@ -36,8 +36,7 @@ public class ProductM {
                 .build();
     }
 
-    public static List<ProductM> convertListProductEToProductM(List<ProductE> productEList)
-    {
+    public static List<ProductM> convertListProductEToProductM(List<ProductE> productEList) {
         return productEList.stream().map(productE -> convertProductEToProductM(productE)).collect(Collectors.toList());
     }
 }

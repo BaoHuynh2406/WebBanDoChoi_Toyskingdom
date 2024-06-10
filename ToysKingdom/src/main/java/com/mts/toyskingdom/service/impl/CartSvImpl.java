@@ -42,7 +42,7 @@ public class CartSvImpl implements CartSv {
             }
 
             //Kiểm tra đã có đơn hàng chưa
-            if(orderM == null){
+            if (orderM == null) {
                 return false;
             }
 
@@ -61,7 +61,7 @@ public class CartSvImpl implements CartSv {
             //Thêm vào đơn hàng chi tiết
             orderItemSv.addOrderDetails(orderItemDTO);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Lỗi chỗ CartSvImpl: " + e.getMessage());
             return false;
         }
@@ -79,7 +79,7 @@ public class CartSvImpl implements CartSv {
             //Lấy mã đơn hàng của user
             int idOrder = orderSv.findPendingByIdUser(idUser).getIdOrder();
             return mapper.getOrderItemByIdOrder(idOrder);
-        }catch (Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }

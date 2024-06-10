@@ -50,7 +50,7 @@ public class DiscountAPI {
     }
 
     @PostMapping("/save")
-    public ResponseObject<?> doPostSave(@RequestBody DiscountDTO discountDTO){
+    public ResponseObject<?> doPostSave(@RequestBody DiscountDTO discountDTO) {
         var resultApi = new ResponseObject<>();
         try {
             int ketQua = sv.save(discountDTO);
@@ -58,7 +58,7 @@ public class DiscountAPI {
             if (ketQua == 0) {
                 resultApi.setSuccess(false);
                 resultApi.setMessage("Không có gì để cập nhật hoặc thêm");
-            } else if(ketQua == 1) { // 1 khi lưu thành công
+            } else if (ketQua == 1) { // 1 khi lưu thành công
                 resultApi.setSuccess(true);
                 resultApi.setMessage("Thêm mới thành công");
             } else { // 2 khi cập nhật thành công

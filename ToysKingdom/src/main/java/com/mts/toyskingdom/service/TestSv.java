@@ -5,7 +5,7 @@ import com.mts.toyskingdom.data.model.TestM;
 
 public interface TestSv {
 
-     TestM testService(TestDTO testDTO) throws Exception;
+    TestM testService(TestDTO testDTO) throws Exception;
 
-     void test1(TestDTO testDTO) throws Exception;
+    void test1(TestDTO testDTO) throws Exception;
 }
