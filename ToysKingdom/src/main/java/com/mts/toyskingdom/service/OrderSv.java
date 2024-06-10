@@ -23,5 +23,5 @@ public interface OrderSv {
 
     Double getTotalRevenueBetweenDates(@Param("startDate") String startDate, @Param("endDate") String endDate) throws SQLException;
 
-    List<OrderM> getAllByStatus(String status);
+    List<OrderM> getAllByStatus();
 }

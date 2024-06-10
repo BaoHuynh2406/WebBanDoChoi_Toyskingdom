@@ -31,9 +31,10 @@
         FROM orders
     </select>
 
-    <select id="getAllByStatus" resultMap="oderMap">
-        SELECT * FROM oders WHERE status = "PAID"
+    <select id="getAllByStatus" resultMap="orderMap">
+        SELECT * FROM orders
     </select>
+
 
     <select id="getOrderItemByIdOrder" resultMap="orderByUser" parameterType="int">
         SELECT p.id_product, p.product_name, p.image, oi.order_quantity, oi.price

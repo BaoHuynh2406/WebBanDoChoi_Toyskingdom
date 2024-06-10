@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -57,6 +58,20 @@ public class OrderAPI {
         } catch (Exception e) {
             resultApi.setSuccess(false);
             resultApi.setMessage("Lấy tổng doanh thu thất bại");
+            log.error("Lỗi sau: ", e);
+        }
+        return resultApi;
+    }
+    @GetMapping("/getAllByStatus")
+    public ResponseObject<?> getAllByStatus() {
+        var resultApi = new ResponseObject<>();
+        try {
+            resultApi.setData(sv.getAllByStatus());
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Danh sách đơn hàng đã được lấy thành công");
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lấy danh sách đơn hàng thất bại");
             log.error("Lỗi sau: ", e);
         }
         return resultApi;

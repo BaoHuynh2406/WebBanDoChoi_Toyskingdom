@@ -12,6 +12,7 @@ import java.util.Map;
 @Mapper
 public interface OrderMapper {
     List<OrderE> getAll();
+    List<OrderE> getAllByStatus();
 
     List<CartItemM> getOrderItemByIdOrder(@Param("idOrder") int idOrder);
 

@@ -78,13 +78,13 @@ public class OrderSvImpl implements OrderSv {
         params.put("endDate", endDate);
         return orderMapper.getTotalRevenueBetweenDates(params);
     }
-//
-//    @Override
-//    public List<OrderM> getAllByStatus) {
-//        var listResultEntity = orderMapper.getAllByStatus();
-//        if (Objects.nonNull(listResultEntity)) {
-//            return OrderM.convertListOrderEtoOrderM(listResultEntity);
-//        }
-//        return null;
-//    }
+
+    @Override
+    public List<OrderM> getAllByStatus() {
+        var listResultEntity = orderMapper.getAllByStatus();
+        if (Objects.nonNull(listResultEntity)) {
+            return OrderM.convertListOrderEtoOrderM(listResultEntity);
+        }
+        return null;
+    }
 }
