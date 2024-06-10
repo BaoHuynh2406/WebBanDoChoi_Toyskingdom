@@ -115,6 +115,22 @@ public class UserAPI {
         return resultApi;
     }
 
+    @GetMapping("/signOut")
+    public ResponseObject<?> doGetSignOut(HttpSession session) {
+        var resultApi = new ResponseObject<>();
+        try {
+            session.setAttribute("user", null);
+            resultApi.setSuccess(true);
+            resultApi.setMessage("Đăng xuất");
+            return resultApi;
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lỗi");
+            log.error("Fail when: ", e);
+        }
+        return resultApi;
+    }
+
     @PostMapping("/save")
     public ResponseObject<?> add(@RequestBody UserDTO userDTO) {
         var resultApi = new ResponseObject<>();

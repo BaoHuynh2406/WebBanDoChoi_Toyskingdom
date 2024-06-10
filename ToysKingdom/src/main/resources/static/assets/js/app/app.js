@@ -53,7 +53,12 @@ angular.module('ToysKingdom').controller('mainCtrl', function ($scope, $location
 
         $location.path('/login');
         $rootScope.getCart();
-    };
+
+        $http.get('/api-public/user/signOut').then(function (response) {
+            console.log(response);
+        }).catch(function (e) {
+            console.log(e);
+        })};
 
     $scope.submitDK = function () {
         $location.path('/signUp');

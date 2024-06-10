@@ -55,4 +55,39 @@ angular.module('ToysKingdom').controller('CartCtrl', function ($scope, $http, $l
     }
 
 
+
+    $scope.payment = function(){
+
+        if(!$rootScope.isLoggedIn) return;
+
+
+        $http.get('/api-public/cart/payment', {params: {idUser: $rootScope.customer.idUser}})
+            .then(function (response) {
+                if(response.data.success){
+                    Swal.fire({
+                        title: "Thành Công",
+                        text: "Thanh toán thành công!, cảm ơn quý khách <3",
+                        icon: "success"
+                    });
+
+                    $rootScope.getCart();
+                    $location.path('/home');
+                }else{
+                    Swal.fire({
+                        title: "Thất Bại",
+                        text: "Thanh toán thất bại, vui lòng thử lại!",
+                        icon: "error"
+                    });
+                }
+                
+            }).catch(function(e){
+                Swal.fire({
+                    title: "Server Lỗi!",
+                    text: e,
+                    icon: "error"
+                });
+            });
+    }
+
+
 });

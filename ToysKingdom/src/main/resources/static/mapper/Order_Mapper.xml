@@ -58,10 +58,7 @@
     <update id="update" parameterType="com.mts.toyskingdom.data.dto.OrderDTO">
         UPDATE orders
         <set>
-            <if test="idUser != null">id_user = #{idUser},</if>
-            <if test="total != null">total = #{total},</if>
             <if test="orderStatus != null">status = #{orderStatus},</if>
-            <if test="orderDate != null">order_date = #{orderDate},</if>
         </set>
         WHERE id_order = #{idOrder}
     </update>

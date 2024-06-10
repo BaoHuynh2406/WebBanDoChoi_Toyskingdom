@@ -51,5 +51,24 @@ public class CartAPI {
         return resultApi;
     }
 
+    @GetMapping("/payment")
+    public ResponseObject<?> doGetPayment(@RequestParam("idUser") int idUser) {
+        var resultApi = new ResponseObject<>();
+        try {
+            if(sv.payment(idUser)){
+                resultApi.setSuccess(true);
+                resultApi.setMessage("Thanh toán thành công");
+                return resultApi;
+            }
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Thanh toán thất bại");
+        } catch (Exception e) {
+            resultApi.setSuccess(false);
+            resultApi.setMessage("Lấy thông tin thất bại");
+            log.error("Fail When: ", e);
+        }
+        return resultApi;
+    }
+
 
 }

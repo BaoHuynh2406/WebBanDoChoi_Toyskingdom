@@ -214,4 +214,4 @@ DELIMITER ;
 
 
 select *
-from orders
+from order_items
