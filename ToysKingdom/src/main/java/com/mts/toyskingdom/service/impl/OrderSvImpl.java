@@ -78,6 +78,11 @@ public class OrderSvImpl implements OrderSv {
         params.put("endDate", endDate);
         return orderMapper.getTotalRevenueBetweenDates(params);
     }
+
+    @Override
+    public List<OrderM> getAllByStatus(String status) {
+        return List.of();
+    }
 //
 //    @Override
 //    public List<OrderM> getAllByStatus) {
