@@ -98,7 +98,6 @@
 
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">THỐNG KÊ DOANH THU</h1>
-<p class="mb-4">Tổng doanh thu theo: {{tongDoanhThu | number: 0}}đ</p>
 
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between">
@@ -122,6 +121,8 @@
                         <th>DATE</th>
                         <th>TOTAL</th>
                         <th>STATUS</th>
+                        <th>View</th>
+
                     </tr>
                 </thead>
                 <tfoot>
@@ -132,6 +133,8 @@
                         <th>DATE</th>
                         <th>TOTAL</th>
                         <th>STATUS</th>
+                        <th>View</th>
+
                     </tr>
                 </tfoot>
                 <tbody>
@@ -140,8 +143,8 @@
                         <td class="text-center">{{o.idOrder}}</td>
                         <td class="text-center">{{o.idUser}}</td>
                         <td class="text-center">{{o.orderDate}}</td>
-                        <td class="text-center">{{o.total}}</td>
-                        <td class="text-center">{{o.status}}%</td>
+                        <td class="text-center">{{o.total | number: 0}}đ</td>
+                        <td class="text-center">{{o.orderStatus}}</td>
                         <td class="text-center">
                             <!-- Nút chỉnh sửa -->
                             <button ng-click="openEditModal(d)" class="btn btn-warning btn-circle btn-sm">
