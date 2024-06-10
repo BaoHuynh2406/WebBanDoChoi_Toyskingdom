@@ -84,4 +84,21 @@ public class CartSvImpl implements CartSv {
         }
     }
 
+    @Override
+    public boolean payment(int idUser) throws SQLException {
+        try{
+            int idOrder = orderSv.findPendingByIdUser(idUser).getIdOrder();
+            OrderDTO orderDTO = new OrderDTO();
+            orderDTO.setIdOrder(idOrder);
+            orderDTO.setOrderStatus("PAID");
+            if(orderSv.updateOrder(orderDTO) > 0) {
+                return true;
+            }
+            return false;
+        }catch (Exception e){
+            return false;
+        }
+
+    }
+
 }
