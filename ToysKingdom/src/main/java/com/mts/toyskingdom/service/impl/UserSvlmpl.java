@@ -6,6 +6,7 @@ import com.mts.toyskingdom.data.model.UserM;
 import com.mts.toyskingdom.mapper.UserMapper;
 import com.mts.toyskingdom.service.UserSv;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserSvlmpl implements UserSv {
     final UserMapper userMapper;
+
 
     //    Lấy user bằng ID
     @Override
