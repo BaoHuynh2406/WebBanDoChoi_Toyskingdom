@@ -1,4 +1,4 @@
-<div class="sign">
+<div class="register">
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-7 col-lg-6">
@@ -7,18 +7,20 @@
                         <h1 class="fw-bold">Đăng ký</h1>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="/api-public/user/register" accept-charset="UTF-8" novalidate>
+                        <form ng-submit="register()" novalidate>
                             <div class="mb-4">
-                                <label for="fullname" class="form-sign__label fw-bold fs-6 mb-1">Họ và tên</label>
-                                <input type="text" id="fullname" name="fullname" class="form-control form-sign__input" placeholder="Nhập họ và tên" required>
+                                <label class="form-sign__label fw-bold fs-6 mb-1" for="fullname">Họ và tên</label>
+                                <input type="text" class="form-control form-sign__input" id="fullname" name="fullname"
+                                       ng-model="user.fullname" placeholder="Nhập họ và tên" required>
                             </div>
                             <div class="mb-4">
-                                <label for="phoneNumber" class="form-sign__label fw-bold fs-6 mb-1">Số điện thoại</label>
-                                <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control form-sign__input" placeholder="Nhập số điện thoại" required>
+                                <label class="form-sign__label fw-bold fs-6 mb-1" for="phoneNumber">Số điện thoại</label>
+                                <input type="tel" class="form-control form-sign__input" id="phoneNumber" name="phoneNumber"
+                                       ng-model="user.phoneNumber" placeholder="Nhập số điện thoại" required>
                             </div>
                             <div class="mb-4">
-                                <label for="gender" class="form-sign__label fw-bold fs-6 mb-1">Giới tính</label>
-                                <select id="gender" name="gender" class="form-select form-sign__input" required>
+                                <label class="form-sign__label fw-bold fs-6 mb-1" for="gender">Giới tính</label>
+                                <select id="gender" class="form-select form-sign__input" name="gender" ng-model="user.gender" required>
                                     <option value="" disabled selected>Chọn giới tính</option>
                                     <option value="Nam">Nam</option>
                                     <option value="Nữ">Nữ</option>
@@ -26,36 +28,41 @@
                                 </select>
                             </div>
                             <div class="mb-4">
-                                <label for="email" class="form-sign__label fw-bold fs-6 mb-1">Email</label>
-                                <input type="email" id="email" name="email" class="form-control form-sign__input" placeholder="Nhập email" required>
+                                <label class="form-sign__label fw-bold fs-6 mb-1" for="email">Email</label>
+                                <input type="email" class="form-control form-sign__input" id="email" name="email"
+                                       ng-model="user.email" placeholder="Nhập email" required>
                             </div>
                             <div class="mb-4">
-                                <label for="password" class="form-sign__label fw-bold fs-6 mb-1">Mật khẩu</label>
-                                <input type="password" id="password" name="password" class="form-control form-sign__input" placeholder="Nhập mật khẩu" required>
+                                <label class="form-sign__label fw-bold fs-6 mb-1" for="password">Mật khẩu</label>
+                                <input type="password" class="form-control form-sign__input" id="password" name="password"
+                                       ng-model="user.password" placeholder="Nhập mật khẩu" required>
                             </div>
                             <div class="mb-4">
-                                <label for="confirmPassword" class="form-sign__label fw-bold fs-6 mb-1">Nhập lại mật khẩu</label>
-                                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control form-sign__input" placeholder="Vui lòng nhập lại mật khẩu" required>
+                                <label class="form-sign__label fw-bold fs-6 mb-1" for="confirmPassword">Nhập lại mật khẩu</label>
+                                <input type="password" class="form-control form-sign__input" id="confirmPassword" name="confirmPassword"
+                                       ng-model="user.confirmPassword" placeholder="Vui lòng nhập lại mật khẩu" required>
                             </div>
                             <div class="mb-4">
-                                <label for="address" class="form-sign__label fw-bold fs-6 mb-1">Địa chỉ</label>
-                                <input type="text" id="address" name="address" class="form-control form-sign__input" placeholder="Nhập địa chỉ" required>
+                                <label class="form-sign__label fw-bold fs-6 mb-1" for="address">Địa chỉ</label>
+                                <input type="text" class="form-control form-sign__input" id="address" name="address"
+                                       ng-model="user.address" placeholder="Nhập địa chỉ" required>
                             </div>
                             <div class="mb-4">
-                                <label for="birthday" class="form-sign__label fw-bold fs-6 mb-1">Ngày sinh</label>
-                                <input type="date" id="birthday" name="birthday" class="form-control form-sign__input" placeholder="Nhập ngày sinh" required>
+                                <label class="form-sign__label fw-bold fs-6 mb-1" for="birthday">Ngày sinh</label>
+                                <input type="date" class="form-control form-sign__input" id="birthday" name="birthday"
+                                       ng-model="user.birthday" placeholder="Nhập ngày sinh" required>
                             </div>
                             <div class="mb-4">
-                                <label for="role" class="form-sign__label fw-bold fs-6 mb-1">Vai trò</label>
-                                <select id="role" name="role" class="form-select form-sign__input" required>
+                                <label class="form-sign__label fw-bold fs-6 mb-1" for="role">Vai trò</label>
+                                <select id="role" class="form-select form-sign__input" name="role" ng-model="user.role" required>
                                     <option value="" disabled selected>Chọn vai trò</option>
                                     <option value="User">User</option>
                                     <option value="Admin">Admin</option>
                                 </select>
                             </div>
                             <div class="mb-4">
-                                <label for="active" class="form-sign__label fw-bold fs-6 mb-1">Trạng thái kích hoạt</label>
-                                <select id="active" name="active" class="form-select form-sign__input" required>
+                                <label class="form-sign__label fw-bold fs-6 mb-1" for="active">Trạng thái kích hoạt</label>
+                                <select id="active" class="form-select form-sign__input" name="active" ng-model="user.active" required>
                                     <option value="" disabled selected>Chọn trạng thái</option>
                                     <option value="true">Kích hoạt</option>
                                     <option value="false">Chưa kích hoạt</option>

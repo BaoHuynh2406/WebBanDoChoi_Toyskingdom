@@ -13,7 +13,6 @@ public class UserRegistrationDto {
     private String password;
     private String phoneNumber;
     private String address;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd") // Định dạng ngày hợp lệ
     private Date birthday;
 }
